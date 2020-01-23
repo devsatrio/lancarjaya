@@ -6,8 +6,10 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('',views.index,name='home'),
+    path('artikel/',include('blog.urls')),
+    path('',views.index,name='index'),
 ]
 
 if settings.DEBUG: # new
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
