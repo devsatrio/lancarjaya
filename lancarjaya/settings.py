@@ -129,5 +129,14 @@ STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'static')
 ]
 
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+MATERIAL_ADMIN_SITE = {
+    'HEADER':  'Lancar Jaya Shop',  # Admin site header
+    'TITLE':  'LJS',  # Admin site title
+    'MAIN_BG_COLOR':  '#f39c12',  # Admin site main color, css color should be specified
+    'MAIN_HOVER_COLOR':  '#34495e', # Admin site main hover color, css color should be specified
+    'PROFILE_PICTURE':  'images/user.png',  # Admin site profile picture (path to static should be specified)
+}
