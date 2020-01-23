@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'produk',
     'galeri',
+    'contact',
     'import_export',
     'django_cleanup.apps.CleanupConfig',
 ]
