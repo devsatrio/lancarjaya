@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'produk',
     'blog',
     'galeri',
+    'contact',
     'import_export',
 ]
 
