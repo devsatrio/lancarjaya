@@ -6,7 +6,7 @@ class rolekategori(admin.ModelAdmin):
     list_display = ('nama',)
     readonly_fields = ['tanggal','slug']
     list_filter = ('tanggal',)
-    icon_name = 'label'
+    icon_name='bookmark'
 
 admin.site.register(models.kategori,rolekategori)
 

@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'blog',
     'galeri',
     'contact',
+    'slider',
     'import_export',
 ]
 
@@ -130,7 +131,6 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR,'static')
 ]
-
 
 
 MEDIA_URL = '/media/'
