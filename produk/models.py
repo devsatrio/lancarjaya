@@ -21,7 +21,8 @@ class barang(models.Model):
     tanggal_buat = models.DateTimeField(auto_now_add=True)
     kategori = models.ForeignKey(kategori,on_delete=models.SET_NULL,null=True)
     slug = models.SlugField(null=True,editable=False)
-    
+    gambar = models.ImageField(upload_to='produk/',null=True)
+
     def save(self):
       self.slug=slugify(self.nama)
       super(barang, self).save()
