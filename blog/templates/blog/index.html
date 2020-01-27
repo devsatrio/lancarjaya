@@ -3,12 +3,12 @@
 {% block content %}
 <section class="small-section bg-dark">
     <div class="relative container align-left">
-        
+
         <div class="row">
-            
+
             <div class="col-md-8">
                 <h1 class="hs-line-11 font-alt mb-20 mb-xs-0">Blog</h1>
-                <div class="hs-line-4 font-alt black">
+                <div class="hs-line-4 font-alt white">
                     We share our best ideas in our blog
                 </div>
             </div>
@@ -26,336 +26,39 @@
 
 <section class="page-section">
     <div class="container relative">
-        
+
         <div class="row">
-            
+
             <!-- Content -->
             <div class="col-sm-8">
-                
+
                 <div class="row multi-columns-row">
-            
+
                     <!-- Post Item -->
+                    {% for row in artikel %}
                     <div class="col-md-6 col-lg-6 mb-60 mb-xs-40">
-                        
+
                         <div class="post-prev-img">
-                            <a href="blog-single-sidebar-right.html"><img src="images/blog/post-prev-1.jpg" alt="" /></a>
+                            <img src="{{row.gambar.url}}" alt=""/>
                         </div>
                         
                         <div class="post-prev-title font-alt">
-                            <a href="">New Web Design Trends</a>
+                            {{row.judul}}
                         </div>
                         
                         <div class="post-prev-info font-alt">
-                            <a href="">John Doe</a> | 10 December
+                            {{row.kategori}} || {{row.tanggal}}
                         </div>
                         
                         <div class="post-prev-text">
-                            Maecenas  volutpat, diam enim sagittis quam, id porta quam. Sed id dolor 
-                            consectetur fermentum nibh volutpat, accumsan purus. 
+                            {{row.isi|slice:"0:149"}}
                         </div>
                         
                         <div class="post-prev-more">
-                            <a href="" class="btn btn-mod btn-gray btn-round">Read More <i class="fa fa-angle-right"></i></a>
-                        </div>
-                        
+                            <a href="{% url 'blog:show' row.slug %}" class="btn btn-mod btn-gray btn-round">Lanjut Baca<i class="fa fa-angle-right"></i></a>
+                        </div>                        
                     </div>
-                    <!-- End Post Item -->
-                    
-                    <!-- Post Item -->
-                    <div class="col-md-6 col-lg-6 mb-60 mb-xs-40">
-                        
-                        <div class="post-prev-img">
-                            <a href="blog-single-sidebar-right.html"><img src="images/blog/post-prev-2.jpg" alt="" /></a>
-                        </div>
-                        
-                        <div class="post-prev-title font-alt">
-                            <a href="">Minimalistic Design Forever</a>
-                        </div>
-                        
-                        <div class="post-prev-info font-alt">
-                            <a href="">John Doe</a> | 9 December
-                        </div>
-                        
-                        <div class="post-prev-text">
-                            Maecenas  volutpat, diam enim sagittis quam, id porta quam. Sed id dolor 
-                            consectetur fermentum nibh volutpat, accumsan purus. 
-                        </div>
-                        
-                        <div class="post-prev-more">
-                            <a href="" class="btn btn-mod btn-gray btn-round">Read More <i class="fa fa-angle-right"></i></a>
-                        </div>
-                        
-                    </div>
-                    <!-- End Post Item -->
-                    
-                    <!-- Post Item -->
-                    <div class="col-md-6 col-lg-6 mb-60 mb-xs-40">
-                        
-                        <div class="post-prev-img">
-                            <a href="blog-single-sidebar-right.html"><img src="images/blog/post-prev-3.jpg" alt="" /></a>
-                        </div>
-                        
-                        <div class="post-prev-title font-alt">
-                            <a href="">Hipster&rsquo;s Style in&nbsp;Web</a>
-                        </div>
-                        
-                        <div class="post-prev-info font-alt">
-                            <a href="">John Doe</a> | 7 December
-                        </div>
-                        
-                        <div class="post-prev-text">
-                            Maecenas  volutpat, diam enim sagittis quam, id porta quam. Sed id dolor 
-                            consectetur fermentum nibh volutpat, accumsan purus. 
-                        </div>
-                        
-                        <div class="post-prev-more">
-                            <a href="" class="btn btn-mod btn-gray btn-round">Read More <i class="fa fa-angle-right"></i></a>
-                        </div>
-                        
-                    </div>
-                    <!-- End Post Item -->
-                    
-                    <!-- Post Item -->
-                    <div class="col-md-6 col-lg-6 mb-60 mb-xs-40">
-                        
-                        <div class="post-prev-img">
-                            <a href="blog-single-sidebar-right.html"><img src="images/blog/post-prev-4.jpg" alt="" /></a>
-                        </div>
-                        
-                        <div class="post-prev-title font-alt">
-                            <a href="">Duis tristique condimentum</a>
-                        </div>
-                        
-                        <div class="post-prev-info font-alt">
-                            <a href="">John Doe</a> | 7 December
-                        </div>
-                        
-                        <div class="post-prev-text">
-                            Maecenas  volutpat, diam enim sagittis quam, id porta quam. Sed id dolor 
-                            consectetur fermentum nibh volutpat, accumsan purus. 
-                        </div>
-                        
-                        <div class="post-prev-more">
-                            <a href="" class="btn btn-mod btn-gray btn-round">Read More <i class="fa fa-angle-right"></i></a>
-                        </div>
-                        
-                    </div>
-                    <!-- End Post Item -->
-                    
-                    <!-- Post Item -->
-                    <div class="col-md-6 col-lg-6 mb-60 mb-xs-40">
-                        
-                        <div class="post-prev-img">
-                            <a href="blog-single-sidebar-right.html"><img src="images/blog/post-prev-5.jpg" alt="" /></a>
-                        </div>
-                        
-                        <div class="post-prev-title font-alt">
-                            <a href="">New Web Design Trends</a>
-                        </div>
-                        
-                        <div class="post-prev-info font-alt">
-                            <a href="">John Doe</a> | 10 December
-                        </div>
-                        
-                        <div class="post-prev-text">
-                            Maecenas  volutpat, diam enim sagittis quam, id porta quam. Sed id dolor 
-                            consectetur fermentum nibh volutpat, accumsan purus. 
-                        </div>
-                        
-                        <div class="post-prev-more">
-                            <a href="" class="btn btn-mod btn-gray btn-round">Read More <i class="fa fa-angle-right"></i></a>
-                        </div>
-                        
-                    </div>
-                    <!-- End Post Item -->
-                    
-                    <!-- Post Item -->
-                    <div class="col-md-6 col-lg-6 mb-60 mb-xs-40">
-                        
-                        <div class="post-prev-img">
-                            <a href="blog-single-sidebar-right.html"><img src="images/blog/post-prev-6.jpg" alt="" /></a>
-                        </div>
-                        
-                        <div class="post-prev-title font-alt">
-                            <a href="">Minimalistic Design Forever</a>
-                        </div>
-                        
-                        <div class="post-prev-info font-alt">
-                            <a href="">John Doe</a> | 9 December
-                        </div>
-                        
-                        <div class="post-prev-text">
-                            Maecenas  volutpat, diam enim sagittis quam, id porta quam. Sed id dolor 
-                            consectetur fermentum nibh volutpat, accumsan purus. 
-                        </div>
-                        
-                        <div class="post-prev-more">
-                            <a href="" class="btn btn-mod btn-gray btn-round">Read More <i class="fa fa-angle-right"></i></a>
-                        </div>
-                        
-                    </div>
-                    <!-- End Post Item -->
-                    
-                    <!-- Post Item -->
-                    <div class="col-md-6 col-lg-6 mb-60 mb-xs-40">
-                        
-                        <div class="post-prev-img">
-                            <a href="blog-single-sidebar-right.html"><img src="images/blog/post-prev-7.jpg" alt="" /></a>
-                        </div>
-                        
-                        <div class="post-prev-title font-alt">
-                            <a href="">Hipster&rsquo;s Style in&nbsp;Web</a>
-                        </div>
-                        
-                        <div class="post-prev-info font-alt">
-                            <a href="">John Doe</a> | 7 December
-                        </div>
-                        
-                        <div class="post-prev-text">
-                            Maecenas  volutpat, diam enim sagittis quam, id porta quam. Sed id dolor 
-                            consectetur fermentum nibh volutpat, accumsan purus. 
-                        </div>
-                        
-                        <div class="post-prev-more">
-                            <a href="" class="btn btn-mod btn-gray btn-round">Read More <i class="fa fa-angle-right"></i></a>
-                        </div>
-                        
-                    </div>
-                    <!-- End Post Item -->
-                    
-                    <!-- Post Item -->
-                    <div class="col-md-6 col-lg-6 mb-60 mb-xs-40">
-                        
-                        <div class="post-prev-img">
-                            <a href="blog-single-sidebar-right.html"><img src="images/blog/post-prev-8.jpg" alt="" /></a>
-                        </div>
-                        
-                        <div class="post-prev-title font-alt">
-                            <a href="">Duis tristique condimentum</a>
-                        </div>
-                        
-                        <div class="post-prev-info font-alt">
-                            <a href="">John Doe</a> | 7 December
-                        </div>
-                        
-                        <div class="post-prev-text">
-                            Maecenas  volutpat, diam enim sagittis quam, id porta quam. Sed id dolor 
-                            consectetur fermentum nibh volutpat, accumsan purus. 
-                        </div>
-                        
-                        <div class="post-prev-more">
-                            <a href="" class="btn btn-mod btn-gray btn-round">Read More <i class="fa fa-angle-right"></i></a>
-                        </div>
-                        
-                    </div>
-                    <!-- End Post Item -->
-                    
-                    <!-- Post Item -->
-                    <div class="col-md-6 col-lg-6 mb-60 mb-xs-40">
-                        
-                        <div class="post-prev-img">
-                            <a href="blog-single-sidebar-right.html"><img src="images/blog/post-prev-9.jpg" alt="" /></a>
-                        </div>
-                        
-                        <div class="post-prev-title font-alt">
-                            <a href="">New Web Design Trends</a>
-                        </div>
-                        
-                        <div class="post-prev-info font-alt">
-                            <a href="">John Doe</a> | 10 December
-                        </div>
-                        
-                        <div class="post-prev-text">
-                            Maecenas  volutpat, diam enim sagittis quam, id porta quam. Sed id dolor 
-                            consectetur fermentum nibh volutpat, accumsan purus. 
-                        </div>
-                        
-                        <div class="post-prev-more">
-                            <a href="" class="btn btn-mod btn-gray btn-round">Read More <i class="fa fa-angle-right"></i></a>
-                        </div>
-                        
-                    </div>
-                    <!-- End Post Item -->
-                    
-                    <!-- Post Item -->
-                    <div class="col-md-6 col-lg-6 mb-60 mb-xs-40">
-                        
-                        <div class="post-prev-img">
-                            <a href="blog-single-sidebar-right.html"><img src="images/blog/post-prev-10.jpg" alt="" /></a>
-                        </div>
-                        
-                        <div class="post-prev-title font-alt">
-                            <a href="">Minimalistic Design Forever</a>
-                        </div>
-                        
-                        <div class="post-prev-info font-alt">
-                            <a href="">John Doe</a> | 9 December
-                        </div>
-                        
-                        <div class="post-prev-text">
-                            Maecenas  volutpat, diam enim sagittis quam, id porta quam. Sed id dolor 
-                            consectetur fermentum nibh volutpat, accumsan purus. 
-                        </div>
-                        
-                        <div class="post-prev-more">
-                            <a href="" class="btn btn-mod btn-gray btn-round">Read More <i class="fa fa-angle-right"></i></a>
-                        </div>
-                        
-                    </div>
-                    <!-- End Post Item -->
-                    
-                    <!-- Post Item -->
-                    <div class="col-md-6 col-lg-6 mb-60 mb-xs-40">
-                        
-                        <div class="post-prev-img">
-                            <a href="blog-single-sidebar-right.html"><img src="images/blog/post-prev-11.jpg" alt="" /></a>
-                        </div>
-                        
-                        <div class="post-prev-title font-alt">
-                            <a href="">Hipster&rsquo;s Style in&nbsp;Web</a>
-                        </div>
-                        
-                        <div class="post-prev-info font-alt">
-                            <a href="">John Doe</a> | 7 December
-                        </div>
-                        
-                        <div class="post-prev-text">
-                            Maecenas  volutpat, diam enim sagittis quam, id porta quam. Sed id dolor 
-                            consectetur fermentum nibh volutpat, accumsan purus. 
-                        </div>
-                        
-                        <div class="post-prev-more">
-                            <a href="" class="btn btn-mod btn-gray btn-round">Read More <i class="fa fa-angle-right"></i></a>
-                        </div>
-                        
-                    </div>
-                    <!-- End Post Item -->
-                    
-                    <!-- Post Item -->
-                    <div class="col-md-6 col-lg-6 mb-60 mb-xs-40">
-                        
-                        <div class="post-prev-img">
-                            <a href="blog-single-sidebar-right.html"><img src="images/blog/post-prev-12.jpg" alt="" /></a>
-                        </div>
-                        
-                        <div class="post-prev-title font-alt">
-                            <a href="">Duis tristique condimentum</a>
-                        </div>
-                        
-                        <div class="post-prev-info font-alt">
-                            <a href="">John Doe</a> | 7 December
-                        </div>
-                        
-                        <div class="post-prev-text">
-                            Maecenas  volutpat, diam enim sagittis quam, id porta quam. Sed id dolor 
-                            consectetur fermentum nibh volutpat, accumsan purus. 
-                        </div>
-                        
-                        <div class="post-prev-more">
-                            <a href="" class="btn btn-mod btn-gray btn-round">Read More <i class="fa fa-angle-right"></i></a>
-                        </div>
-                        
-                    </div>
+                    {% endfor %}
                     <!-- End Post Item -->
                     
                 </div>
@@ -378,23 +81,10 @@
             <!-- Sidebar -->
             <div class="col-sm-4 col-md-3 col-md-offset-1 sidebar">
                 
-                <!-- Search Widget -->
-                <div class="widget">
-                    <form class="form-inline form" role="form">
-                        <div class="search-wrap">
-                            <button class="search-button animate" type="submit" title="Start Search">
-                                <i class="fa fa-search"></i>
-                            </button>
-                            <input type="text" class="form-control search-field" placeholder="Search...">
-                        </div>
-                    </form>
-                </div>
-                <!-- End Search Widget -->
-                
                 <!-- Widget -->
                 <div class="widget">
-                    
-                    <h5 class="widget-title font-alt">Categories</h5>
+
+                    <h5 class="widget-title font-alt">Kategori</h5>
                     
                     <div class="widget-body">
                         <ul class="clearlist widget-menu">
@@ -436,7 +126,7 @@
                 
                 <!-- Widget -->
                 <div class="widget">
-                    
+
                     <h5 class="widget-title font-alt">Tags</h5>
                     
                     <div class="widget-body">
@@ -457,7 +147,7 @@
                 
                 <!-- Widget -->
                 <div class="widget">
-                    
+
                     <h5 class="widget-title font-alt">Last posts</h5>
                     
                     <div class="widget-body">
@@ -505,7 +195,7 @@
                 
                 <!-- Widget -->
                 <div class="widget">
-                    
+
                     <h5 class="widget-title font-alt">Comments</h5>
                     
                     <div class="widget-body">
@@ -533,18 +223,18 @@
                 
                 <!-- Widget -->
                 <div class="widget">
-                    
+
                     <h5 class="widget-title font-alt">Text widget</h5>
                     
                     <div class="widget-body">
                         <div class="widget-text clearfix">
-                            
+
                             <img src="images/user-avatar.png" alt="" width="70" class="img-circle left img-left">
                             
                             Consectetur adipiscing elit. Quisque magna ante eleifend eleifend. 
                             Purus ut dignissim consectetur, nulla erat ultrices purus, ut consequat sem elit non sem.
                             Quisque magna ante eleifend eleifend. 
-                        
+
                         </div>
                     </div>
                     
@@ -553,7 +243,7 @@
                 
                 <!-- Widget -->
                 <div class="widget">
-                    
+
                     <h5 class="widget-title font-alt">Archive</h5>
                     
                     <div class="widget-body">

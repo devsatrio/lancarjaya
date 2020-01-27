@@ -3,7 +3,7 @@ from . import models
 
 # Register your models here.
 class rolekategori(admin.ModelAdmin):
-    list_display = ('nama',)
+    list_display = ('nama','tanggal',)
     readonly_fields = ['tanggal','slug']
     list_filter = ('tanggal',)
     icon_name='bookmark'

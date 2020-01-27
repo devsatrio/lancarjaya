@@ -5,7 +5,7 @@ from django.core.paginator import Paginator
 def index(request):
     data_kategori = models.kategori.objects.all()
     data_artikel = models.artikel.objects.all().order_by('-id')
-    paginator = Paginator(data_artikel, 5)
+    paginator = Paginator(data_artikel, 4)
     page = request.GET.get('page')
     data_artikel = paginator.get_page(page)
 
