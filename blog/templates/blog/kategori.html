@@ -1,0 +1,107 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+{% block content %}
+<section class="small-section bg-dark">
+    <div class="relative container align-left">
+
+        <div class="row">
+
+            <div class="col-md-8">
+                <h1 class="hs-line-11 font-alt mb-20 mb-xs-0">Blog</h1>
+                <div class="hs-line-4 font-alt white">
+                    Selamat Membaca Artikel Produk Kami
+                </div>
+            </div>
+            
+        </div>
+        
+    </div>
+</section>
+
+<section class="page-section">
+    <div class="container relative">
+
+        <div class="row">
+
+            <!-- Content -->
+            <div class="col-sm-8">
+
+                <h3 style="color: black; text-transform: uppercase; font-size: 24px;">Kategori : {{detail_kategori.nama}}</h3>
+
+                <div class="row multi-columns-row">
+
+                    <!-- Post Item -->
+                    {% for row in artikel %}
+                    <div class="col-md-6 col-lg-6 mb-60 mb-xs-40">
+
+                        <div class="post-prev-img">
+                            <img src="{{row.gambar.url}}" alt=""/>
+                        </div>
+                        
+                        <div class="post-prev-title font-alt">
+                            {{row.judul}}
+                        </div>
+                        
+                        <div class="post-prev-info font-alt">
+                            {{row.kategori}} || {{row.tanggal}}
+                        </div>
+                        
+                        <div class="post-prev-text">
+                            {{row.isi|slice:"0:149"}}
+                        </div>
+                        
+                        <div class="post-prev-more">
+                            <a href="{% url 'blog:show' row.slug %}" class="btn btn-mod btn-gray btn-round">Lanjut Baca<i class="fa fa-angle-right"></i></a>
+                        </div>                        
+                    </div>
+                    {% endfor %}
+                    <!-- End Post Item -->
+                    
+                </div>
+                
+                <!-- pagination nak kene -->
+                {% if artikel.paginator.num_pages > 1 %}
+                    <!-- start -->
+                {% include 'layout/_pagination.html' with items=artikel %}
+                    <!-- end -->
+                {% endif %}
+                
+            </div>
+            <!-- End Content -->
+            
+            <!-- Sidebar -->
+            <div class="col-sm-4 col-md-3 col-md-offset-1 sidebar">
+                
+                <!-- Widget -->
+                <div class="widget">
+
+                    <h5 class="widget-title font-alt">Kategori</h5>
+                    
+                    <div class="widget-body">
+                        <ul class="clearlist widget-menu">
+
+                            <li>
+                                <a href="{% url 'blog:index' %}">Semua Kategori</a>
+                            </li>
+
+                            {% for row in kategori %}
+                            <li>
+
+                                <a href="{% url 'blog:kategori' row.id %}">{{row.nama}}</a><br>
+                                
+                            </li>
+                            {% endfor %}
+
+                        </ul>
+                    </div>
+                    
+                </div>
+                <!-- End Widget -->
+                
+            </div>
+            <!-- End Sidebar -->
+        </div>
+        
+    </div>
+</section>
+{% endblock content %}
