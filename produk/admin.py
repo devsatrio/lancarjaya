@@ -1,7 +1,15 @@
 from django.contrib import admin
 from . import models
+from import_export import resources
+from import_export.admin import ImportExportModelAdmin
 
-class roleskategori(admin.ModelAdmin):
+class ProdukResource(resources.ModelResource):
+
+	class Meta:
+		model = models.kategori
+		fields = ('id','nama','tanggal_buat')
+
+class roleskategori(ImportExportModelAdmin):
     list_display = ('nama','tanggal_buat')
     list_filter = ('tanggal_buat',)
     readonly_fields = ('tanggal_buat','slug')

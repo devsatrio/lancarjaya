@@ -1,0 +1,99 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+{% load humanize %}
+{% load mathfilters %}
+{% block content %}
+<section class="small-section bg-dark">
+    <div class="relative container align-left">
+
+        <div class="row">
+
+            <div class="col-md-8">
+                <h1 class="hs-line-11 font-alt mb-20 mb-xs-0">Produk</h1>
+                <div class="hs-line-4 font-alt">
+                    Pilih produk terbaik di toko kami
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+<section class="page-section">
+    <div class="container relative">
+
+        <div class="row">
+            <div class="col-sm-8">
+
+                <div class="row multi-columns-row">
+                    {% for row in produk %}
+                    <div class="col-md-4 col-lg-4 mb-60 mb-xs-40">
+
+                        <div class="post-prev-img">
+
+                            <a href="#"><img src="{{row.gambar.url}}" alt="" /></a>
+
+                            {% if row.diskon != 0 %}
+                            <div class="intro-label">
+                                <span class="label label-danger bg-red">{{row.diskon}}%</span>
+                            </div>
+                            {% endif%}
+
+                        </div>
+
+                        <div class="post-prev-title font-alt align-center">
+                            <a href="#">{{row.nama}}</a>
+                        </div>
+
+                        <div class="post-prev-text align-center">
+                            {% if row.diskon != 0 %}
+                            <del>Rp. {{row.harga|intcomma}}</del>
+                            &nbsp;
+                            <strong>
+                                {% with numerator=row.harga|mul:row.diskon|div:100%}
+                                    {{row.harga|sub:numerator|floatformat|intcomma}}
+                                {% endwith %}
+                            </strong>
+                            {%else%}
+                            <strong>
+                                Rp. {{row.harga|intcomma}}
+                            </strong>
+                            {% endif %}
+                        </div>
+
+                        <div class="post-prev-more align-center">
+                            <a href="{% url 'produk:show' row.slug %}" class="btn btn-mod btn-gray btn-round"><i class="fa fa-eye"></i> Lihat
+                                Detail</a>
+                        </div>
+
+                    </div>
+                    {% endfor %}
+
+                </div>
+
+                <!-- Pagination -->
+                {% if produk.paginator.num_pages > 1 %}
+                <!-- start -->
+                {% include 'layout/_pagination.html' with items=produk %}
+                <!-- end -->
+
+                {% endif %}
+            </div>
+            <div class="col-sm-4 col-md-3 col-md-offset-1 sidebar">
+                <div class="widget">
+                    <h5 class="widget-title font-alt">Kategori</h5>
+                    <div class="widget-body">
+                        <ul class="clearlist widget-menu">
+                            {% for row in kategori %}
+                            <li>
+                                <a href="{% url 'produk:kategori' row.slug %}" title="">{{row.nama}}</a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+{% endblock content %}
