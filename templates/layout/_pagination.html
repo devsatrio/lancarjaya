@@ -1,0 +1,23 @@
+<!-- Pagination -->
+<div class="pagination">
+    {% if items.has_previous %}
+        <i class="fa fa-angle-left"></i>
+
+        <a href="?page=1">First</a>
+        &nbsp;&nbsp;
+        <a href="?page={{ items.previous_page_number }}">Previous</a>
+
+        <!-- <i class="fa fa-angle-right"></i> -->
+    {% endif %}
+    &nbsp;&nbsp;
+    {% if items.has_next %}
+        <!-- <i class="fa fa-angle-left"></i> -->
+
+        <a href="?page={{ items.next_page_number }}"> Next </a>
+        &nbsp;&nbsp;
+        <a href="?page={{ items.paginator.num_pages }}"> Last </a>
+
+        <i class="fa fa-angle-right"></i>
+    {% endif %}
+</div>
+<!-- End Pagination -->
