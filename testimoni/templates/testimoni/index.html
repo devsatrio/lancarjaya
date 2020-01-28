@@ -25,14 +25,23 @@
         </h2>
 
         <!-- Contact Form -->
+
         <div class="row">
+            {% if messages %}
+            <div class="col-md-8 col-md-offset-2">
+                {% for message in messages %}
+                <div class="alert {{ message.tags }}"><i class="fa fa-lg fa-check-circle-o"></i> {{ message }}</div>
+                {% endfor %}
+            </div>
+            {% endif %}
             <div class="col-md-8 col-md-offset-2">
 
-                <form class="form contact-form" id="contact_form" action="">
+                <form class="form" method="POST" action="{% url 'testimoni:index' %}">
+
                     <div class="clearfix">
                         {% csrf_token %}
                         <div class="cf-left-col">
-                            
+
                             <div class="form-group">
                                 {{testimoniform.nama}}
                             </div>
@@ -52,14 +61,11 @@
                     <div class="clearfix">
                         <div class="cf-left-col">
                             <div class="form-tip pt-20">
-
                             </div>
                         </div>
-
                         <div class="cf-right-col">
                             <div class="align-right pt-10">
-                                <button type="submit" class="submit_btn btn btn-mod btn-medium btn-round"
-                                    id="submit_btn">Kirim</button>
+                                <button type="submit" class="submit_btn btn btn-mod btn-medium btn-round">Kirim</button>
                             </div>
                         </div>
                     </div>
@@ -67,5 +73,31 @@
             </div>
         </div>
     </div>
+</section>
+<section class="page-section bg-dark fullwidth-slider bg-scroll">
+    {% for row in testi %}
+    <div>
+        <div class="container relative">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 align-center">
+                    <!-- Section Icon -->
+                    <div class="section-icon">
+                        <span class="icon-quote"></span>
+                    </div>
+                    <!-- Section Title -->
+                    <h3 class="small-title font-alt">Testimoni</h3>
+                    <blockquote class="testimonial">
+                        <p>
+                            {{row.perihal}} - {{row.deskripsi}}
+                        </p>
+                        <footer class="testimonial-author">
+                            {{row.nama}} - {{row.email}}
+                        </footer>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
 </section>
 {% endblock content %}
