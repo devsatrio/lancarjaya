@@ -1,0 +1,103 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+{% block content %}
+<section class="small-section bg-dark">
+    <div class="relative container align-left">
+
+        <div class="row">
+
+            <div class="col-md-8">
+                <h1 class="hs-line-11 font-alt mb-20 mb-xs-0">Testimoni</h1>
+                <div class="hs-line-4 font-alt white">
+                    Kasih Penilaian Dong Untuk Kami
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+<section class="page-section" id="contact">
+    <div class="container relative">
+
+        <h2 class="section-title font-alt mb-70 mb-sm-40">
+            Beri Testimoni :D
+        </h2>
+
+        <!-- Contact Form -->
+
+        <div class="row">
+            {% if messages %}
+            <div class="col-md-8 col-md-offset-2">
+                {% for message in messages %}
+                <div class="alert {{ message.tags }}"><i class="fa fa-lg fa-check-circle-o"></i> {{ message }}</div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            <div class="col-md-8 col-md-offset-2">
+
+                <form class="form" method="POST" action="{% url 'testimoni:index' %}">
+
+                    <div class="clearfix">
+                        {% csrf_token %}
+                        <div class="cf-left-col">
+
+                            <div class="form-group">
+                                {{testimoniform.nama}}
+                            </div>
+                            <div class="form-group">
+                                {{testimoniform.email}}
+                            </div>
+                            <div class="form-group">
+                                {{testimoniform.perihal}}
+                            </div>
+                        </div>
+                        <div class="cf-right-col">
+                            <div class="form-group">
+                                {{testimoniform.deskripsi}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="clearfix">
+                        <div class="cf-left-col">
+                            <div class="form-tip pt-20">
+                            </div>
+                        </div>
+                        <div class="cf-right-col">
+                            <div class="align-right pt-10">
+                                <button type="submit" class="submit_btn btn btn-mod btn-medium btn-round">Kirim</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="page-section bg-dark fullwidth-slider bg-scroll">
+    {% for row in testi %}
+    <div>
+        <div class="container relative">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 align-center">
+                    <!-- Section Icon -->
+                    <div class="section-icon">
+                        <span class="icon-quote"></span>
+                    </div>
+                    <!-- Section Title -->
+                    <h3 class="small-title font-alt">Testimoni</h3>
+                    <blockquote class="testimonial">
+                        <p>
+                            {{row.perihal}} - {{row.deskripsi}}
+                        </p>
+                        <footer class="testimonial-author">
+                            {{row.nama}} - {{row.email}}
+                        </footer>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</section>
+{% endblock content %}

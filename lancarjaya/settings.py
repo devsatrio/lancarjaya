@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     'contact',
     'slider',
     'import_export',
+    'testimoni',
 ]
 
 MIDDLEWARE = [
