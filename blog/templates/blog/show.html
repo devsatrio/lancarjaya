@@ -33,69 +33,27 @@
                     <!-- Text -->
                     <div class="blog-item-body">
                         
-                        <h1 class="mt-0 font-alt">Here is the big headline for your blog post</h1>
-                    
-                        <div class="lead">
-                            <p>
-                                Morbi lacus massa, euismod ut turpis molestie, tristique sodales est. Integer sit amet mi id sapien tempor molestie in nec massa.
-                                Fusce non ante sed lorem rutrum feugiat.
-                            </p>
+                        <h1 class="mt-0 font-alt">{{detail_artikel.judul}}</h1>
+
+                        <div style="font-size: 15px; text-transform: uppercase;">
+                            {{detail_artikel.kategori}} || {{detail_artikel.tanggal}}
                         </div>
-                        <!-- End Text -->   
                         
                         <!-- Media Gallery -->
                         <div class="blog-media mt-40 mb-40 mb-xs-30">
                             <ul class="clearlist content-slider">
                                 <li>
-                                    <img src="images/portfolio/full-project-1.jpg" alt="" />
-                                </li>
-                                <li>
-                                    <img src="images/portfolio/full-project-2.jpg" alt="" />
-                                </li>
-                                <li>
-                                    <img src="images/portfolio/full-project-3.jpg" alt="" />
+                                    <img src="{{detail_artikel.gambar.url}}" alt="" />
                                 </li>
                             </ul>
                         </div>
                         
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris non laoreet dui. Morbi lacus massa, euismod ut turpis molestie, tristique sodales est. Integer sit amet mi id sapien tempor molestie in nec massa.
+                        <p style="text-align: justify;">
+                            {{detail_artikel.isi}}
                         </p>
+
+                        <button type="button" onclick="history.go(-1)" class="btn btn-mod btn-gray btn-round" ><i class="fa fa-angle-left"></i>Kembali</button>
                         
-                        <p>
-                            Fusce non ante sed lorem rutrum feugiat. Vestibulum pellentesque, purus ut&nbsp;dignissim consectetur, nulla erat ultrices purus, ut&nbsp;consequat sem elit non sem.
-                            Morbi lacus massa, euismod ut turpis molestie, tristique sodales est. Integer sit amet mi id sapien tempor molestie in nec massa.
-                            Fusce non ante sed lorem rutrum feugiat.
-                        </p>
-                        
-                        <blockquote>
-                            <p>
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a&nbsp;ante.
-                            </p>
-                            <footer>
-                                Someone famous in 
-                                <cite title="Source Title">
-                                    Source Title
-                                </cite>
-                            </footer>
-                        </blockquote>
-                        
-                        <p>
-                            Praesent ultricies ut ipsum non laoreet. Nunc ac ultricies leo. Nulla ac ultrices arcu. Nullam adipiscing lacus in consectetur posuere. Nunc malesuada tellus turpis, ac pretium orci molestie vel.
-                            Morbi lacus massa, euismod ut turpis molestie, tristique sodales est. Integer sit amet mi id sapien tempor molestie in nec massa.
-                            Fusce non ante sed lorem rutrum feugiat.
-                        </p>
-                        
-                        <ul>
-                            <li>First item of the list</li>
-                            <li>Second item of the list</li>
-                            <li>Third item of the list</li>
-                        </ul>
-                        
-                        <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris non laoreet dui. Morbi lacus massa, euismod ut turpis molestie, tristique sodales est. Integer sit amet mi id sapien tempor molestie in nec massa.
-                            Fusce non ante sed lorem rutrum feugiat. Vestibulum pellentesque, purus ut&nbsp;dignissim consectetur, nulla erat ultrices purus, ut&nbsp;consequat sem elit non sem.
-                        </p>
                         
                         
                     </div>
@@ -113,45 +71,47 @@
                 <!-- Widget -->
                 <div class="widget">
                     
-                    <h5 class="widget-title font-alt">Categories</h5>
+                    <h5 class="widget-title font-alt">Kategori</h5>
                     
                     <div class="widget-body">
                         <ul class="clearlist widget-menu">
+                            {% for row in detail_kategori %}
                             <li>
-                                <a href="#" title="">Branding</a>
-                                <small>
-                                    - 7
-                                </small>
+                                <a href="{% url 'blog:kategori' row.id %}">{{row.nama}}</a>
                             </li>
-                            <li>
-                                <a href="#" title="">Design</a>
-                                <small>
-                                    - 15
-                                </small>
-                            </li>
-                            <li>
-                                <a href="#" title="">Development</a>
-                                <small>
-                                    - 3
-                                </small>
-                            </li>
-                            <li>
-                                <a href="#" title="">Photography</a>
-                                <small>
-                                    - 5
-                                </small>
-                            </li>
-                            <li>
-                                <a href="#" title="">Other</a>
-                                <small>
-                                    - 1
-                                </small>
-                            </li>
+                            {% endfor %}
                         </ul>
                     </div>
                     
                 </div>
                 <!-- End Widget -->
+
+                <!-- Widget -->
+                            <div class="widget">
+                                
+                                <h5 class="widget-title font-alt">Artikel Lain</h5>
+                                
+                                <div class="widget-body">
+                                    <ul class="clearlist widget-posts">
+
+                                        {% for row in artikel_lain %}
+
+                                        <li class="clearfix">
+                                            <a href="{% url 'blog:show' row.slug %}"><img src="{{row.gambar.url}}" alt="" style="max-width: 25%;" class="widget-posts-img" /></a>
+                                            
+                                            <div class="widget-posts-descr">
+                                                <a href="{% url 'blog:show' row.slug %}">{{row.judul}}</a>
+                                                <p style="text-transform: capitalize; font-size: 12px;">{{row.kategori}} || {{row.tanggal}}</p>
+                                            </div>
+                                        </li>
+
+                                        {% endfor %}
+
+                                    </ul>
+                                </div>
+                                
+                            </div>
+                            <!-- End Widget -->
                 
             </div>
             <!-- End Sidebar -->

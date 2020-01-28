@@ -18,12 +18,14 @@ def index(request):
 
 def show(request,blogslug):
     detail_artikel = models.artikel.objects.get(slug=blogslug)
-    artikel_lain = models.artikel.objects.all().order_by('?')[0:3]
+    artikel_lain = models.artikel.objects.all().order_by('?')[0:4]
+    data_kategori = models.kategori.objects.all()
 
     #parsing data
     context = {
         'detail_artikel':detail_artikel,
         'artikel_lain':artikel_lain,
+        'detail_kategori':data_kategori,
     }
     return render(request,'blog/show.html',context)
 
