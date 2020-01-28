@@ -7,4 +7,6 @@ class contact(models.Model):
 	alamat = models.CharField(max_length=50,blank=True)
 	email = models.EmailField(max_length=50,blank=True)
 	tanggal_buat = models.DateTimeField(auto_now_add=True)
-	slug = models.SlugField(editable=False,blank=True,null=True)
+
+	def __str__(self):
+		return self.nama
