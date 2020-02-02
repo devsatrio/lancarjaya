@@ -58,11 +58,14 @@
                 </div>
                 
                 <!-- pagination nak kene -->
-                {% if artikel.paginator.num_pages > 1 %}
+                <div class="text-center">
+                    {% if artikel.paginator.num_pages > 1 %}
                     <!-- start -->
                 {% include 'layout/_pagination.html' with items=artikel %}
                     <!-- end -->
                 {% endif %}
+                </div>
+                
                 
             </div>
             <!-- End Content -->
