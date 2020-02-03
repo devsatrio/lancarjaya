@@ -11,7 +11,7 @@ class rolekategori(admin.ModelAdmin):
 admin.site.register(models.kategori,rolekategori)
 
 class roleartikel(admin.ModelAdmin):
-    list_display = ('judul','isi','gambar','kategori',)
+    list_display = ('judul','tanggal','gambar','kategori',)
     readonly_fields = ['tanggal','slug']
     list_filter = ('tanggal','kategori',)
     icon_name = 'art_track'

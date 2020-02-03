@@ -2,7 +2,7 @@ from django.shortcuts import render
 from . import models
 
 def index(request):
-	data_kontak = models.contact.objects.all().order_by('id')[0:3]
+	data_kontak = models.contact.objects.all().order_by('-id')[0:1]
 
 	#parsing data
 	context = {

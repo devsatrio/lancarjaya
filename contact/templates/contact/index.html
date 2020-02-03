@@ -1,86 +1,175 @@
 {% extends 'layout/base.html' %}
 {% load static %}
 {% block content %}
-            <!-- Head Section -->
-            <section class="small-section bg-dark">
-                <div class="relative container align-left">
-                    
-                    <div class="row">
-                        
-                        <div class="col-md-8">
-                            <h1 class="hs-line-11 font-alt mb-20 mb-xs-0">Kontak</h1>
-                            <div class="hs-line-4 font-alt">
-                                Kami selalu siap untuk membantu anda
-                            </div>
-                        </div>
-                        
-                    </div>
-                    
+<!-- Head Section -->
+<section class="small-section bg-dark">
+    <div class="relative container align-left">
+
+        <div class="row">
+
+            <div class="col-md-8">
+                <h1 class="hs-line-11 font-alt mb-20 mb-xs-0">Kontak</h1>
+                <div class="hs-line-4 font-alt">
+                    Kami siap membantu anda dalam pembelian produk / kerjasama
                 </div>
-            </section>
-            <!-- End Head Section -->
-            
-            
-            <!-- Contact Section -->
-            <section class="page-section" id="contact">
-                <div class="container relative">
-                    
-                    <h2 class="section-title font-alt mb-70 mb-sm-40">
-                        Hubungi Kami
-                    </h2>
-                    
-                    <div class="row mb-60 mb-xs-40">
-                        
-                        <div class="col-md-8 col-md-offset-2">
-                            <div class="row">
-                                
-                                <!-- Phone -->
-                                {% for row in contact %}
-                                <div class="col-sm-6 col-lg-4 pt-20 pb-20 pb-xs-0">
-                                    <div class="contact-item">
-                                        <div class="ci-icon">
-                                            <i class="fa fa-phone"></i>
-                                        </div>
-                                        <div class="ci-title font-alt">
-                                            {{row.nama}}
-                                        </div>
-                                        <div class="ci-text">
-                                            {{row.nomer_hp}}
-                                        </div>
-                                    </div>
-                                </div>
-                                {% endfor %}
-                                <!-- End Phone -->
-                                
-                            </div>
-                        </div>
-                        
-                    </div>
-                    
-                </div>
-            </section>
-            <!-- End Contact Section -->
-            
-            
-            <!-- Google Map -->
-            <div class="google-map">
-                
-                <a href="#" class="map-section">
-                    
-                    <div class="map-toggle">
-                        <div class="mt-icon">
-                            <i class="fa fa-map-marker"></i>
-                        </div>
-                        <div class="mt-text font-alt">
-                            <div class="mt-open">Buka google map <i class="fa fa-angle-down"></i></div>
-                            <div class="mt-close">Tutup google map <i class="fa fa-angle-up"></i></div>
-                        </div>
-                    </div>
-                    
-                </a>
-                
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.6988925065975!2d112.01864731477819!3d-7.821660994363882!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e785712881b900b%3A0x6a002dc5d8b9d6b3!2sAGSATU!5e0!3m2!1sid!2sid!4v1580200003548!5m2!1sid!2sid" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe> 
-                
             </div>
-            <!-- End Google Map -->
+
+        </div>
+
+    </div>
+</section>
+<!-- End Head Section -->
+
+
+{% for row in contact %}
+<section class="page-section" id="contact">
+    <div class="container relative">
+
+        <h2 class="section-title font-alt mb-70 mb-sm-40">
+            Hubungi Kami
+        </h2>
+
+        <div class="row mb-60 mb-xs-40">
+
+            <div class="col-md-8 col-md-offset-2">
+                <div class="row">
+                    <div class="col-sm-6 col-lg-4 pt-20 pb-20 pb-xs-0">
+                        <div class="contact-item">
+                            <div class="ci-icon">
+                                <i class="fa fa-phone"></i>
+                            </div>
+                            <div class="ci-title font-alt">
+                                Admin 1
+                            </div>
+                            <div class="ci-text">
+                                {{row.nomer_hp_satu}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-4 pt-20 pb-20 pb-xs-0">
+                        <div class="contact-item">
+                            <div class="ci-icon">
+                                <i class="fa fa-phone"></i>
+                            </div>
+                            <div class="ci-title font-alt">
+                                Admin 2
+                            </div>
+                            <div class="ci-text">
+                                {{row.nomer_hp_dua}}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Phone -->
+
+                    <!-- Address -->
+                    <div class="col-sm-6 col-lg-4 pt-20 pb-20 pb-xs-0">
+                        <div class="contact-item">
+                            <div class="ci-icon">
+                                <i class="fa fa-map-marker"></i>
+                            </div>
+                            <div class="ci-title font-alt">
+                                Alamat
+                            </div>
+                            <div class="ci-text">
+                                {{row.alamat}}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Address -->
+
+                    <!-- Email -->
+                    <div class="col-sm-6 col-lg-4 pt-20 pb-20 pb-xs-0">
+                        <div class="contact-item">
+                            <div class="ci-icon">
+                                <i class="fa fa-envelope"></i>
+                            </div>
+                            <div class="ci-title font-alt">
+                                Email
+                            </div>
+                            <div class="ci-text">
+                                {{row.email}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-4 pt-20 pb-20 pb-xs-0">
+                        <div class="contact-item">
+                            <div class="ci-icon">
+                                <i class="fa fa-facebook"></i>
+                            </div>
+                            <div class="ci-title font-alt">
+                                Facebook
+                            </div>
+                            <div class="ci-text">
+                                {{row.facebook}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-4 pt-20 pb-20 pb-xs-0">
+                        <div class="contact-item">
+                            <div class="ci-icon">
+                                <i class="fa fa-instagram"></i>
+                            </div>
+                            <div class="ci-title font-alt">
+                                Instagram
+                            </div>
+                            <div class="ci-text">
+                                {{row.instagram}}
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End Email -->
+
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="container relative">
+        <div class="row multi-columns-row alt-features-grid">
+            
+            <!-- Features Item -->
+            <div class="col-sm-12 col-md-12 col-lg-12">
+                <div class="alt-features-item align-center">
+                    <div class="alt-features-icon">
+                        <span class="icon-heart"></span>
+                    </div>
+                    <h3 class="alt-features-title font-alt">{{row.moto}}</h3>
+                    <div class="alt-features-descr">
+                        {{row.deskripsi}}
+                    </div>
+                </div>
+            </div>
+            <!-- End Features Item -->
+            
+            
+            
+        </div>
+        <!-- End Features Grid -->
+            
+    </div>
+</section>
+{% endfor %}
+<div class="google-map">
+
+    <a href="#" class="map-section">
+
+        <div class="map-toggle">
+            <div class="mt-icon">
+                <i class="fa fa-map-marker"></i>
+            </div>
+            <div class="mt-text font-alt">
+                <div class="mt-open">Buka google map <i class="fa fa-angle-down"></i></div>
+                <div class="mt-close">Tutup google map <i class="fa fa-angle-up"></i></div>
+            </div>
+        </div>
+
+    </a>
+
+    <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3952.6988925065975!2d112.01864731477819!3d-7.821660994363882!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e785712881b900b%3A0x6a002dc5d8b9d6b3!2sAGSATU!5e0!3m2!1sid!2sid!4v1580200003548!5m2!1sid!2sid"
+        width="600" height="450" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+
+</div>
+<!-- End Google Map -->
 {% endblock content %}
