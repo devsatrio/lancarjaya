@@ -22,6 +22,7 @@ class barang(models.Model):
     kategori = models.ForeignKey(kategori,on_delete=models.SET_NULL,null=True)
     slug = models.SlugField(null=True,editable=False)
     gambar = models.ImageField(upload_to='produk/',null=True)
+    status_aktiv = models.BooleanField(default=False)
 
     def save(self):
       self.slug=slugify(self.nama)
