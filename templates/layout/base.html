@@ -11,7 +11,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         
         <!-- Favicons -->
-        <link rel="shortcut icon" href="images/favicon.png">
+        <link rel="shortcut icon" href="{% static 'assets/images/favicon-lancar-jaya.png' %}">
 
         <!-- CSS -->
         <link rel="stylesheet" href="{% static 'assets/css/bootstrap.min.css' %}">
@@ -50,7 +50,7 @@
                     
                     <!-- Footer Logo -->
                     <div class="local-scroll mb-30 wow fadeInUp" data-wow-duration="1.5s">
-                        <a href="#top"><img src="images/logo-footer.png" width="78" height="36" alt="" /></a>
+                        <a href="#top"><img src="{% static 'assets/images/logo-footer-lancar-jaya.png' %}" width="78" height="36" alt="" /></a>
                     </div>
                     <!-- End Footer Logo -->
                     
@@ -69,7 +69,7 @@
                         
                         <!-- Copyright -->
                         <div class="footer-copy font-alt">
-                            <a href="http://themeforest.net/user/theme-guru/portfolio" target="_blank">&copy; Rhythm 2019</a>.
+                            <a href="{%url 'index' %}" target="_blank">&copy; Lancar Jaya 2020</a>.
                         </div>
                         <!-- End Copyright -->
                         
