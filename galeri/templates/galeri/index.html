@@ -1,67 +1,8 @@
 {% extends 'layout/base.html' %}
 {% load static %}
+
 {% block content %}
 
-            <!-- Head Section -->
-            <section class="small-section bg-dark">
-                <div class="relative container align-left">
-                    
-                    <div class="row">
-                        
-                        <div class="col-md-8">
-                            <h1 class="hs-line-11 font-alt mb-20 mb-xs-0">Galeri</h1>
-                            <div class="hs-line-4 font-alt">
-                                An eye for detail makes our works excellent
-                            </div>
-                        </div>
-                        
-                    </div>
-                    
-                </div>
-            </section>
-            <!-- End Head Section -->
-            
-            
-            <!-- Portfolio Section -->
-            <section class="page-section">
-                <div class="container relative">
-                    
-                    <!-- Works Filter -->                    
-                    <!-- <div class="works-filter font-alt align-center">
-                        <a href="#" class="filter active" data-filter="*">All works</a>
-                        {% for row in kategori %}
-                        <a href="{% url 'galeri:kategori' row.id %}" class="filter" data-filter=".petualangan">{{row.nama}}</a>
-                        {% endfor %}
-                    </div>  -->                   
-                    <!-- End Works Filter -->
-                    
-                    <!-- Works Grid -->
-                    <ul class="works-grid work-grid-3 work-grid-gut clearfix font-alt hover-white hide-titles" id="work-grid">
-                        
-                        <!-- Work Item (Lightbox) -->
-                        {% for row in galeri%}
-                        <li class="work-item mix photography">
-                            <a href="{{row.gambar.url}}" class="work-lightbox-link mfp-image">
-                                <div class="work-img">
-                                    <img src="{{row.gambar.url}}" />
-                                </div>
-                                <div class="work-intro">
-                                    <h3 class="work-title">{{row.judul}}</h3>
-                                    <div class="work-descr">
-                                        {{row.deskripsi}}
-                                    </div>
-                                </div>
-                            </a>
-                        </li>
-                        {% endfor %}
-                        <!-- End Work Item -->
-                        
-                        
-                    </ul>
-                    <!-- End Works Grid -->
-                    
-
-<!-- Head Section -->
 <section class="small-section bg-dark">
     <div class="relative container align-left">
 
