@@ -24,6 +24,6 @@ class foto(models.Model):
 	def save(self):
 		self.slug = slugify(self.judul)
 		super(foto, self).save()
-
+			
 	def __str__(self):
 		return self.judul
