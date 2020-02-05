@@ -40,7 +40,7 @@
                     {% endif%}
                 </div>
                 <div class="post-prev-title font-alt align-center">
-                    <a href="#">{{row.nama}}</a>
+                    <a href="{% url 'produk:show' row.slug %}">{{row.nama}}</a>
                 </div>
                 <div class="post-prev-text align-center">
                     {% if row.diskon != 0 %}

@@ -24,11 +24,20 @@ class roleskategori(ImportExportModelAdmin):
 
 admin.site.register(models.kategori,roleskategori)
 
+def aktivkan_produk(modeladmin, request, queryset):
+    queryset.update(status_aktiv=1)
+aktivkan_produk.short_description = "Aktivkan Produk"
+
+def nonaktivkan_produk(modeladmin, request, queryset):
+    queryset.update(status_aktiv=0)
+nonaktivkan_produk.short_description = "Non Aktivkan Produk"
+
 class rolesbarang(ImportExportModelAdmin):
     resource_class = barangResource
     list_display = ('nama', 'harga', 'diskon','kategori','tanggal_buat','status_aktiv',)
     list_filter = ('kategori','tanggal_buat')
     readonly_fields = ('tanggal_buat','slug')
+    actions = [aktivkan_produk,nonaktivkan_produk]
     icon_name='next_week'
 
     def status_aktiv(self, obj):

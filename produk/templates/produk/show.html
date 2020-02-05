@@ -17,9 +17,11 @@
         <div class="row mb-60 mb-xs-30">
             <div class="col-md-4 mb-md-30">
                 <div class="post-prev-img">
+                    {% if barang.gambar %}
                     <a href="{{barang.gambar.url}}" class="lightbox-gallery-3 mfp-image"><img
-                            src="{{barang.gambar.url}}" alt="" /></a>
-                    {% if barang.diskon != 0 %}
+                        src="{{barang.gambar.url}}" alt="" /></a>
+                    {% endif %}
+                   {% if barang.diskon != 0 %}
                     <div class="intro-label">
                         <span class="label label-danger bg-red">{{barang.diskon}}%</span>
                     </div>
@@ -56,7 +58,7 @@
                     <div>Kategori : {{barang.kategori}}</div>
                     <div>Tanggal Posting : {{barang.tanggal_buat}}</div>
                     {% for row in contact %}
-                    <div>Minat ? Hubungi : <a href="https://wa.me/{{row.nomer_hp_satu}}" target="blank()"> {{row.nomer_hp_satu}} (Admin 1)</a> <a href="https://wa.me/{{row.nomer_hp_dua}}" target="blank()"> {{row.nomer_hp_dua}} (Admin 2)</a></div>
+                    <div>Minat ? Hubungi : <br><a href="https://wa.me/{{row.nomer_hp_satu}}" target="blank()"> {{row.nomer_hp_satu}} (Admin 1)</a><br> <a href="https://wa.me/{{row.nomer_hp_dua}}" target="blank()"> {{row.nomer_hp_dua}} (Admin 2)</a></div>
                     {% endfor %}
                 </div>
                 <br>

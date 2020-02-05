@@ -4,7 +4,7 @@ from contact import models as contactmodel
 from django.core.paginator import Paginator
 
 def index(request):
-    data_produk = models.barang.objects.all().order_by('-id')
+    data_produk = models.barang.objects.all().filter(status_aktiv=1).order_by('-id')
     paginator = Paginator(data_produk, 9)
     page = request.GET.get('page')
     data_produk = paginator.get_page(page)
@@ -26,7 +26,7 @@ def show(request,slugbarang):
 
 def kategori(request,slugkategori):
     data_kategori = models.kategori.objects.get(slug=slugkategori)
-    data_barang = models.barang.objects.filter(kategori=data_kategori.id).order_by('-id')
+    data_barang = models.barang.objects.filter(status_aktiv=1).filter(kategori=data_kategori.id).order_by('-id')
     data_list_kategori = models.kategori.objects.order_by('-id').all()
     context = {
         'produk':data_barang,

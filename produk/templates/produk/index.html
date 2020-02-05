@@ -29,8 +29,9 @@
                     <div class="col-md-4 col-lg-4 mb-60 mb-xs-40">
 
                         <div class="post-prev-img">
-
-                            <a href="#"><img src="{{row.gambar.url}}" alt="" /></a>
+                            {% if row.gambar %}
+                                <img src="{{row.gambar.url}}" alt="" />
+                            {% endif %}
 
                             {% if row.diskon != 0 %}
                             <div class="intro-label">
@@ -41,7 +42,7 @@
                         </div>
 
                         <div class="post-prev-title font-alt align-center">
-                            <a href="#">{{row.nama}}</a>
+                            <a href="{% url 'produk:show' row.slug %}">{{row.nama}}</a>
                         </div>
 
                         <div class="post-prev-text align-center">
