@@ -21,7 +21,7 @@ class barang(models.Model):
     tanggal_buat = models.DateTimeField(auto_now_add=True)
     kategori = models.ForeignKey(kategori,on_delete=models.SET_NULL,null=True)
     slug = models.SlugField(null=True,editable=False)
-    gambar = models.ImageField(upload_to='produk/',null=True)
+    gambar = models.ImageField(upload_to='produk/',null=True,blank=True)
     status_aktiv = models.BooleanField(default=False)
 
     def save(self):

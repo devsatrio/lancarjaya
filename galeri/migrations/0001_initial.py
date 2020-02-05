@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
             name='kategori',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('nama_kategori', models.CharField(max_length=50)),
+                ('nama', models.CharField(max_length=50)),
                 ('tanggal_buat', models.DateTimeField(auto_now_add=True)),
             ],
         ),
