@@ -55,7 +55,9 @@
                 <div class="section-text small">
                     <div>Kategori : {{barang.kategori}}</div>
                     <div>Tanggal Posting : {{barang.tanggal_buat}}</div>
-                    <div>Minat ? Hubungi : <a href="#"> 08345793540</a></div>
+                    {% for row in contact %}
+                    <div>Minat ? Hubungi : <a href="https://wa.me/{{row.nomer_hp_satu}}" target="blank()"> {{row.nomer_hp_satu}} (Admin 1)</a> <a href="https://wa.me/{{row.nomer_hp_dua}}" target="blank()"> {{row.nomer_hp_dua}} (Admin 2)</a></div>
+                    {% endfor %}
                 </div>
                 <br>
                 <hr class="mt-0 mb-30" />

@@ -29,7 +29,7 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `auth_group` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL PRIMARY KEY,
   `name` varchar(150) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -584,7 +584,6 @@ INSERT INTO `testimoni_testi` (`id`, `nama`, `email`, `perihal`, `deskripsi`, `t
 -- Indeks untuk tabel `auth_group`
 --
 ALTER TABLE `auth_group`
-  ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `name` (`name`);
 
 --
@@ -840,9 +839,9 @@ ALTER TABLE `testimoni_testi`
 --
 -- Ketidakleluasaan untuk tabel `auth_group_permissions`
 --
-ALTER TABLE `auth_group_permissions`
+/*ALTER TABLE `auth_group_permissions`
   ADD CONSTRAINT `auth_group_permissio_permission_id_84c5c92e_fk_auth_perm` FOREIGN KEY (`permission_id`) REFERENCES `auth_permission` (`id`),
-  ADD CONSTRAINT `auth_group_permissions_group_id_b120cbf9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`);
+  ADD CONSTRAINT `auth_group_permissions_group_id_b120cbf9_fk_auth_group_id` FOREIGN KEY (`group_id`) REFERENCES `auth_group` (`id`);*/
 
 --
 -- Ketidakleluasaan untuk tabel `auth_permission`

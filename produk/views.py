@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from . import models
+from contact import models as contactmodel
 from django.core.paginator import Paginator
 
 def index(request):
@@ -7,7 +8,6 @@ def index(request):
     paginator = Paginator(data_produk, 9)
     page = request.GET.get('page')
     data_produk = paginator.get_page(page)
-
     data_kategori = models.kategori.objects.order_by('-id').all()
     context = {
         'produk':data_produk,
@@ -16,9 +16,11 @@ def index(request):
     return render(request,'produk/index.html',context)
 
 def show(request,slugbarang):
+    data_kontak = contactmodel.contact.objects.all().order_by('-id')[0:1]
     data_barang = models.barang.objects.get(slug=slugbarang)
     context = {
         'barang':data_barang,
+        'contact':data_kontak
     }
     return render(request,'produk/show.html',context)
 
