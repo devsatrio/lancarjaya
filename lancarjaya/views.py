@@ -7,7 +7,7 @@ from slider.models import gambar
 def index(request):
     data_testi = testi.objects.all().order_by('-id')[0:4]
     data_barang = barang.objects.all().filter(status_aktiv=1).order_by('-id')[0:8]
-    data_artikel = artikel.objects.all().order_by('-id')[0:3]
+    data_artikel = artikel.objects.all().filter(status_aktif=1).order_by('-id')[0:3]
     data_slider = gambar.objects.all().order_by('-id')[0:3]
     
     #parsing data
