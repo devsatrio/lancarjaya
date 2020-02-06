@@ -34,10 +34,14 @@
                 </li>
                 <li><a>&nbsp;</a></li>
                 <li>
-                    <a href="#" class="mn-has-sub"><i class="fa fa-search"></i> Search</a>
-                    
+                    <a href="#" class="mn-has-sub active">Login</a>
+                </li>
+                <li>
+                    <a href="{%url 'users:register' %}" class="mn-has-sub active">Register</a>
+                </li>
+                <li>
+                    <a class="mn-has-sub"><i class="fa fa-search"></i> Search</a>
                     <ul class="mn-sub">
-                        
                         <li>
                             <div class="mn-wrap">
                                 <form  action="{% url 'pencarian' %}" method="get" class="form">
