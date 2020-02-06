@@ -20,6 +20,7 @@
 </section>
 
 <section class="page-section">
+    {% if hasil %}
     <div class="container relative">
 
         <div class="row">
@@ -60,6 +61,26 @@
         </div>
         
     </div>
+    {% else %}
+    <div class="container relative">
+
+        <div class="row">
+
+            <!-- Content -->
+            <div class="col-sm-12">
+
+                <div class="row multi-columns-row">
+
+                    <!-- Post Item -->
+                    <h3 align="center">"Ooops Produk Yang dicari Tidak Ada"</h3>
+                    <!-- End Post Item -->
+                    
+                </div> 
+            </div>
+        </div>
+        
+    </div>
+    {% endif %}
 </section>
 
 <section class="small-section bg-dark">
@@ -74,6 +95,7 @@
     </div>
 </section>
 <section class="page-section">
+    {% if hasil2 %}
     <div class="container relative">
 
         <div class="row">
@@ -115,6 +137,26 @@
         </div>
         
     </div>
+    {% else %}
+    <div class="container relative">
+
+        <div class="row">
+
+            <!-- Content -->
+            <div class="col-sm-12">
+
+                <div class="row multi-columns-row">
+
+                    <!-- Post Item -->
+                    <h3 align="center">"Ooops Artikel Yang dicari Tidak Ada"</h3>
+                    <!-- End Post Item -->
+                    
+                </div> 
+            </div>
+        </div>
+        
+    </div>
+    {% endif %}
 </section>
 
 {% endblock content %}
