@@ -27,11 +27,11 @@ admin.site.register(models.kategori,rolekategori)
 
 def aktifkan_produk(modeladmin, request, queryset):
     queryset.update(status_aktif=1)
-aktifkan_produk.short_description = "Aktifkan Produk"
+aktifkan_produk.short_description = "Aktifkan Artikel"
 
 def nonaktifkan_produk(modeladmin, request, queryset):
     queryset.update(status_aktif=0)
-nonaktifkan_produk.short_description = "Non Aktifkan Produk"
+nonaktifkan_produk.short_description = "Non Aktifkan Artikel"
 
 
 class roleartikel(ImportExportModelAdmin):
