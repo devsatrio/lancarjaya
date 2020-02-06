@@ -47,7 +47,6 @@ INSTALLED_APPS = [
     'galeri',
     'contact',
     'slider',
-    'cari',
     'import_export',
     'testimoni',
 ]
