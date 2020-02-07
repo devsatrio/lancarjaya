@@ -18,6 +18,7 @@ class barang(models.Model):
     deskripsi = models.TextField()
     harga = models.IntegerField()
     diskon = models.IntegerField()
+    stok = models.IntegerField()
     tanggal_buat = models.DateTimeField(auto_now_add=True)
     kategori = models.ForeignKey(kategori,on_delete=models.SET_NULL,null=True)
     slug = models.SlugField(null=True,editable=False)

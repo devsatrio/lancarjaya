@@ -4,7 +4,7 @@ from django.core.paginator import Paginator
 
 def index(request):
     data_kategori = models.kategori.objects.all()
-    data_artikel = models.artikel.objects.all().order_by('-id')
+    data_artikel = models.artikel.objects.all().filter(status_aktif=1).order_by('-id')
     paginator = Paginator(data_artikel, 6)
     page = request.GET.get('page')
     data_artikel = paginator.get_page(page)
@@ -18,7 +18,7 @@ def index(request):
 
 def show(request,blogslug):
     detail_artikel = models.artikel.objects.get(slug=blogslug)
-    artikel_lain = models.artikel.objects.all().order_by('?')[0:4]
+    artikel_lain = models.artikel.objects.all().filter(status_aktif=1).order_by('?')[0:4]
     data_kategori = models.kategori.objects.all()
 
     #parsing data
@@ -31,7 +31,7 @@ def show(request,blogslug):
 
 def bykategori(request,kategori):
     data_kategori = models.kategori.objects.all()
-    data_artikel = models.artikel.objects.all().filter(kategori=kategori).order_by('-id')
+    data_artikel = models.artikel.objects.all().filter(kategori=kategori).filter(status_aktif=1).order_by('-id')
     paginator = Paginator(data_artikel, 4)
     page = request.GET.get('page')
     data_artikel = paginator.get_page(page)

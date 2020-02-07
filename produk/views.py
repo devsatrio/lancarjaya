@@ -2,6 +2,7 @@ from django.shortcuts import render
 from . import models
 from contact import models as contactmodel
 from django.core.paginator import Paginator
+from . import forms
 
 def index(request):
     data_produk = models.barang.objects.all().filter(status_aktiv=1).order_by('-id')
@@ -20,7 +21,8 @@ def show(request,slugbarang):
     data_barang = models.barang.objects.get(slug=slugbarang)
     context = {
         'barang':data_barang,
-        'contact':data_kontak
+        'contact':data_kontak,
+        'form':forms.form_keranjang,
     }
     return render(request,'produk/show.html',context)
 

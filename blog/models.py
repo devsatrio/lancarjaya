@@ -20,6 +20,7 @@ class artikel(models.Model):
     slug = models.SlugField(editable=False,blank=True,null=True)
     gambar = models.ImageField(upload_to='artikel/',null=True)
     kategori = models.ForeignKey(kategori,on_delete=models.SET_NULL,null=True)
+    status_aktif = models.BooleanField(default=False)
 
     def save(self):
         self.slug = slugify(self.judul)

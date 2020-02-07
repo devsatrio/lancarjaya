@@ -47,9 +47,11 @@ INSTALLED_APPS = [
     'galeri',
     'contact',
     'slider',
-    'cari',
     'import_export',
     'testimoni',
+    'crispy_forms',
+    'users',
+    'transaksi',
 ]
 
 MIDDLEWARE = [
@@ -91,7 +93,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'db_lancarjaya',
         'USER':'root',
-        'PASSWORD':'',
+        'PASSWORD':'d7676543',
     }
 }
 
@@ -148,3 +150,9 @@ MATERIAL_ADMIN_SITE = {
     'MAIN_HOVER_COLOR':  '#34495e', # Admin site main hover color, css color should be specified
     'PROFILE_PICTURE':  'images/user.png',  # Admin site profile picture (path to static should be specified)
 }
+
+CRISPY_TEMPLATE_PACK='bootstrap3'
+
+LOGIN_REDIRECT_URL='index'
+
+LOGIN_URL = 'users:login'

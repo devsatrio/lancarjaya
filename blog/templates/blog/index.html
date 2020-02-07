@@ -33,7 +33,9 @@
                     <div class="col-md-6 col-lg-6 mb-60 mb-xs-40">
 
                         <div class="post-prev-img">
-                            <img src="{{row.gambar.url}}" alt=""/>
+                            {% if row.gambar %}
+                                <img src="{{row.gambar.url}}" alt=""/>
+                            {% endif %}
                         </div>
                         
                         <div class="post-prev-title font-alt">

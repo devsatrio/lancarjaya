@@ -1,0 +1,46 @@
+{% extends 'layout/base.html' %}
+{% load crispy_forms_tags %}
+{% load static %}
+{% block content %}
+<!-- Head Section -->
+<section class="small-section bg-dark-lighter">
+    <div class="relative container align-left">
+        
+        <div class="row">
+            
+            <div class="col-md-8">
+                <h1 class="hs-line-11 font-alt mb-20 mb-xs-0">Logout</h1>
+            </div>
+            
+            <div class="col-md-4 mt-30">
+            </div>
+        </div>
+        
+    </div>
+</section>
+<!-- End Head Section -->
+
+
+<!-- Section -->
+<section class="page-section">
+    <div class="container relative">
+        <div class="tab-content tpl-minimal-tabs-cont section-text">
+            
+            <div class="tab-pane fade in active" id="mini-one">
+                                      
+                <div class="row">
+                    <div class="col-md-4 col-md-offset-4 text-center">
+                        <h1 class="display-4">Hai !</h1>
+                            <p class="lead">Anda telah logout, Sampai jumpa lagi</p>
+                            <a class="submit_btn btn btn-mod btn-medium btn-round" href="{% url 'index' %}" role="button">Home</a>
+                            <a class="submit_btn btn btn-mod btn-medium btn-round" href="{% url 'users:login' %}" role="button">Login lagi</a>
+                    </div>
+                </div>
+                
+            </div>
+            
+        </div>
+        
+    </div>
+</section>
+{% endblock content %}

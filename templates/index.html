@@ -155,33 +155,7 @@
         </div>
     </div>
 </section>
-<section class="page-section bg-dark fullwidth-slider bg-scroll">
-    {% for row in testi %}
-    <div>
-        <div class="container relative">
-            <div class="row">
-                <div class="col-md-8 col-md-offset-2 align-center">
-                    <!-- Section Icon -->
-                    <div class="section-icon">
-                        <span class="icon-quote"></span>
-                    </div>
-                    <!-- Section Title -->
-                    <h3 class="small-title font-alt">Testimoni</h3>
-                    <blockquote class="testimonial">
-                        <p>
-                            {{row.perihal}} - {{row.deskripsi}}
-                        </p>
-                        <footer class="testimonial-author">
-                            {{row.nama}} - {{row.email}}
-                        </footer>
-                    </blockquote>
-                </div>
-            </div>
-        </div>
-    </div>
-    {% endfor %}
-</section>
-<hr class="mt-0 mb-0 " />
+
 <section class="page-section" id="news">
     <div class="container relative">
 
@@ -227,4 +201,34 @@
 
     </div>
 </section>
+
+<hr class="mt-0 mb-0 " />
+
+<section class="page-section bg-dark fullwidth-slider bg-scroll">
+    {% for row in testi %}
+    <div>
+        <div class="container relative">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2 align-center">
+                    <!-- Section Icon -->
+                    <div class="section-icon">
+                        <span class="icon-quote"></span>
+                    </div>
+                    <!-- Section Title -->
+                    <h3 class="small-title font-alt">Testimoni</h3>
+                    <blockquote class="testimonial">
+                        <p>
+                            {{row.perihal}} - {{row.deskripsi}}
+                        </p>
+                        <footer class="testimonial-author">
+                            {{row.nama}} - {{row.email}}
+                        </footer>
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</section>
+
 {% endblock content %}
