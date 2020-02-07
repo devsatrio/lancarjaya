@@ -33,11 +33,28 @@
                     <a href="{%url 'contact:index' %}" class="mn-has-sub active">Kontak</a>
                 </li>
                 <li><a>&nbsp;</a></li>
+                {% if user.is_authenticated %}
                 <li>
-                    <a href="#" class="mn-has-sub"><i class="fa fa-search"></i> Search</a>
-                    
+                    <a href="#"><i class="fa fa-shopping-cart"></i> Keranjang(0)</a>
+                </li>
+                <li>
+                    <a href="#" class="mn-has-sub">{{user.username}} <i class="fa fa-angle-down"></i></a>
                     <ul class="mn-sub">
-                        
+                        <li><a href="#">Edit Profile</a></li>
+                        <li><a href="{%url 'users:logout' %}">Logout</a></li>
+                    </ul>
+                </li>
+                {% else %}
+                <li>
+                    <a href="{%url 'users:login' %}" class="mn-has-sub active">Login</a>
+                </li>
+                <li>
+                    <a href="{%url 'users:register' %}" class="mn-has-sub active">Register</a>
+                </li>
+                {% endif %}
+                <li>
+                    <a class="mn-has-sub"><i class="fa fa-search"></i> Search</a>
+                    <ul class="mn-sub">
                         <li>
                             <div class="mn-wrap">
                                 <form  action="{% url 'pencarian' %}" method="get" class="form">
