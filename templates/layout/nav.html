@@ -35,7 +35,7 @@
                 <li><a>&nbsp;</a></li>
                 {% if user.is_authenticated %}
                 <li>
-                    <a href="#"><i class="fa fa-shopping-cart"></i> Keranjang(0)</a>
+                    <a href="{% url 'transaksi:keranjang' user.username %}"><i class="fa fa-shopping-cart"></i> Keranjang</a>
                 </li>
                 <li>
                     <a href="#" class="mn-has-sub">{{user.username}} <i class="fa fa-angle-down"></i></a>
