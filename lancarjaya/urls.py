@@ -13,6 +13,7 @@ urlpatterns = [
     path('kontak/',include('contact.urls')),
     path('user/',include('users.urls')),
     path('pencarian/',views.pencarian,name='pencarian'),
+    path('keranjang/',include('transaksi.urls')),
     path('',views.index,name='index'),
 ]
 

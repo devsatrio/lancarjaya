@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'testimoni',
     'crispy_forms',
     'users',
+    'transaksi',
 ]
 
 MIDDLEWARE = [

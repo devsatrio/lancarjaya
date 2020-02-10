@@ -1,7 +1,11 @@
-from django.shortcuts import render
+from django.shortcuts import render,redirect
+from django.contrib import messages
+from django.contrib.auth.models import User
 from . import models
 from contact import models as contactmodel
 from django.core.paginator import Paginator
+from transaksi.models import keranjang
+from . import forms
 
 def index(request):
     data_produk = models.barang.objects.all().filter(status_aktiv=1).order_by('-id')
@@ -16,11 +20,29 @@ def index(request):
     return render(request,'produk/index.html',context)
 
 def show(request,slugbarang):
+    if request.method == 'POST':
+        jumlahnya = keranjang.objects.filter(barang=models.barang.objects.get(id=request.POST['barang'])).filter(pembeli=User.objects.get(id=request.POST['user'])).count()
+        print(jumlahnya)
+        if jumlahnya > 0 :
+            t = keranjang.objects.get(barang=models.barang.objects.get(id=request.POST['barang']), pembeli=User.objects.get(id=request.POST['user']))
+            t.jumlah = int(t.jumlah) + int(request.POST['jumlah']) 
+            t.save()
+        else:
+            keranjang.objects.create(
+            jumlah=request.POST['jumlah'],
+            barang = models.barang.objects.get(id=request.POST['barang']),
+            pembeli = User.objects.get(id=request.POST['user']),
+            )
+        
+        messages.success(request,'Berhasil menambah ke keranjang belanja')
+        return redirect('produk:show',slugbarang=slugbarang)
+
     data_kontak = contactmodel.contact.objects.all().order_by('-id')[0:1]
     data_barang = models.barang.objects.get(slug=slugbarang)
     context = {
         'barang':data_barang,
-        'contact':data_kontak
+        'contact':data_kontak,
+        'form':forms.form_keranjang,
     }
     return render(request,'produk/show.html',context)
 
