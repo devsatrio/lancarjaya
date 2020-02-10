@@ -38,9 +38,7 @@
                                 <span class="label label-danger bg-red">{{row.diskon}}%</span>
                             </div>
                             {% endif%}
-
                         </div>
-
                         <div class="post-prev-title font-alt align-center">
                             <a href="{% url 'produk:show' row.slug %}">{{row.nama}}</a>
                         </div>
@@ -50,7 +48,7 @@
                             <del>Rp. {{row.harga|intcomma}}</del>
                             &nbsp;
                             <strong>
-                                {% with numerator=row.harga|mul:row.diskon|div:100%}
+                                Rp. {% with numerator=row.harga|mul:row.diskon|div:100%}
                                     {{row.harga|sub:numerator|floatformat|intcomma}}
                                 {% endwith %}
                             </strong>
@@ -70,13 +68,8 @@
                     {% endfor %}
 
                 </div>
-
-                <!-- Pagination -->
                 {% if produk.paginator.num_pages > 1 %}
-                <!-- start -->
                 {% include 'layout/_pagination.html' with items=produk %}
-                <!-- end -->
-
                 {% endif %}
             </div>
             <div class="col-sm-4 col-md-3 col-md-offset-1 sidebar">

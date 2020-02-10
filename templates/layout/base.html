@@ -104,6 +104,8 @@
         <script type="text/javascript" src="{% static 'assets/js/jquery.lazyload.min.js'%}"></script>
         <script type="text/javascript" src="{% static 'assets/js/all.js'%}"></script>
         <script type="text/javascript" src="{% static 'assets/js/contact-form.js'%}"></script>
-        <script type="text/javascript" src="{% static 'assets/js/jquery.ajaxchimp.min.js'%}"></script>        
+        <script type="text/javascript" src="{% static 'assets/js/jquery.ajaxchimp.min.js'%}"></script> 
+        {% block customjs %}
+        {% endblock customjs %}       
         </body>
 </html>

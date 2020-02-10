@@ -34,8 +34,8 @@ nonaktivkan_produk.short_description = "Non Aktivkan Produk"
 
 class rolesbarang(ImportExportModelAdmin):
     resource_class = barangResource
-    list_display = ('nama', 'harga', 'diskon','kategori','tanggal_buat','status_aktiv',)
-    list_filter = ('kategori','tanggal_buat')
+    list_display = ('nama', 'harga', 'stok','diskon','kategori','tanggal_buat','status_aktiv',)
+    list_filter = ('kategori','tanggal_buat','status_aktiv')
     readonly_fields = ('tanggal_buat','slug')
     actions = [aktivkan_produk,nonaktivkan_produk]
     icon_name='next_week'
