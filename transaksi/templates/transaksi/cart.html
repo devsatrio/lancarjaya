@@ -73,6 +73,7 @@
                             <form method="post" action="{% url 'transaksi:hapus-keranjang' user.username %}">
                                 {% csrf_token %}
                                 <input type="hidden" value="{{row.id}}" name="kode">
+                                <button type="button" id="myBtn" class="btn btn-mod btn-round"><i class="fa fa-trash-o"></i>Edit</button>
                                 <button type="submit" onclick="return confirm('Hapus Data ?')"
                                     class="btn btn-mod btn-round"><i class="fa fa-trash-o"></i> Hapus</button>
                             </form>
@@ -83,7 +84,7 @@
 
                 <hr />
 
-                <div class="row">
+                <!-- <div class="row">
                     <div class="col-sm-8">
                         <form action="#" class="form">
                             <input placeholder="Coupon code" class="input-sm mb-xs-10" style="width: 250px;" type="text"
@@ -99,33 +100,42 @@
                         </div>
 
                     </div>
-                </div>
+                </div> -->
 
                 <hr class="mb-60" />
 
                 <div class="row">
                     <div class="col-sm-6">
 
-                        <h3 class="small-title font-alt">Calculate Shipping</h3>
+                        <h3 class="small-title font-alt">Alamat pengiriman</h3>
 
                         <form action="#" class="form">
 
                             <div class="mb-10">
-                                <select class="input-md form-control">
-                                    <option>Select Country</option>
-                                    <option>France</option>
-                                    <option>Ukraine</option>
-                                    <option>USA</option>
-                                </select>
-                            </div>
+                                            <select class="input-md form-control">
+                                                <option>Provinsi</option>
+                                                <option>France</option>
+                                                <option>Ukraine</option>
+                                                <option>USA</option>
+                                            </select>
+                                        </div>
+                                        <div class="mb-10">
+                                            <select class="input-md form-control">
+                                                <option>Kota</option>
+                                                <option>France</option>
+                                                <option>Ukraine</option>
+                                                <option>USA</option>
+                                            </select>
+                                        </div>
+    
 
                             <div class="mb-10">
-                                <input placeholder="State" class="input-md form-control" type="text"
+                                <input placeholder="Alamat" class="input-md form-control" type="text"
                                     pattern=".{3,100}" />
                             </div>
 
                             <div class="mb-10">
-                                <input placeholder="Postcode / Zip" class="input-md form-control" type="text"
+                                <input placeholder="Kode Pos" class="input-md form-control" type="text"
                                     pattern=".{3,100}" />
                             </div>
 
@@ -133,33 +143,34 @@
 
                     </div>
                     <div class="col-sm-6 text align-right pt-10">
-
-
+                        
+        
                         <div>
-                            subtotal: <strong>Rp. {{subtotal.barang__avg|intcomma}}</strong>
-                            =======
-                            {{row.jumlah}} Pcs
-                            </td>
                             <td>
+                            Jumlah Barang: <strong>{{jumlah__sum|intcomma}} Pcs</strong>
+                            </td>
+                            <div>
+                                Subtotal: <strong>Rp. {{total__sum|intcomma}}</strong>
+                            </div>
 
-                                Rp. {{row.total|intcomma}}
-                            </td>
-                            <td>
-                                <form method="post" action="{% url 'transaksi:hapus-keranjang' user.username %}">
-                                    {% csrf_token %}
-                                    <input type="hidden" value="{{row.id}}" name="kode">
-                                    <a href="#" class="btn btn-mod btn-round"><i class="fa fa-wrench"></i></a>
-                                    <button type="button" id="myBtn">Open Modal</button>
-                                    <button type="submit" onclick="return confirm('Hapus Data ?')"
-                                        class="btn btn-mod btn-round"><i class="fa fa-trash-o"></i></button>
-                                </form>
-                            </td>
-                            </tr>
-                            {% endfor %}
+                            <div class="mb-10">
+                                Ongkir: <strong>Rp. 0</strong>
+                            </div>
+
+                            <div class="lead mt-0 mb-30">
+                                Total : <strong>Rp. 0</strong>
+                            </div>
+
+                            <div>
+                            <a href="#" class="btn btn-mod btn-round btn-large">Beli Sekarang</a>
+                            </div>
+                            <table>
+                            <tr></tr>
                             </table>
+                        </div>
 
-                            <hr class="mb-60" />
-
+                           <!--  <hr class="mb-60" /> -->
+<!-- 
                             <div class="row">
                                 <div class="col-sm-6">
 
@@ -217,7 +228,9 @@
 
 
                                 </div>
-                            </div>
+                            </div> -->
+                    </div>
+
 </section>
 <div id="myModal" class="modal">
     <div class="modal-content">
