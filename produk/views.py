@@ -20,18 +20,26 @@ def index(request):
     return render(request,'produk/index.html',context)
 
 def show(request,slugbarang):
+    hargabarangnya = 0
     if request.method == 'POST':
         jumlahnya = keranjang.objects.filter(barang=models.barang.objects.get(id=request.POST['barang'])).filter(pembeli=User.objects.get(id=request.POST['user'])).count()
-        print(jumlahnya)
+        dbarang = models.barang.objects.get(id=request.POST['barang'])
+        if dbarang.diskon > 0:
+            jumlahdiskon = int(dbarang.harga)*int(dbarang.diskon)/100
+            hargabarangnya = (int(dbarang.harga)-int(jumlahdiskon))*int(request.POST['jumlah'])
+        else:
+            hargabarangnya = int(dbarang.harga)*int(request.POST['jumlah'])
         if jumlahnya > 0 :
             t = keranjang.objects.get(barang=models.barang.objects.get(id=request.POST['barang']), pembeli=User.objects.get(id=request.POST['user']))
             t.jumlah = int(t.jumlah) + int(request.POST['jumlah']) 
+            t.total = int(t.total)+int(hargabarangnya)
             t.save()
         else:
             keranjang.objects.create(
             jumlah=request.POST['jumlah'],
             barang = models.barang.objects.get(id=request.POST['barang']),
             pembeli = User.objects.get(id=request.POST['user']),
+            total= int(hargabarangnya),
             )
         
         messages.success(request,'Berhasil menambah ke keranjang belanja')
