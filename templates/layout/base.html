@@ -20,7 +20,9 @@
         <link rel="stylesheet" href="{% static 'assets/css/animate.min.css'%}">
         <link rel="stylesheet" href="{% static 'assets/css/vertical-rhythm.min.css'%}">
         <link rel="stylesheet" href="{% static 'assets/css/owl.carousel.css'%}">
-        <link rel="stylesheet" href="{% static 'assets/css/magnific-popup.css'%}">        
+        <link rel="stylesheet" href="{% static 'assets/css/magnific-popup.css'%}">
+        {% block customcss %}
+        {% endblock customcss %}        
         
     </head>
     <body class="appear-animate">

@@ -2,26 +2,31 @@
 {% load mathfilters %}
 {% load static %}
 {% load humanize %}
+
+{% block customcss %}
+<link rel="stylesheet" href="{% static 'assets/custom/modal.css'%}">
+{% endblock customcss %}
+
 {% block content %}
 <section class="small-section bg-dark">
     <div class="relative container align-left">
-        
+
         <div class="row">
-            
+
             <div class="col-md-8">
                 <h1 class="hs-line-11 font-alt mb-0">Keranjang</h1>
             </div>
         </div>
-        
+
     </div>
 </section>
 
 <section class="page-section">
     <div class="container">
-        
+
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
-                
+
                 <table class="table table-striped shopping-cart-table">
                     <tr>
                         <th class="hidden-xs">
@@ -44,7 +49,7 @@
                     <tr>
                         <td class="hidden-xs">
                             {% if row.barang.gambar %}
-                            <img src="{{row.barang.gambar.url}}" alt=""/>
+                            <img src="{{row.barang.gambar.url}}" alt="" />
                             {% endif %}
                         </td>
                         <td>
@@ -54,28 +59,24 @@
                             {{row.jumlah}} Pcs
                         </td>
                         <td>
-                            {% if row.diskon != 0 %}
-                                Rp. {% with numerator=row.barang.harga|mul:row.barang.diskon|div:100%}
-                                    {{row.barang.harga|sub:numerator|mul:row.jumlah|floatformat|intcomma}}
-                                {% endwith %}
-                            {%else%}
-                            Rp. {% with numerator=row.barang.harga|mul:row.jumlah %}
-                                    {{numerator|intcomma}}
-                                {% endwith %}
-                            {% endif %}
+
+                            Rp. {{row.total|intcomma}}
                         </td>
                         <td>
                             <form method="post" action="{% url 'transaksi:hapus-keranjang' user.username %}">
                                 {% csrf_token %}
                                 <input type="hidden" value="{{row.id}}" name="kode">
-                                <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-mod btn-round"><i class="fa fa-trash-o"></i> Hapus</button>
+                                <a href="#" class="btn btn-mod btn-round"><i class="fa fa-wrench"></i></a>
+                                <button type="button" id="myBtn">Open Modal</button>
+                                <button type="submit" onclick="return confirm('Hapus Data ?')"
+                                    class="btn btn-mod btn-round"><i class="fa fa-trash-o"></i></button>
                             </form>
                         </td>
                     </tr>
                     {% endfor %}
                 </table>
-                
-                <hr />
+
+                <!-- <hr />
                 
                 <div class="row">
                     <div class="col-sm-8">
@@ -91,64 +92,109 @@
                         </div>
                         
                     </div>
-                </div>
-                
+                </div> -->
+
                 <hr class="mb-60" />
-                
+
                 <div class="row">
                     <div class="col-sm-6">
-                        
-                        <h3 class="small-title font-alt">Calculate Shipping</h3>
-                        
+
+                        <h3 class="small-title font-alt">Alamat Pengiriman</h3>
+
                         <form action="#" class="form">
-                            
+
                             <div class="mb-10">
                                 <select class="input-md form-control">
-                                    <option>Select Country</option>
+                                    <option>Provinsi</option>
                                     <option>France</option>
                                     <option>Ukraine</option>
                                     <option>USA</option>
                                 </select>
                             </div>
-                            
                             <div class="mb-10">
-                                <input placeholder="State" class="input-md form-control" type="text" pattern=".{3,100}" />
+                                <select class="input-md form-control">
+                                    <option>Kota</option>
+                                    <option>France</option>
+                                    <option>Ukraine</option>
+                                    <option>USA</option>
+                                </select>
                             </div>
-                            
                             <div class="mb-10">
-                                <input placeholder="Postcode / Zip" class="input-md form-control" type="text" pattern=".{3,100}" />
+                                <input placeholder="State" class="input-md form-control" type="text"
+                                    pattern=".{3,100}" />
                             </div>
-                            
+
+                            <div class="mb-10">
+                                <input placeholder="Postcode / Zip" class="input-md form-control" type="text"
+                                    pattern=".{3,100}" />
+                            </div>
+
                         </form>
-                        
+
                     </div>
                     <div class="col-sm-6 text align-right pt-10">
-                        
-                        
+
+
                         <div>
-                            subtotal: <strong>Rp. {{subtotal.barang__avg|intcomma}}</strong>
+                            Subtotal: <strong>Rp. {{total__sum|intcomma}}</strong>
                         </div>
-                        
+
                         <div class="mb-10">
-                            Shipping: <strong>$30.00</strong>
+                            Ongkir: <strong>Rp. 0</strong>
                         </div>
-                        
+
                         <div class="lead mt-0 mb-30">
-                            Order Total: <strong>$75.99</strong>
+                            Total : <strong>Rp. 0</strong>
                         </div>
-                        
+
                         <div>
-                            <a href="" class="btn btn-mod btn-round btn-large">Proceed to Checkout</a>
+                            <a href="#" class="btn btn-mod btn-round btn-large">Beli Sekarang</a>
                         </div>
-                        
+
                     </div>
                 </div>
-                
-                
-                
             </div>
         </div>
-    
+
     </div>
 </section>
+<div id="myModal" class="modal">
+
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <p>Some text in the Modal..</p>
+    </div>
+  
+  </div>
 {% endblock content %}
+
+{% block customjs %}
+<script>
+    // Get the modal
+    var modal = document.getElementById("myModal");
+    
+    // Get the button that opens the modal
+    var btn = document.getElementById("myBtn");
+    
+    // Get the <span> element that closes the modal
+    var span = document.getElementsByClassName("close")[0];
+    
+    // When the user clicks the button, open the modal 
+    btn.onclick = function() {
+      modal.style.display = "block";
+    }
+    
+    // When the user clicks on <span> (x), close the modal
+    span.onclick = function() {
+      modal.style.display = "none";
+    }
+    
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function(event) {
+      if (event.target == modal) {
+        modal.style.display = "none";
+      }
+    }
+    </script>
+{% endblock customjs %}

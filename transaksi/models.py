@@ -7,6 +7,7 @@ class keranjang(models.Model):
     pembeli = models.ForeignKey(settings.AUTH_USER_MODEL,on_delete=models.SET_NULL,null=True)
     barang = models.ForeignKey(barang,on_delete=models.SET_NULL,null=True)
     jumlah = models.IntegerField()
+    total = models.IntegerField(null=True,default=0)
     tanggal_buat = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
