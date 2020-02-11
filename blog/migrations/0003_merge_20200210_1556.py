@@ -7,7 +7,6 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('blog', '0002_auto_20200207_0946'),
-        ('blog', '0002_auto_20200206_0815'),
         ('blog', '0002_auto_20200205_1448'),
     ]
 

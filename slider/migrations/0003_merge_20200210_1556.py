@@ -8,7 +8,7 @@ class Migration(migrations.Migration):
     dependencies = [
         ('slider', '0002_auto_20200207_0946'),
         ('slider', '0002_auto_20200206_0815'),
-        ('slider', '0002_auto_20200205_1448'),
+        # ('slider', '0002_auto_20200209_1922'),
     ]
 
     operations = [

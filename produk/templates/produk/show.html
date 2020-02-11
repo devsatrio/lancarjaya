@@ -19,9 +19,9 @@
                 <div class="post-prev-img">
                     {% if barang.gambar %}
                     <a href="{{barang.gambar.url}}" class="lightbox-gallery-3 mfp-image"><img
-                            src="{{barang.gambar.url}}" alt="" /></a>
+                        src="{{barang.gambar.url}}" alt="" /></a>
                     {% endif %}
-                    {% if barang.diskon != 0 %}
+                   {% if barang.diskon != 0 %}
                     <div class="intro-label">
                         <span class="label label-danger bg-red">{{barang.diskon}}%</span>
                     </div>
@@ -35,10 +35,7 @@
                 {% endfor %}
             <br>
             {% endif %}
-                <h3 class="mt-0" style="text-transform: uppercase;">{{barang.nama}}</h3>
-                <br>
-                {% endif %}
-                <h3 class="mt-0">{{barang.nama}}</h3>
+                <h3 class="mt-0" style="text-transform: capitalize;">{{barang.nama}}</h3>
                 <hr class="mt-0 mb-30" />
                 <div class="row">
                     {% if barang.diskon != 0 %}
@@ -62,50 +59,37 @@
                     {{barang.deskripsi}}
                 </div>
                 <hr class="mt-0 mb-30" />
-
+                
                 <div class="section-text small">
                     <div>Stok : {{barang.stok}} Pcs</div>
                     <div>Kategori : {{barang.kategori}}</div>
                     <div>Tanggal Posting : {{barang.tanggal_buat}}</div>
                     {% for row in contact %}
-                    <div>Bingung Cara Order ? Hubungi : <br><a href="https://wa.me/{{row.nomer_hp_satu}}"
-                            target="blank()"> {{row.nomer_hp_satu}} (Admin 1)</a><br> <a
-                            href="https://wa.me/{{row.nomer_hp_dua}}" target="blank()"> {{row.nomer_hp_dua}} (Admin
-                            2)</a></div>
+                    <div>Bingung Cara Order ? Hubungi : <br><a href="https://wa.me/{{row.nomer_hp_satu}}" target="blank()"> {{row.nomer_hp_satu}} (Admin 1)</a><br> <a href="https://wa.me/{{row.nomer_hp_dua}}" target="blank()"> {{row.nomer_hp_dua}} (Admin 2)</a></div>
                     {% endfor %}
                 </div>
                 <br>
                 <hr class="mt-0 mb-30" />
-
                 {% if user.is_authenticated %}
                 <h3 class="mt-0">Masukan Keranjang</h3>
-                <form action="{% url 'produk:show' barang.slug %}" class="form-group text-center" method="POST"
-                    onsubmit="return validasiform()">
+                <form action="{% url 'produk:show' barang.slug %}" class="form-group text-center" method="POST" onsubmit="return validasiform()">
                     <input type="hidden" id="stok" name="stok" value="{{barang.stok}}">
                     <input type="hidden" id="user" name="user" value="{{user.id}}">
                     <input type="hidden" id="barang" name="barang" value="{{barang.id}}">
-
                     <div id="errormsg" class="alert error hide">
                         <span id="errorisi"></span>
                     </div>
-
                     <div class="section-text mb-30">
                         {% csrf_token %}
                         {{form}}
                     </div>
-
                     <button type="button" onclick="history.go(-1)" class="btn btn-mod btn-circle btn-medium">Kembali</button> 
-
                     <button type="submit" class="btn btn-mod btn-circle btn-medium">Masukan Keranjang</button> 
-                    <button type="button" onclick="history.go(-1)"
-                        class="btn btn-mod btn-circle btn-medium">Kembali</button>
-                    <button type="submit" class="btn btn-mod btn-circle btn-medium">Masukan Keranjang</button>
                 </form>
                 {% else %}
-                <button type="button" onclick="history.go(-1)"
-                    class="btn btn-mod btn-circle btn-medium">Kembali</button>
+                <button type="button" onclick="history.go(-1)" class="btn btn-mod btn-circle btn-medium">Kembali</button> 
                 {% endif %}
-            </div>
+                </div>
         </div>
     </div>
 </section>
@@ -113,22 +97,22 @@
 
 {% block customjs %}
 <script>
-    function validasiform() {
-        if ($('#jumlah').val() == 0 || $('#jumlah').val() == '') {
+function validasiform() {
+         if($('#jumlah').val()==0 || $('#jumlah').val()=='' ){
             $('#errorisi').html('Oops, Jumlah tidak boleh berjumlah kosong');
             $("#errormsg").removeClass("hide");
             return false;
-        } else {
-            if (parseInt($('#jumlah').val()) > parseInt($('#stok').val())) {
+        }else{
+            if(parseInt($('#jumlah').val())>parseInt($('#stok').val())){
                 $('#errorisi').html('Oops, Stok tidak cukup');
                 $("#errormsg").removeClass("hide");
                 return false;
-            } else {
+            }else{
                 $('#errorisi').html('');
                 $("#errormsg").addClass("hide");
                 return true;
             }
-        }
-    }
+         }
+  }
 </script>
 {% endblock customjs %}
