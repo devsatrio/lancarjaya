@@ -10,15 +10,15 @@ class Migration(migrations.Migration):
     ]
 
     operations = [
-        migrations.RenameField(
-            model_name='gambar',
-            old_name='nama',
-            new_name='head',
-        ),
-        migrations.AddField(
-            model_name='gambar',
-            name='deskripsi',
-            field=models.TextField(default=''),
-            preserve_default=False,
-        ),
+        # migrations.RenameField(
+        #     model_name='gambar',
+        #     old_name='nama',
+        #     new_name='head',
+        # ),
+        # migrations.AddField(
+        #     model_name='gambar',
+        #     name='deskripsi',
+        #     field=models.TextField(default=''),
+        #     preserve_default=False,
+        # ),
     ]

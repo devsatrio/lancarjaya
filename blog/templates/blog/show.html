@@ -100,7 +100,7 @@
                                             <a href="{% url 'blog:show' row.slug %}"><img src="{{row.gambar.url}}" alt="" style="max-width: 25%;" class="widget-posts-img" /></a>
                                             
                                             <div class="widget-posts-descr">
-                                                <a href="{% url 'blog:show' row.slug %}">{{row.judul}}</a>
+                                                <a href="{% url 'blog:show' row.slug %}" style="text-transform: capitalize;">{{row.judul}}</a>
                                                 <p style="text-transform: capitalize; font-size: 12px;">{{row.kategori}} || {{row.tanggal}}</p>
                                             </div>
                                         </li>

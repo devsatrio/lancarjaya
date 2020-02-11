@@ -35,7 +35,7 @@
                 {% endfor %}
             <br>
             {% endif %}
-                <h3 class="mt-0">{{barang.nama}}</h3>
+                <h3 class="mt-0" style="text-transform: uppercase;">{{barang.nama}}</h3>
                 <hr class="mt-0 mb-30" />
                 <div class="row">
                     {% if barang.diskon != 0 %}
@@ -70,20 +70,25 @@
                 </div>
                 <br>
                 <hr class="mt-0 mb-30" />
+
                 {% if user.is_authenticated %}
                 <h3 class="mt-0">Masukan Keranjang</h3>
                 <form action="{% url 'produk:show' barang.slug %}" class="form-group text-center" method="POST" onsubmit="return validasiform()">
                     <input type="hidden" id="stok" name="stok" value="{{barang.stok}}">
                     <input type="hidden" id="user" name="user" value="{{user.id}}">
                     <input type="hidden" id="barang" name="barang" value="{{barang.id}}">
+
                     <div id="errormsg" class="alert error hide">
                         <span id="errorisi"></span>
                     </div>
+
                     <div class="section-text mb-30">
                         {% csrf_token %}
                         {{form}}
                     </div>
+
                     <button type="button" onclick="history.go(-1)" class="btn btn-mod btn-circle btn-medium">Kembali</button> 
+
                     <button type="submit" class="btn btn-mod btn-circle btn-medium">Masukan Keranjang</button> 
                 </form>
                 {% else %}

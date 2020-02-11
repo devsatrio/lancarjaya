@@ -5,9 +5,9 @@
 {% block content %}
 <section class="small-section bg-dark">
     <div class="relative container align-left">
-        
+
         <div class="row">
-            
+
             <div class="col-md-8">
                 <h1 class="hs-line-11 font-alt mb-0">Keranjang</h1>
             </div>
@@ -18,10 +18,10 @@
 
 <section class="page-section">
     <div class="container">
-        
+
         <div class="row">
             <div class="col-md-10 col-md-offset-1">
-                
+
                 <table class="table table-striped shopping-cart-table">
                     <tr>
                         <th class="hidden-xs">
@@ -48,107 +48,111 @@
                             {% endif %}
                         </td>
                         <td>
-                            <a href="#" title="">{{row.barang.nama}}</a>
+                            <a href="#" title="" style="text-transform: capitalize;">{{row.barang.nama}}</a>
                         </td>
                         <td>
-                            {{row.jumlah}} Pcs
-                        </td>
-                        <td>
-                            {% if row.diskon != 0 %}
-                                Rp. {% with numerator=row.barang.harga|mul:row.barang.diskon|div:100%}
-                                    {{row.barang.harga|sub:numerator|mul:row.jumlah|floatformat|intcomma}}
-                                {% endwith %}
-                            {%else%}
-                            Rp. {% with numerator=row.barang.harga|mul:row.jumlah %}
-                                    {{numerator|intcomma}}
-                                {% endwith %}
-                            {% endif %}
-                        </td>
-                        <td>
-                            <form method="post" action="{% url 'transaksi:hapus-keranjang' user.username %}">
-                                {% csrf_token %}
-                                <input type="hidden" value="{{row.id}}" name="kode">
-                                <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-mod btn-round"><i class="fa fa-trash-o"></i> Hapus</button>
+                            <form class="form">
+                                 <input type="number" class="input-sm" style="width: 50px;" min="1" max="100" value="{{row.jumlah}}" /> Pcs
                             </form>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </table>
-                
-                <hr />
-                
-                <div class="row">
-                    <div class="col-sm-8">
-                        <form action="#" class="form">
-                            <input placeholder="Coupon code" class="input-sm mb-xs-10" style="width: 250px;" type="text" pattern=".{3,100}" required />
-                            &nbsp;<button type="submit" class="btn btn-mod btn-round btn-gray btn-small mb-xs-10">Apply Coupon</button>
+                         <!-- {{row.jumlah}} Pcs -->
+                     </td>
+                     <td>
+                        {% if row.diskon != 0 %}
+                        Rp. {% with numerator=row.barang.harga|mul:row.barang.diskon|div:100%}
+                        {{row.barang.harga|sub:numerator|mul:row.jumlah|floatformat|intcomma}}
+                        {% endwith %}
+                        {%else%}
+                        Rp. {% with numerator=row.barang.harga|mul:row.jumlah %}
+                        {{numerator|intcomma}}
+                        {% endwith %}
+                        {% endif %}
+                    </td>
+                    <td>
+                        <form method="post" action="{% url 'transaksi:hapus-keranjang' user.username %}">
+                            {% csrf_token %}
+                            <input type="hidden" value="{{row.id}}" name="kode">
+                            <button type="submit" onclick="return confirm('Hapus Data ?')" class="btn btn-mod btn-round"><i class="fa fa-trash-o"></i> Hapus</button>
                         </form>
-                    </div>
-                    <div class="col-sm-4 text align-right">
-                        
-                        <div>
-                            <a href="" class="btn btn-mod btn-gray btn-round btn-small">Update Cart</a>
-                        </div>
-                        
-                    </div>
+                    </td>
+
+                </tr>
+                {% endfor %}
+            </table>
+
+            <hr />
+
+            <div class="row">
+                <div class="col-sm-8">
+                    <form action="#" class="form">
+                        <input placeholder="Coupon code" class="input-sm mb-xs-10" style="width: 250px;" type="text" pattern=".{3,100}" required />
+                        &nbsp;<button type="submit" class="btn btn-mod btn-round btn-gray btn-small mb-xs-10">Apply Coupon</button>
+                    </form>
                 </div>
-                
-                <hr class="mb-60" />
-                
-                <div class="row">
-                    <div class="col-sm-6">
-                        
-                        <h3 class="small-title font-alt">Calculate Shipping</h3>
-                        
-                        <form action="#" class="form">
-                            
-                            <div class="mb-10">
-                                <select class="input-md form-control">
-                                    <option>Select Country</option>
-                                    <option>France</option>
-                                    <option>Ukraine</option>
-                                    <option>USA</option>
-                                </select>
-                            </div>
-                            
-                            <div class="mb-10">
-                                <input placeholder="State" class="input-md form-control" type="text" pattern=".{3,100}" />
-                            </div>
-                            
-                            <div class="mb-10">
-                                <input placeholder="Postcode / Zip" class="input-md form-control" type="text" pattern=".{3,100}" />
-                            </div>
-                            
-                        </form>
-                        
+                <div class="col-sm-4 text align-right">
+
+                    <div>
+                        <a href="" class="btn btn-mod btn-gray btn-round btn-small">Update Cart</a>
                     </div>
-                    <div class="col-sm-6 text align-right pt-10">
-                        
-                        
-                        <div>
-                            subtotal: <strong>Rp. {{subtotal.barang__avg|intcomma}}</strong>
-                        </div>
-                        
-                        <div class="mb-10">
-                            Shipping: <strong>$30.00</strong>
-                        </div>
-                        
-                        <div class="lead mt-0 mb-30">
-                            Order Total: <strong>$75.99</strong>
-                        </div>
-                        
-                        <div>
-                            <a href="" class="btn btn-mod btn-round btn-large">Proceed to Checkout</a>
-                        </div>
-                        
-                    </div>
+
                 </div>
-                
-                
-                
             </div>
+
+            <hr class="mb-60" />
+
+            <div class="row">
+                <div class="col-sm-6">
+
+                    <h3 class="small-title font-alt">Calculate Shipping</h3>
+
+                    <form action="#" class="form">
+
+                        <div class="mb-10">
+                            <select class="input-md form-control">
+                                <option>Select Country</option>
+                                <option>France</option>
+                                <option>Ukraine</option>
+                                <option>USA</option>
+                            </select>
+                        </div>
+
+                        <div class="mb-10">
+                            <input placeholder="State" class="input-md form-control" type="text" pattern=".{3,100}" />
+                        </div>
+
+                        <div class="mb-10">
+                            <input placeholder="Postcode / Zip" class="input-md form-control" type="text" pattern=".{3,100}" />
+                        </div>
+
+                    </form>
+
+                </div>
+                <div class="col-sm-6 text align-right pt-10">
+
+
+                    <div>
+                        subtotal: <strong>Rp. {{subtotal.barang__avg|intcomma}}</strong>
+                    </div>
+
+                    <div class="mb-10">
+                        Shipping: <strong>$30.00</strong>
+                    </div>
+
+                    <div class="lead mt-0 mb-30">
+                        Order Total: <strong>$75.99</strong>
+                    </div>
+
+                    <div>
+                        <a href="" class="btn btn-mod btn-round btn-large">Proceed to Checkout</a>
+                    </div>
+
+                </div>
+            </div>
+
+
+
         </div>
-    
     </div>
+    
+</div>
 </section>
 {% endblock content %}
