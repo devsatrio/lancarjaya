@@ -20,6 +20,8 @@
     </section>
     {% endfor %}
 </div>
+
+<!-- start produk terbaru -->
 <section class="page-section">
     <div class="container relative">
         <h2 class="section-title font-alt align-left mb-70 mb-sm-40">
@@ -67,87 +69,10 @@
         </div>
     </div>
 </section>
-<hr class="mt-0 mb-0 " />
-<section class="page-section pt-0 pb-0 banner-section bg-dark"
-    data-background="{% static 'images/blog.jpg' %}">
-    <div class="container relative">
-        <div class="row">
-            <div class="col-sm-6">
-                <div class="mt-140 mt-lg-80 mb-140 mb-lg-80">
-                    <div class="banner-content">
-                        <h3 class="banner-heading font-alt">Looking for exclusive digital services?</h3>
-                        <div class="banner-decription">
-                            Proin fringilla augue at maximus vestibulum. Nam pulvinar vitae neque et porttitor.
-                            Integer non dapibus diam, ac eleifend lectus.
-                        </div>
-                        <div class="local-scroll">
-                            <a href="pages-contact-1.html" class="btn btn-mod btn-w btn-medium btn-round">Lets talk</a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-    </div>
-</section>
-<hr class="mt-0 mb-0" />
-
-
-<!-- Features Section -->
-<section class="page-section">
-    <div class="container relative">
-
-        <h2 class="section-title font-alt mb-70 mb-sm-40">
-            Why Choose Us?
-        </h2>
-        <div class="row multi-columns-row alt-features-grid">
-            <div class="col-sm-6 col-md-4 col-lg-4">
-                <div class="alt-features-item align-center">
-                    <div class="alt-features-icon">
-                        <span class="icon-flag"></span>
-                    </div>
-                    <h3 class="alt-features-title font-alt">We’re Creative</h3>
-                    <div class="alt-features-descr align-left">
-                        Lorem ipsum dolor sit amet, c-r adipiscing elit.
-                        In maximus ligula semper metus pellentesque mattis.
-                        Maecenas volutpat, diam enim.
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-4">
-                <div class="alt-features-item align-center">
-                    <div class="alt-features-icon">
-                        <span class="icon-clock"></span>
-                    </div>
-                    <h3 class="alt-features-title font-alt">We’re Punctual</h3>
-                    <div class="alt-features-descr align-left">
-                        Proin fringilla augue at maximus vestibulum.
-                        Nam pulvinar vitae neque et porttitor. Praesent sed
-                        nisi eleifend, lorem fermentum orci sit amet, iaculis libero.
-                    </div>
-                </div>
-            </div>
-            <div class="col-sm-6 col-md-4 col-lg-4">
-                <div class="alt-features-item align-center">
-                    <div class="alt-features-icon">
-                        <span class="icon-hotairballoon"></span>
-                    </div>
-                    <h3 class="alt-features-title font-alt">We have magic</h3>
-                    <div class="alt-features-descr align-left">
-                        Curabitur iaculis accumsan augue, nec finibus mauris pretium eu.
-                        Duis placerat ex gravida nibh tristique porta. Nulla facilisi.
-                        Suspendisse ultricies eros blandit.
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
+<!-- end produk -->
 
 <!-- galeri -->
-<section class="page-section">
+<section class="page-section bg-dark">
     <div class="container relative">
 
         <h2 class="section-title font-alt align-left mb-70 mb-sm-40">
@@ -218,15 +143,12 @@
             </div>
             {% endfor %}
             <!-- End Post Item -->
-
         </div>
-
     </div>
 </section>
 <!-- end artikel -->
 
-<hr class="mt-0 mb-0 " />
-
+<!-- start tesimoni -->
 <section class="page-section bg-dark fullwidth-slider bg-scroll">
     {% for row in testi %}
     <div>
@@ -253,5 +175,6 @@
     </div>
     {% endfor %}
 </section>
+<!-- end testimoni -->
 
 {% endblock content %}
