@@ -19,7 +19,7 @@ def index(request):
         'produk':data_barang,
         'artikel':data_artikel,
         'slider':data_slider,
-        'galeri':data_galeri,
+        'galeri_home':data_galeri,
     }
     return render(request,'index.html',context)
 
