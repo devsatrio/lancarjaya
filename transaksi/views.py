@@ -53,4 +53,4 @@ def edit(request,kodeuser):
         t.total = hargabarangnya
         t.save()
         messages.success(request,'Berhasil edit data')
-    return redirect('transaksi:edit',kodeuser=kodeuser)
+    return redirect('transaksi:keranjang',kodeuser=kodeuser)
