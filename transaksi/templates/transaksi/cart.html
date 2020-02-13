@@ -45,6 +45,14 @@
                             Aksi
                         </th>
                     </tr>
+
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert {{ message.tags }}"><i class="fa fa-lg fa-check-circle-o"></i> {{ message }}</div>
+                    {% endfor %}
+                    <br>
+                    {% endif %}
+                    
                     {% for row in barang %}
                     <tr>
                         <td class="hidden-xs">
@@ -178,7 +186,6 @@
                                             <div id="errormsg" class="alert error hide">
                                                 <span id="errorisi"></span>
                                             </div>
-
                                             <label for="">Jumlah</label>
                                             <input type="number" name="jumlah" value="{{row.jumlah}}" class="form-control" id="jumlah" min="0">
 
