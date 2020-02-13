@@ -159,6 +159,7 @@
                     </div>
 
 </section>
+
 {% for row in barang %}
 <div id="myModal{{row.id}}" class="modal">
         <div class="modal-dialog">
@@ -178,7 +179,7 @@
                                         <div class="form-group">
                                             {% csrf_token %}
                                             
-                                            <input type="hidden" id="stok" name="stok" value="{{row.barang.stok}}">
+                                            <!-- <input type="text" id="stok" name="stok" value="{{row.barang.stok}}"> -->
 
                                             <input type="hidden" name="barang" value="{{row.barang.id}}">
                                             <input type="hidden" name="kode" value="{{row.id}}">
@@ -186,6 +187,7 @@
                                             <div id="errormsg" class="alert error hide">
                                                 <span id="errorisi"></span>
                                             </div>
+
                                             <label for="">Jumlah</label>
                                             <input type="number" name="jumlah" value="{{row.jumlah}}" class="form-control" id="jumlah" min="0">
 
@@ -197,8 +199,8 @@
                                 </div>
                                 
                             </div>
-                        </div>
-    </div>
+        </div>
+</div>
 
 </div>
 {% endfor %}
@@ -217,7 +219,7 @@
     });
 </script>
 
-<script>
+<!-- <script>
 function validasiform() {
          if($('#jumlah').val()==0 || $('#jumlah').val()=='' ){
             $('#errorisi').html('Oops, Jumlah tidak boleh berjumlah kosong');
@@ -235,6 +237,6 @@ function validasiform() {
             }
          }
   }
-</script>
+</script> -->
 
 {% endblock customjs %}
