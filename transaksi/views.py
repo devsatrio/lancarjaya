@@ -6,7 +6,6 @@ from .models import keranjang
 from produk.models import barang
 from django.db.models import Sum
 from django.contrib.auth.models import User
-from .forms import Editform
 
 
 @login_required
