@@ -39,6 +39,9 @@
                             Jumlah
                         </th>
                         <th>
+                            Berat
+                        </th>
+                        <th>
                             Total
                         </th>
                         <th>
@@ -59,6 +62,9 @@
                             {{row.jumlah}} Pcs
                         </td>
                         <td>
+                            {{row.berat_total|div:1000}} Kg
+                        </td>
+                        <td>
                             {% if row.diskon != 0 %}
                             Rp. {% with numerator=row.barang.harga|mul:row.barang.diskon|div:100%}
                             {{row.barang.harga|sub:numerator|mul:row.jumlah|floatformat|intcomma}}
@@ -73,7 +79,8 @@
                             <form method="post" action="{% url 'transaksi:hapus-keranjang' user.username %}">
                                 {% csrf_token %}
                                 <input type="hidden" value="{{row.id}}" name="kode">
-                                <button type="button" class="btn btn-mod btn-round tampilmodal" data-kode="{{row.id}}"><i class="fa fa-wrench"></i></button>
+                                <button type="button" class="btn btn-mod btn-round tampilmodal"
+                                    data-kode="{{row.id}}"><i class="fa fa-wrench"></i></button>
                                 <button type="submit" onclick="return confirm('Hapus Data ?')"
                                     class="btn btn-mod btn-round"><i class="fa fa-trash-o"></i></button>
                             </form>
@@ -85,66 +92,76 @@
 
                 <div class="row">
                     <div class="col-sm-6">
+                        {% if cekalamat > 0 %}
+                        <h3 class="small-title font-alt">Opsi pengiriman</h3>
 
-                        <h3 class="small-title font-alt">Alamat pengiriman</h3>
+                        <dl class="accordion">
+                            {% for halo in jne.rajaongkir.results %}
+                            <dt>
+                                <a href="" class="active">{{halo.code}}</a>
+                            </dt>
+                            <dd style="display: block;">
+                                {% for row in halo.costs %}
+                                <label class="radio-inline">
+                                    <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">{{row.service}} - {{row.description}}
+                                </label><br>
+                                {% endfor%}
+                                
+                            </dd>
+                            {% endfor%}
 
-                        <form action="#" class="form">
+                            <dt>
+                                <a href="" class="">Second</a>
+                            </dt>
+                            <dd style="display: none;">
+                                Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet
+                                orci. Aenean dignissim pellentesque felis.
+                            </dd>
+                            <dt>
+                                <a href="" class="">Third</a>
+                            </dt>
+                            <dd style="display: none;">
+                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit.
+                                Pellentesque aliquet nibh nec urna.
+                            </dd>
 
-                            <div class="mb-10">
-                                            <select class="input-md form-control">
-                                                <option>Provinsi</option>
-                                                <option>France</option>
-                                                <option>Ukraine</option>
-                                                <option>USA</option>
-                                            </select>
-                                        </div>
-                                        <div class="mb-10">
-                                            <select class="input-md form-control">
-                                                <option>Kota</option>
-                                                <option>France</option>
-                                                <option>Ukraine</option>
-                                                <option>USA</option>
-                                            </select>
-                                        </div>
-    
-
-                            <div class="mb-10">
-                                <input placeholder="Alamat" class="input-md form-control" type="text"
-                                    pattern=".{3,100}" />
-                            </div>
-
-                            <div class="mb-10">
-                                <input placeholder="Kode Pos" class="input-md form-control" type="text"
-                                    pattern=".{3,100}" />
-                            </div>
-
-                        </form>
+                            {% endif %}
 
                     </div>
                     <div class="col-sm-6 text align-right pt-10">
-                        
-        
+
+
                         <div>
                             <td>
-                            Jumlah Barang: <strong>{{jumlah__sum|intcomma}} Pcs</strong>
+                                Jumlah Barang: <strong>{{jumlah__sum|intcomma}} Pcs</strong>
                             </td>
+                            <div>
+                                Total berat: <strong>{{berat_total__sum|div:1000}} Kg</strong>
+                            </div>
                             <div>
                                 Subtotal: <strong>Rp. {{total__sum|intcomma}}</strong>
                             </div>
 
                             <div class="mb-10">
-                                Ongkir: <strong>Rp. 0</strong>
+                                Ongkir: <strong>-</strong>
                             </div>
 
                             <div class="lead mt-0 mb-30">
                                 Total : <strong>Rp. 0</strong>
                             </div>
-
+                            {% if cekalamat > 0 %}
                             <div>
-                            <a href="#" class="btn btn-mod btn-round btn-large">Beli Sekarang</a>
+                                <a href="#" class="btn btn-mod btn-round btn-large">Beli Sekarang</a>
                             </div>
+                            {% else %}
+                            <div class="alert notice">
+                                <i class="fa fa-lg fa-exclamation-triangle"></i> Maaf, Anda harus melengkapi data alamat
+                                terlebih dahulu, klik <a href="{% url 'users:tambah-alamat' %}">disini</a> untuk
+                                melengkapi
+                            </div>
+                            {% endif %}
                             <table>
-                            <tr></tr>
+                                <tr></tr>
                             </table>
                         </div>
 
@@ -153,37 +170,39 @@
 </section>
 {% for row in barang %}
 <div id="myModal{{row.id}}" class="modal">
-        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <span class="close">&times;</span>
-                                <div class="modal-header">
-                                    <h4 class="modal-title">Edit Data</h4>
-                                </div>
-                                <hr style="border: 1px solid ;">
-                                <div class="modal-body">
-                                    <form role="form" action="{% url 'transaksi:edit' user.username %}" method="POST" >
-                                       
-                                        <div class="form-group">
-                                            <img src="{{row.barang.gambar.url}}" alt="" / style="max-width: 150px;">
-                                        </div>
-                                        
-                                        <div class="form-group">
-                                            {% csrf_token %}
-                                            <input type="hidden" name="barang" value="{{row.barang.id}}">
-                                            <input type="hidden" name="kode" value="{{row.id}}">
-                                            <label for="">Jumlah</label>
-                                            <input type="number" name="jumlah" value="{{row.jumlah}}" class="form-control">
+    <div class="modal-dialog">
+        <div class="modal-content" style="width: 60%;">
+            <span class="close">&times;</span>
+            <div class="modal-header text-center">
+                <h4 class="modal-title">Edit Data</h4>
+            </div>
+            <hr style="border: 1px solid ;">
+            <div class="modal-body text-center">
+                <form role="form" action="{% url 'transaksi:edit' user.username %}" method="POST">
 
-                                        </div>                          
-                                       <div class="text-right">
-                                        <button type="submit" class="btn btn-mod btn-round">Perbarui</button>
-                                        </div>
-                                    </form>
-                                </div>
-                                
-                            </div>
-                        </div>
+                    <div class="form-group">
+                        <img src="{{row.barang.gambar.url}}" alt="" / style="max-width: 200px;">
+                    </div>
+
+                    <div class="form-group" align="center">
+                        {% csrf_token %}
+                        <input type="hidden" name="barang" value="{{row.barang.id}}">
+                        <input type="hidden" name="kode" value="{{row.id}}">
+                        <label for="">Jumlah</label>
+                        <input type="number" name="jumlah" value="{{row.jumlah}}" class="form-control"
+                            style="width:120px;">
+
+                    </div>
+                    <div class="text-right">
+                        <button type="submit" class="btn btn-mod btn-round">Perbarui</button>
+                        <button type="button" class="btn btn-mod btn-round closemodal">Close</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
     </div>
+</div>
 
 </div>
 {% endfor %}
@@ -191,14 +210,40 @@
 
 {% block customjs %}
 <script>
-    $('.tampilmodal').click(function(){
-        var kode = $(this).data('kode');
-        var modal = document.getElementById("myModal"+kode);
-        modal.style.display = "block"; 
-        
+    $("#cekongkir").change(function () {
+        $.ajax({
+            url: 'https://api.rajaongkir.com/starter/cost',
+            headers: {
+                'key': '5c9d1c918e391d9fee83d59759943b59',
+                'content-type': 'application/x-www-form-urlencoded',
+            },
+            type: "POST", /* or type:"GET" or type:"PUT" */
+            dataType: "json",
+            data: {
+                'origin': 501,
+                'destination': 114,
+                'weight': 1700,
+                'courier': 'pos',
+            },
+            success: function (result) {
+                console.log(result);
+            },
+            error: function () {
+                console.log("error");
+            }
+        });
     });
-    $('.close').click(function(){
-        $('.modal').hide(); 
+    $('.tampilmodal').click(function () {
+        var kode = $(this).data('kode');
+        var modal = document.getElementById("myModal" + kode);
+        modal.style.display = "block";
+
+    });
+    $('.close').click(function () {
+        $('.modal').hide();
+    });
+    $('.closemodal').click(function () {
+        $('.modal').hide();
     });
 </script>
 {% endblock customjs %}

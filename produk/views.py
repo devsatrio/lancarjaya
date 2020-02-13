@@ -29,16 +29,20 @@ def show(request,slugbarang):
             hargabarangnya = (int(dbarang.harga)-int(jumlahdiskon))*int(request.POST['jumlah'])
         else:
             hargabarangnya = int(dbarang.harga)*int(request.POST['jumlah'])
+
+        beratbarang = int(dbarang.berat)*int(request.POST['jumlah'])
         if jumlahnya > 0 :
             t = keranjang.objects.get(barang=models.barang.objects.get(id=request.POST['barang']), pembeli=User.objects.get(id=request.POST['user']))
             t.jumlah = int(t.jumlah) + int(request.POST['jumlah']) 
             t.total = int(t.total)+int(hargabarangnya)
+            t.berat_total = int(t.berat_total) + int(beratbarang)
             t.save()
         else:
             keranjang.objects.create(
             jumlah=request.POST['jumlah'],
             barang = models.barang.objects.get(id=request.POST['barang']),
             pembeli = User.objects.get(id=request.POST['user']),
+            berat_total = int(beratbarang),
             total= int(hargabarangnya),
             )
         

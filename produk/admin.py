@@ -13,7 +13,7 @@ class barangResource(resources.ModelResource):
 
 	class Meta:
 		model = models.barang
-		fields = ('nama','deskripsi','harga','diskon','tanggal_buat','kategori','status_aktiv',)
+		fields = ('nama','deskripsi','harga','diskon','tanggal_buat','berat','stok','kategori','status_aktiv',)
 
 class roleskategori(ImportExportModelAdmin):
     resource_class = kategoriResource
