@@ -48,6 +48,14 @@
                             Aksi
                         </th>
                     </tr>
+
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert {{ message.tags }}"><i class="fa fa-lg fa-check-circle-o"></i> {{ message }}</div>
+                    {% endfor %}
+                    <br>
+                    {% endif %}
+                    
                     {% for row in barang %}
                     <tr>
                         <td class="hidden-xs">
@@ -168,8 +176,10 @@
                     </div>
 
 </section>
+
 {% for row in barang %}
 <div id="myModal{{row.id}}" class="modal">
+<<<<<<< HEAD
     <div class="modal-dialog">
         <div class="modal-content" style="width: 60%;">
             <span class="close">&times;</span>
@@ -202,6 +212,46 @@
 
         </div>
     </div>
+=======
+        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Edit Data</h4>
+                                </div>
+                                <hr style="border: 1px solid ;">
+                                <div class="modal-body">
+                                    <form role="form" action="{% url 'transaksi:edit' user.username %}" method="POST" onsubmit="return validasiform()">
+                                       
+                                        <div class="form-group">
+                                            <img src="{{row.barang.gambar.url}}" alt="" / style="max-width: 150px;">
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            {% csrf_token %}
+                                            
+                                            <!-- <input type="text" id="stok" name="stok" value="{{row.barang.stok}}"> -->
+
+                                            <input type="hidden" name="barang" value="{{row.barang.id}}">
+                                            <input type="hidden" name="kode" value="{{row.id}}">
+                                            
+                                            <div id="errormsg" class="alert error hide">
+                                                <span id="errorisi"></span>
+                                            </div>
+
+                                            <label for="">Jumlah</label>
+                                            <input type="number" name="jumlah" value="{{row.jumlah}}" class="form-control" id="jumlah" min="0">
+
+                                        </div>                          
+                                       <div class="text-right">
+                                        <button type="submit" class="btn btn-mod btn-round">Perbarui</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                
+                            </div>
+        </div>
+>>>>>>> master
 </div>
 
 </div>
@@ -246,4 +296,25 @@
         $('.modal').hide();
     });
 </script>
+
+<!-- <script>
+function validasiform() {
+         if($('#jumlah').val()==0 || $('#jumlah').val()=='' ){
+            $('#errorisi').html('Oops, Jumlah tidak boleh berjumlah kosong');
+            $("#errormsg").removeClass("hide");
+            return false;
+        }else{
+            if(parseInt($('#jumlah').val())>parseInt($('#stok').val())){
+                $('#errorisi').html('Oops, Stok tidak cukup');
+                $("#errormsg").removeClass("hide");
+                return false;
+            }else{
+                $('#errorisi').html('');
+                $("#errormsg").addClass("hide");
+                return true;
+            }
+         }
+  }
+</script> -->
+
 {% endblock customjs %}
