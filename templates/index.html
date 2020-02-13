@@ -85,14 +85,19 @@
             {% for row in galeri_home %}
             <li class="work-item mix {{row.kategori.slug}}">
                 <a href="{{row.gambar.url}}" class="work-lightbox-link mfp-image">
+
                     <div class="work-img">
                         <img src="{{row.gambar.url}}" alt="Work" />
                     </div>
+
                     <div class="work-intro">
+
                         <h3 class="work-title">{{row.kategori.nama}}</h3>
+
                         <div class="work-descr">
                             {{row.deskripsi}}
                         </div>
+                        
                     </div>
                 </a>
             </li>
