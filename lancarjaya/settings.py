@@ -52,6 +52,7 @@ INSTALLED_APPS = [
     'crispy_forms',
     'users',
     'transaksi',
+    'alamat',
 ]
 
 MIDDLEWARE = [
@@ -93,7 +94,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'db_lancarjaya',
         'USER':'root',
-        'PASSWORD':'',
+        'PASSWORD':'d7676543',
     }
 }
 
