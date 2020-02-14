@@ -55,7 +55,7 @@
                     {% endfor %}
                     <br>
                     {% endif %}
-                    
+
                     {% for row in barang %}
                     <tr>
                         <td class="hidden-xs">
@@ -104,34 +104,51 @@
                         <h3 class="small-title font-alt">Opsi pengiriman</h3>
 
                         <dl class="accordion">
-                            {% for halo in jne.rajaongkir.results %}
+                            {% for hallo in jne.rajaongkir.results %}
                             <dt>
-                                <a href="" class="active">{{halo.code}}</a>
+                                <a href="#">{{hallo.code}}</a>
                             </dt>
-                            <dd style="display: block;">
-                                {% for row in halo.costs %}
-                                <label class="radio-inline">
-                                    <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2">{{row.service}} - {{row.description}}
-                                </label><br>
+                            <dd style="display: none;">
+                                {% for row in hallo.costs %}
+                                <div class="custom-control custom-radio">
+                                    {% for halo in row.cost %}
+                                    <input type="radio" class="custom-control-input ongkir"
+                                        id="defaultChecked{{row.service}}" value="{{hallo.code}}-{{row.service}}-{{halo.value}}" name="defaultExample2">
+                                    <label class="custom-control-label"
+                                        for="defaultChecked{{row.service}}">{{row.service}} -
+                                        {{row.description}}</label>
+                                    <br>
+                                    <span class="text-muted">Rp. {{halo.value|intcomma}} estimasi {{halo.etd}}
+                                        hari</span>
+                                    {% endfor %}
+
+                                </div><br>
                                 {% endfor%}
-                                
+
                             </dd>
                             {% endfor%}
+                            {% for hallo in pos.rajaongkir.results %}
+                            <dt>
+                                <a href="#">{{hallo.code}}</a>
+                            </dt>
+                            <dd style="display: none;">
+                                {% for row in hallo.costs %}
+                                <div class="custom-control custom-radio">
+                                    {% for halo in row.cost %}
+                                    <input type="radio" class="custom-control-input ongkir"
+                                        id="defaultChecked{{row.service}}" value="{{hallo.code}}-{{row.service}}-{{halo.value}}" name="defaultExample2">
+                                    <label class="custom-control-label"
+                                        for="defaultChecked{{row.service}}">{{row.service}} -
+                                        {{row.description}}</label>
+                                    <br>
+                                    <span class="text-muted">Rp. {{halo.value|intcomma}} estimasi {{halo.etd}}
+                                        hari</span>
+                                    {% endfor %}
 
-                            <dt>
-                                <a href="" class="">Second</a>
-                            </dt>
-                            <dd style="display: none;">
-                                Donec nec justo eget felis facilisis fermentum. Aliquam porttitor mauris sit amet
-                                orci. Aenean dignissim pellentesque felis.
+                                </div><br>
+                                {% endfor%}
                             </dd>
-                            <dt>
-                                <a href="" class="">Third</a>
-                            </dt>
-                            <dd style="display: none;">
-                                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Phasellus hendrerit.
-                                Pellentesque aliquet nibh nec urna.
-                            </dd>
+                            {% endfor%}
 
                             {% endif %}
 
@@ -149,17 +166,29 @@
                             <div>
                                 Subtotal: <strong>Rp. {{total__sum|intcomma}}</strong>
                             </div>
-
                             <div class="mb-10">
-                                Ongkir: <strong>-</strong>
+                                Ongkir: <strong id="hargaongkir">-</strong>
                             </div>
 
                             <div class="lead mt-0 mb-30">
-                                Total : <strong>Rp. 0</strong>
+                                Total : <strong id="hargatotal">Rp. 0</strong>
                             </div>
                             {% if cekalamat > 0 %}
-                            <div>
-                                <a href="#" class="btn btn-mod btn-round btn-large">Beli Sekarang</a>
+                            <div class="text-center">
+                                <form action="{% url 'transaksi:buat-tansaksi' %}" method="POST" onsubmit="return validasiform()">
+                                    {% csrf_token %}
+                                    <input type="text" value="{{berat_total__sum}}" id="input-berat" name="input-berat">
+                                    <input type="text" value="{{total__sum}}" id="input-subtotal" name="input-subtotal">
+                                    <input type="text" id="input-ongkir" name="input-ongkir">
+                                    <input type="text" id="input-kargo" name="input-kargo">
+                                    <input type="text" id="input-total" name="input-total"> <br><br>
+                                    <div id="errormsg" class="text-center alert error hide">
+                                        <span id="errorisi"></span>
+                                    </div>
+                                    <br><br>
+                                    <button type="submit" class="btn btn-mod btn-round btn-large">Beli Sekarang</button>
+                                    <button type="reset" onclick="history.go(-1)" class="btn btn-mod btn-round btn-large">Kembali</button>
+                                </form>
                             </div>
                             {% else %}
                             <div class="alert notice">
@@ -179,7 +208,6 @@
 
 {% for row in barang %}
 <div id="myModal{{row.id}}" class="modal">
-<<<<<<< HEAD
     <div class="modal-dialog">
         <div class="modal-content" style="width: 60%;">
             <span class="close">&times;</span>
@@ -191,7 +219,7 @@
                 <form role="form" action="{% url 'transaksi:edit' user.username %}" method="POST">
 
                     <div class="form-group">
-                        <img src="{{row.barang.gambar.url}}" alt="" / style="max-width: 200px;">
+                        <img src="{{row.barang.gambar.url}}" alt="" style="max-width: 200px;">
                     </div>
 
                     <div class="form-group" align="center">
@@ -199,7 +227,7 @@
                         <input type="hidden" name="barang" value="{{row.barang.id}}">
                         <input type="hidden" name="kode" value="{{row.id}}">
                         <label for="">Jumlah</label>
-                        <input type="number" name="jumlah" value="{{row.jumlah}}" class="form-control"
+                        <input type="number" name="jumlah" value="{{row.jumlah}}" min="0" max="{{row.barang.stok}}" class="form-control"
                             style="width:120px;">
 
                     </div>
@@ -232,5 +260,42 @@
     $('.closemodal').click(function () {
         $('.modal').hide();
     });
+    $(".ongkir").change(function () {
+        if (this.checked) {
+            var result = $(this).val().split('-');
+            var pengiriman = result[0]+'-'+result[1];
+            var harga = parseInt(result[2]);
+            var subtotal = $('#input-subtotal').val();
+
+            var total = parseInt(harga)+parseInt(subtotal);
+            $('#input-ongkir').val(harga);
+            $('#input-total').val(total);
+            $('#input-kargo').val(pengiriman);
+            $('#hargaongkir').html('Rp. '+rupiah(harga));
+            $('#hargatotal').html('Rp.'+rupiah(total));
+            
+        }
+    });
+    //==================================================
+		function rupiah(bilangan){
+			var	number_string = bilangan.toString(),
+			sisa 	= number_string.length % 3,
+			rupiah 	= number_string.substr(0, sisa),
+			ribuan 	= number_string.substr(sisa).match(/\d{3}/gi);
+			
+		if (ribuan) {
+			separator = sisa ? '.' : '';
+			rupiah += separator + ribuan.join('.');
+		}
+
+			return rupiah;
+        }
+    function validasiform() {
+         if($('#input-ongkir').val()==0){
+            $('#errorisi').html('Oops, Pilih Opsi Pengiriman Terlebih Dahulu');
+            $("#errormsg").removeClass("hide");
+            return false;
+        }
+  }
 </script>
 {% endblock customjs %}
