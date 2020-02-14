@@ -4,17 +4,18 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import get_object_or_404
 import http.client
 from contact.models import contact
-from .models import keranjang
+from .models import keranjang, transaksi
 from produk.models import barang
 from django.db.models import Sum
 from django.contrib.auth.models import User
 from alamat.models import pengguna
 import json
 
-
 @login_required
 def listkeranjang(request,kodeuser):
     jne = ''
+    post = ''
+
     data_keranjang = keranjang.objects.filter(pembeli=User.objects.get(username=kodeuser))
     subtotal = keranjang.objects.filter(pembeli=User.objects.get(username=kodeuser)).aggregate(Sum('total'))
     totalbarang = keranjang.objects.filter(pembeli=User.objects.get(username=kodeuser)).aggregate(Sum('jumlah'))
@@ -33,11 +34,21 @@ def listkeranjang(request,kodeuser):
     res = conn.getresponse()
     data = res.read()
     jne = json.loads(data)
-    print(jne)
+
+    payload = "origin="+webdata.kode_kota+"&destination="+desti.kode_kota+"&weight="+str(totalberat['berat_total__sum'])+"&courier=pos"
+    headers = {
+        'key': "5c9d1c918e391d9fee83d59759943b59",
+        'content-type': "application/x-www-form-urlencoded"
+    }
+    conn.request("POST", "/starter/cost", payload, headers)
+    res = conn.getresponse()
+    data = res.read()
+    pos = json.loads(data)
     context = {
         'barang':data_keranjang,
         'cekalamat':cekalamat,
         'jne':jne,
+        'pos':pos,
     }
     context.update(subtotal)
     context.update(totalbarang)
@@ -79,3 +90,17 @@ def edit(request,kodeuser):
         t.save()
         messages.success(request,'Berhasil edit data')
     return redirect('transaksi:keranjang',kodeuser=kodeuser)
+
+@login_required
+def buattransaksi(request):
+    if request.method == 'POST':
+        transaksi.objects.create(
+            pembeli = User.objects.get(id=request.user.id),
+            subtotal = request.POST['input-subtotal'],
+            ongkir = request.POST['input-ongkir'],
+            berat_total = request.POST['input-berat'],
+            total_biaya = request.POST['input-total'],
+            opsi_pengiriman = request.POST['input-kargo'],
+        )
+        return redirect('index')
+    return redirect('transaksi:keranjang',kodeuser=request.user.username)        
