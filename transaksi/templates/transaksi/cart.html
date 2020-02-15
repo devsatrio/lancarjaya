@@ -44,7 +44,7 @@
                     <tr>
                         <td class="hidden-xs">
                             {% if row.barang.gambar %}
-                            <img src="{{row.barang.gambar.url}}" alt=""/>
+                            <img src="{{row.barang.gambar.url}}" alt=""/ style="max-width: 150px;">
                             {% endif %}
                         </td>
                         <td>
@@ -126,15 +126,15 @@
                         
                         
                         <div>
-                            subtotal: <strong>Rp. {{subtotal.barang__avg|intcomma}}</strong>
+                            Sub Total: <strong>Rp. {{subtotal.barang__avg|intcomma}}</strong>
                         </div>
                         
                         <div class="mb-10">
-                            Shipping: <strong>$30.00</strong>
+                            Ongkir: <strong>$30.00</strong>
                         </div>
                         
                         <div class="lead mt-0 mb-30">
-                            Order Total: <strong>$75.99</strong>
+                            Total Pembelian: <strong>$75.99</strong>
                         </div>
                         
                         <div>
