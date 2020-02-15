@@ -10,10 +10,12 @@ from django.contrib.auth.models import User
 def listkeranjang(request,kodeuser):
     data_keranjang = keranjang.objects.filter(pembeli=User.objects.get(username=kodeuser))
     subtotal = keranjang.objects.filter(pembeli=User.objects.get(username=kodeuser)).aggregate(Sum('total'))
+    totalbarang = keranjang.objects.filter(pembeli=User.objects.get(username=kodeuser)).aggregate(Sum('jumlah'))
     context = {
         'barang':data_keranjang,
     }
     context.update(subtotal)
+    context.update(totalbarang)
     return render(request,'transaksi/cart.html',context)
 
 @login_required
