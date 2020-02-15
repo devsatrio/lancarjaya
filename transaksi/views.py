@@ -3,17 +3,17 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import keranjang
 from produk.models import barang
-from django.db.models import Avg
+from django.db.models import Sum
 from django.contrib.auth.models import User
 
 @login_required
 def listkeranjang(request,kodeuser):
     data_keranjang = keranjang.objects.filter(pembeli=User.objects.get(username=kodeuser))
-    subtotal = keranjang.objects.filter(pembeli=User.objects.get(username=kodeuser)).aggregate(Avg('barang'))
+    subtotal = keranjang.objects.filter(pembeli=User.objects.get(username=kodeuser)).aggregate(Sum('total'))
     context = {
         'barang':data_keranjang,
-        'subtotal':subtotal,
     }
+    context.update(subtotal)
     return render(request,'transaksi/cart.html',context)
 
 @login_required
