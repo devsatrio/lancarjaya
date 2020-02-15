@@ -33,6 +33,9 @@
                 {% for message in messages %}
                 <div class="alert {{ message.tags }}"><i class="fa fa-lg fa-check-circle-o"></i> {{ message }}</div>
                 {% endfor %}
+            <br>
+            {% endif %}
+                <h3 class="mt-0" style="text-transform: uppercase;">{{barang.nama}}</h3>
                 <br>
                 {% endif %}
                 <h3 class="mt-0">{{barang.nama}}</h3>
@@ -73,6 +76,7 @@
                 </div>
                 <br>
                 <hr class="mt-0 mb-30" />
+
                 {% if user.is_authenticated %}
                 <h3 class="mt-0">Masukan Keranjang</h3>
                 <form action="{% url 'produk:show' barang.slug %}" class="form-group text-center" method="POST"
@@ -80,9 +84,11 @@
                     <input type="hidden" id="stok" name="stok" value="{{barang.stok}}">
                     <input type="hidden" id="user" name="user" value="{{user.id}}">
                     <input type="hidden" id="barang" name="barang" value="{{barang.id}}">
+
                     <div id="errormsg" class="alert error hide">
                         <span id="errorisi"></span>
                     </div>
+
                     <div class="section-text mb-30">
                         {% csrf_token %}
                         {{form}}
