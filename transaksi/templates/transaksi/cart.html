@@ -169,8 +169,8 @@
                                         
                                         <div class="form-group">
                                             {% csrf_token %}
-                                            <input type="text" name="barang" value="{{row.barang.id}}">
-                                            <input type="text" name="kode" value="{{row.id}}">
+                                            <input type="hidden" name="barang" value="{{row.barang.id}}">
+                                            <input type="hidden" name="kode" value="{{row.id}}">
                                             <label for="">Jumlah</label>
                                             <input type="number" name="jumlah" value="{{row.jumlah}}" class="form-control">
 
