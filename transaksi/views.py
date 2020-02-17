@@ -54,5 +54,12 @@ def edit(request,kodeuser):
             t.jumlah = int(request.POST['jumlah']) 
             t.total = int(t.total)+int(hargabarangnya)
             t.save()
+        else:
+            keranjang.objects.update(
+            jumlah=request.POST['jumlah'],
+            barang = models.barang.objects.get(id=request.POST['barang']),
+            pembeli = User.objects.get(id=request.POST['user']),
+            total= int(hargabarangnya),
+            )
         messages.success(request,'Berhasil edit data')
         return redirect('transaksi:edit',kodeuser=kodeuser)
