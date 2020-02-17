@@ -32,3 +32,6 @@ def pencarian(request):
         'hasil2': data_artikel,
     }
     return render(request, 'pencarian.html',context)
+
+def cara_belanja(request):
+    return render(request,'cara_belanja.html')

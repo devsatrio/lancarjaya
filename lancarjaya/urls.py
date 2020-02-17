@@ -11,6 +11,7 @@ urlpatterns = [
     path('galeri/',include('galeri.urls')),
     path('testimoni/',include('testimoni.urls')),
     path('kontak/',include('contact.urls')),
+    path('cara_belanja/',views.cara_belanja,name='cara_belanja'),
     path('user/',include('users.urls')),
     path('pencarian/',views.pencarian,name='pencarian'),
     path('keranjang/',include('transaksi.urls')),
