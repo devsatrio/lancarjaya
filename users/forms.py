@@ -1,6 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.contrib.auth.forms import UserCreationForm
+from alamat.models import pengguna
 
 class Userregisterform(UserCreationForm):
     username = forms.CharField(widget=forms.TextInput(attrs={'class': 'input-md input-md form-control', 'placeholder': 'Username'}))
@@ -25,3 +26,10 @@ class Userchangedform(forms.ModelForm):
     class Meta():
         model = User
         fields = ('username', 'first_name', 'last_name', 'email',)
+
+class alamatuser(forms.Form):
+    label = forms.CharField(widget=forms.TextInput(attrs={'class':'input-md input-md form-control','placeholder':'Label Alamat'}))
+    CHOICES = (('Option 1', 'Option 1'),('Option 2', 'Option 2'),)
+    kota = forms.ChoiceField(choices=CHOICES,widget=forms.Select(attrs={'class':'input-md input-md form-control','placeholder':'Label Alamat'}))
+    Alamat_lengkap = forms.CharField(widget=forms.Textarea(attrs={'class':'input-md input-md form-control','placeholder':'Label Alamat'}))
+            

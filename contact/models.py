@@ -10,6 +10,8 @@ class contact(models.Model):
 	instagram = models.CharField(max_length=100)
 	facebook = models.CharField(max_length=100)
 	moto = models.CharField(max_length=100)
+	kota = models.CharField(max_length=100)
+	kode_kota = models.CharField(max_length=100)
 	
 	def __str__(self):
 		return self.moto

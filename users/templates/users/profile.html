@@ -34,11 +34,32 @@
                     </fieldset>
                     <div class="form-group">
                         <button type="submit" class="submit_btn btn btn-mod btn-medium btn-round">Simpan</button>
-                        <button type="button" onclick="history.go(-1)" class="submit_btn btn btn-mod btn-medium btn-round">Kembali</button>
+                        <button type="button" onclick="history.go(-1)"
+                            class="submit_btn btn btn-mod btn-medium btn-round">Kembali</button>
                     </div>
+                    {% if jumlah_alamat == 0 %}
+                    Tambahkan <a href="{% url 'users:tambah-alamat' %}">alamat</a> pengiriman
+                    {% endif %}
                 </form>
             </div>
         </div>
     </div>
+    <hr>
+    {% if jumlah_alamat > 0 %}
+    <div class="benefits-grid">
+        <div class="benefit-item">
+            <div class="benefit-icon">
+                <i class="fa fa-paper-plane-o"></i>
+            </div>
+            <h3 class="benefit-title font-alt">Alamat {{alamat.label}}</h3>
+            <p>{{alamat.kota}}</p>
+            <div class="benefits-descr">
+                {{alamat.alamat_lengkap}}
+            </div>
+        </div>
+        <br>
+        <a href="{% url 'users:edit-alamat' %}" class="btn btn-mod btn-medium btn-round">Edit Alamat</a>
+    </div>
+    {% endif %}
 </section>
 {% endblock content %}
