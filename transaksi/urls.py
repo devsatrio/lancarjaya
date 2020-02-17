@@ -4,6 +4,7 @@ app_name = 'transaksi'
 urlpatterns = [
     path('<str:kodeuser>',views.listkeranjang,name='keranjang'),
     path('buat-transaksi/',views.buattransaksi,name='buat-tansaksi'),
+    path('pesanansaya/',views.pesanansaya,name='pesanansaya'),
     path('editkeranjang/<str:kodeuser>',views.edit,name='edit'),
     path('hapuskeranjang/<str:kodeuser>',views.hapuskeranjang,name='hapus-keranjang'),
 ]

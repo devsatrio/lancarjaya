@@ -126,4 +126,8 @@ def buattransaksi(request):
         )
         return redirect('index')
     
-    return redirect('transaksi:keranjang',kodeuser=request.user.username)        
+    return redirect('transaksi:keranjang',kodeuser=request.user.username)
+
+@login_required
+def pesanansaya(request):
+    return render(request,'transaksi/pesanansaya.html')

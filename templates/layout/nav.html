@@ -29,9 +29,6 @@
                 <li>
                     <a href="{%url 'contact:index' %}" class="mn-has-sub active">Kontak</a>
                 </li>
-                <li>
-                    <a href="{%url 'cara_belanja' %}" class="mn-has-sub active">Cara Belanja</a>
-                </li>
                 <li><a>&nbsp;</a></li>
                 {% if user.is_authenticated %}
                 <li>
@@ -42,6 +39,8 @@
                     <a href="#" class="mn-has-sub">{{user.username}} <i class="fa fa-angle-down"></i></a>
                     <ul class="mn-sub">
                         <li><a href="{%url 'users:editprofile' %}">Edit Profile</a></li>
+                        <li><a href="{%url 'transaksi:pesanansaya' %}">Pesanan Saya</a></li>
+                        <li><a href="{%url 'cara_belanja' %}">Cara Belanja</a></li>
                         <li><a href="{%url 'users:logout' %}">Logout</a></li>
                     </ul>
                 </li>
