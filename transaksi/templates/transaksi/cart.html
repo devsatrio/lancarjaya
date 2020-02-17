@@ -161,7 +161,7 @@
                                 </div>
                                 <hr style="border: 1px solid ;">
                                 <div class="modal-body">
-                                    <form role="form" action="{% url 'transaksi:edit' user.username%}" method="post" >
+                                    <form role="form" action="{% url 'transaksi:edit' user.username %}" method="POST" >
                                        
                                         <div class="form-group">
                                             <img src="{{row.barang.gambar.url}}" alt="" / style="max-width: 150px;">
@@ -170,9 +170,9 @@
                                         <div class="form-group">
                                             {% csrf_token %}
                                             <input type="text" name="barang" value="{{row.barang.id}}">
-                                            <input type="hidden" name="kode" value="{{row.id}}">
+                                            <input type="text" name="kode" value="{{row.id}}">
                                             <label for="">Jumlah</label>
-                                            <input type="number" name="jumlah2" value="{{row.jumlah}}" class="form-control">
+                                            <input type="number" name="jumlah" value="{{row.jumlah}}" class="form-control">
 
                                         </div>                          
                                        <div class="text-right">

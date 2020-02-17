@@ -38,10 +38,9 @@ def hapuskeranjang(request,kodeuser):
 
 @login_required
 def edit(request,kodeuser):
+    hargabarangnya = 0
     if request.method == 'POST':
-        hargabarangnya = 0
-        data = request.get(id=request.POST['kode'])
-        dbarang = models.barang.objects.get(id=request.POST['barang'])
+        dbarang = barang.objects.get(id=request.POST['barang'])
 
         if dbarang.diskon > 0:
             jumlahdiskon = int(dbarang.harga)*int(dbarang.diskon)/100
@@ -49,17 +48,9 @@ def edit(request,kodeuser):
         else:
             hargabarangnya = int(dbarang.harga)*int(request.POST['jumlah'])
 
-        if data > 0 :
-            hargabarangnya = int(dbarang.harga)*int(request.POST['jumlah'])
-            t.jumlah = int(request.POST['jumlah']) 
-            t.total = int(t.total)+int(hargabarangnya)
-            t.save()
-        else:
-            keranjang.objects.update(
-            jumlah=request.POST['jumlah'],
-            barang = models.barang.objects.get(id=request.POST['barang']),
-            pembeli = User.objects.get(id=request.POST['user']),
-            total= int(hargabarangnya),
-            )
+        t = keranjang.objects.get(id=request.POST['kode'])
+        t.jumlah = request.POST['jumlah'] 
+        t.total = hargabarangnya
+        t.save()
         messages.success(request,'Berhasil edit data')
-        return redirect('transaksi:edit',kodeuser=kodeuser)
+    return redirect('transaksi:keranjang',kodeuser=kodeuser)
