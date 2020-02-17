@@ -149,7 +149,21 @@
                                 {% endfor%}
                             </dd>
                             {% endfor%}
+                            <dt>
+                                <a href="#">COD</a>
+                            </dt>
+                            <dd style="display: none;">
+                                <div class="custom-control custom-radio">
+                                    <input type="radio" class="custom-control-input ongkir"
+                                        id="defaultCheckedCOD" value="COD-kediri-10000" name="defaultExample2">
+                                    <label class="custom-control-label"
+                                        for="defaultCheckedCOD">COD -
+                                        Dalam Kota Kediri</label>
+                                    <br>
+                                    <span class="text-muted">Rp. {{10000|intcomma}}</span>
 
+                                </div><br>
+                            </dd>
                             {% endif %}
 
                     </div>

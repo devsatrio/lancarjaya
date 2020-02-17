@@ -10,40 +10,45 @@ from django.db.models import Sum
 from django.contrib.auth.models import User
 from alamat.models import pengguna
 import json
+from django.db.models import Max
 
 @login_required
 def listkeranjang(request,kodeuser):
     jne = ''
-    post = ''
+    pos = ''
 
-    data_keranjang = keranjang.objects.filter(pembeli=User.objects.get(username=kodeuser))
+    data_keranjang = keranjang.objects.filter(kode_transaksi__isnull=True,pembeli=User.objects.get(username=kodeuser))
     subtotal = keranjang.objects.filter(pembeli=User.objects.get(username=kodeuser)).aggregate(Sum('total'))
     totalbarang = keranjang.objects.filter(pembeli=User.objects.get(username=kodeuser)).aggregate(Sum('jumlah'))
     totalberat = keranjang.objects.filter(pembeli=User.objects.get(username=kodeuser)).aggregate(Sum('berat_total'))
-    cekalamat = pengguna.objects.filter(pengguna=User.objects.get(username=kodeuser)).count()
+    try:
+        cekalamat = pengguna.objects.filter(pengguna=User.objects.get(username=kodeuser)).count()
+    except cekalamat.DoesNotExist:
+        cekalamat = 0
     
-    webdata = contact.objects.get(id=1)
-    desti = pengguna.objects.get(pengguna=User.objects.get(username=kodeuser))
-    conn = http.client.HTTPSConnection("api.rajaongkir.com")
-    payload = "origin="+webdata.kode_kota+"&destination="+desti.kode_kota+"&weight="+str(totalberat['berat_total__sum'])+"&courier=jne"
-    headers = {
-        'key': "5c9d1c918e391d9fee83d59759943b59",
-        'content-type': "application/x-www-form-urlencoded"
-    }
-    conn.request("POST", "/starter/cost", payload, headers)
-    res = conn.getresponse()
-    data = res.read()
-    jne = json.loads(data)
+    if cekalamat>0:
+        webdata = contact.objects.get(id=1)
+        desti = pengguna.objects.get(pengguna=User.objects.get(username=kodeuser))
+        conn = http.client.HTTPSConnection("api.rajaongkir.com")
+        payload = "origin="+webdata.kode_kota+"&destination="+desti.kode_kota+"&weight="+str(totalberat['berat_total__sum'])+"&courier=jne"
+        headers = {
+            'key': "5c9d1c918e391d9fee83d59759943b59",
+            'content-type': "application/x-www-form-urlencoded"
+        }
+        conn.request("POST", "/starter/cost", payload, headers)
+        res = conn.getresponse()
+        data = res.read()
+        jne = json.loads(data)
+        payload = "origin="+webdata.kode_kota+"&destination="+desti.kode_kota+"&weight="+str(totalberat['berat_total__sum'])+"&courier=pos"
+        headers = {
+            'key': "5c9d1c918e391d9fee83d59759943b59",
+            'content-type': "application/x-www-form-urlencoded"
+        }
+        conn.request("POST", "/starter/cost", payload, headers)
+        res = conn.getresponse()
+        data = res.read()
+        pos = json.loads(data)
 
-    payload = "origin="+webdata.kode_kota+"&destination="+desti.kode_kota+"&weight="+str(totalberat['berat_total__sum'])+"&courier=pos"
-    headers = {
-        'key': "5c9d1c918e391d9fee83d59759943b59",
-        'content-type': "application/x-www-form-urlencoded"
-    }
-    conn.request("POST", "/starter/cost", payload, headers)
-    res = conn.getresponse()
-    data = res.read()
-    pos = json.loads(data)
     context = {
         'barang':data_keranjang,
         'cekalamat':cekalamat,
@@ -88,12 +93,28 @@ def edit(request,kodeuser):
         t.total = hargabarangnya
         t.berat_total = beratbarang
         t.save()
+
         messages.success(request,'Berhasil edit data')
     return redirect('transaksi:keranjang',kodeuser=kodeuser)
 
 @login_required
 def buattransaksi(request):
     if request.method == 'POST':
+        jumlahmax = transaksi.objects.all().count()
+        if jumlahmax > 0:
+            datamax = transaksi.objects.aggregate(Max('id'))
+            finalkode = 'transaksi'+format(datamax['id__max'], "04")
+        else:
+            finalkode = 'transaksi'+format(1, "04")
+            
+        datakeranjang = keranjang.objects.filter(kode_transaksi__isnull=True,pembeli=User.objects.get(id=request.user.id))
+        
+        for row in datakeranjang:
+            t = barang.objects.get(id=row.barang.id)
+            t.stok = t.stok - row.jumlah 
+            t.save()
+
+        keranjang.objects.filter(kode_transaksi__isnull=True,pembeli=User.objects.get(id=request.user.id)).update(kode_transaksi = finalkode)
         transaksi.objects.create(
             pembeli = User.objects.get(id=request.user.id),
             subtotal = request.POST['input-subtotal'],
@@ -101,6 +122,8 @@ def buattransaksi(request):
             berat_total = request.POST['input-berat'],
             total_biaya = request.POST['input-total'],
             opsi_pengiriman = request.POST['input-kargo'],
+            kode_transaksi = finalkode,
         )
         return redirect('index')
+    
     return redirect('transaksi:keranjang',kodeuser=request.user.username)        
