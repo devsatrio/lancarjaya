@@ -1,10 +1,13 @@
 from django.shortcuts import render,redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
 from .models import keranjang
 from produk.models import barang
 from django.db.models import Sum
 from django.contrib.auth.models import User
+from .forms import Editform
+
 
 @login_required
 def listkeranjang(request,kodeuser):
@@ -32,3 +35,11 @@ def hapuskeranjang(request,kodeuser):
         'barang':data_keranjang,
     }
     return render(request,'transaksi/cart.html',context)
+
+@login_required
+def edit(request,kodeuser):
+    if request.method == 'POST':
+        data = keranjang.objects.get(jumlah=request.POST['jumlah2'])
+        data.update()
+        messages.success(request,'Berhasil edit data')
+        return redirect('transaksi:edit',kodeuser=kodeuser)

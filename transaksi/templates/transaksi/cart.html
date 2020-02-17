@@ -73,35 +73,14 @@
                             <form method="post" action="{% url 'transaksi:hapus-keranjang' user.username %}">
                                 {% csrf_token %}
                                 <input type="hidden" value="{{row.id}}" name="kode">
-                                <button type="button" id="myBtn" class="btn btn-mod btn-round"><i class="fa fa-trash-o"></i>Edit</button>
+                                <button type="button" class="btn btn-mod btn-round tampilmodal" data-kode="{{row.id}}"><i class="fa fa-wrench"></i></button>
                                 <button type="submit" onclick="return confirm('Hapus Data ?')"
-                                    class="btn btn-mod btn-round"><i class="fa fa-trash-o"></i> Hapus</button>
+                                    class="btn btn-mod btn-round"><i class="fa fa-trash-o"></i></button>
                             </form>
                         </td>
                     </tr>
                     {% endfor %}
                 </table>
-
-                <hr />
-
-                <!-- <div class="row">
-                    <div class="col-sm-8">
-                        <form action="#" class="form">
-                            <input placeholder="Coupon code" class="input-sm mb-xs-10" style="width: 250px;" type="text"
-                                pattern=".{3,100}" required />
-                            &nbsp;<button type="submit" class="btn btn-mod btn-round btn-gray btn-small mb-xs-10">Apply
-                                Coupon</button>
-                        </form>
-                    </div>
-                    <div class="col-sm-4 text align-right">
-
-                        <div>
-                            <a href="" class="btn btn-mod btn-gray btn-round btn-small">Update Cart</a>
-                        </div>
-
-                    </div>
-                </div> -->
-
                 <hr class="mb-60" />
 
                 <div class="row">
@@ -169,104 +148,56 @@
                             </table>
                         </div>
 
-                           <!--  <hr class="mb-60" /> -->
-<!-- 
-                            <div class="row">
-                                <div class="col-sm-6">
-
-                                    <h3 class="small-title font-alt">Alamat Pengiriman</h3>
-
-                                    <form action="#" class="form">
-
-                                        <div class="mb-10">
-                                            <select class="input-md form-control">
-                                                <option>Provinsi</option>
-                                                <option>France</option>
-                                                <option>Ukraine</option>
-                                                <option>USA</option>
-                                            </select>
-                                        </div>
-                                        <div class="mb-10">
-                                            <select class="input-md form-control">
-                                                <option>Kota</option>
-                                                <option>France</option>
-                                                <option>Ukraine</option>
-                                                <option>USA</option>
-                                            </select>
-                                        </div>
-                                        <div class="mb-10">
-                                            <input placeholder="State" class="input-md form-control" type="text"
-                                                pattern=".{3,100}" />
-                                        </div>
-
-                                        <div class="mb-10">
-                                            <input placeholder="Postcode / Zip" class="input-md form-control"
-                                                type="text" pattern=".{3,100}" />
-                                        </div>
-
-                                    </form>
-
-                                </div>
-                                <div class="col-sm-6 text align-right pt-10">
-
-
-                                    <div>
-                                        Subtotal: <strong>Rp. {{total__sum|intcomma}}</strong>
-                                    </div>
-
-                                    <div class="mb-10">
-                                        Ongkir: <strong>Rp. 0</strong>
-                                    </div>
-
-                                    <div class="lead mt-0 mb-30">
-                                        Total : <strong>Rp. 0</strong>
-                                    </div>
-
-                                    <div>
-                                        <a href="#" class="btn btn-mod btn-round btn-large">Beli Sekarang</a>
-                                    </div>
-
-
-                                </div>
-                            </div> -->
                     </div>
 
 </section>
-<div id="myModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <p>Some text in the Modal..</p>
+{% for row in barang %}
+<div id="myModal{{row.id}}" class="modal">
+        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <span class="close">&times;</span>
+                                <div class="modal-header">
+                                    <h4 class="modal-title">Edit Data</h4>
+                                </div>
+                                <hr style="border: 1px solid ;">
+                                <div class="modal-body">
+                                    <form role="form" action="{% url 'transaksi:edit' user.username%}" method="post" >
+                                       
+                                        <div class="form-group">
+                                            <img src="{{row.barang.gambar.url}}" alt="" / style="max-width: 150px;">
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            {% csrf_token %}
+                                            <!-- <input type="hidden" name="kode" value="{{row.id}}"> -->
+                                            <label for="">Jumlah</label>
+                                            <input type="number" name="jumlah2" value="{{row.jumlah}}" class="form-control">
+
+                                        </div>                          
+                                       <div class="text-right">
+                                        <button type="submit" class="btn btn-mod btn-round">Perbarui</button>
+                                        </div>
+                                    </form>
+                                </div>
+                                
+                            </div>
+                        </div>
     </div>
 
 </div>
+{% endfor %}
 {% endblock content %}
 
 {% block customjs %}
 <script>
-    // Get the modal
-    var modal = document.getElementById("myModal");
-
-    // Get the button that opens the modal
-    var btn = document.getElementById("myBtn");
-
-    // Get the <span> element that closes the modal
-    var span = document.getElementsByClassName("close")[0];
-
-    // When the user clicks the button, open the modal 
-    btn.onclick = function () {
-        modal.style.display = "block";
-    }
-
-    // When the user clicks on <span> (x), close the modal
-    span.onclick = function () {
-        modal.style.display = "none";
-    }
-
-    // When the user clicks anywhere outside of the modal, close it
-    window.onclick = function (event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    }
+    $('.tampilmodal').click(function(){
+        var kode = $(this).data('kode');
+        var modal = document.getElementById("myModal"+kode);
+        modal.style.display = "block"; 
+        
+    });
+    $('.close').click(function(){
+        $('.modal').hide(); 
+    });
 </script>
 {% endblock customjs %}
