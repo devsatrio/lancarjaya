@@ -45,6 +45,14 @@
                             Aksi
                         </th>
                     </tr>
+
+                    {% if messages %}
+                    {% for message in messages %}
+                    <div class="alert {{ message.tags }}"><i class="fa fa-lg fa-check-circle-o"></i> {{ message }}</div>
+                    {% endfor %}
+                    <br>
+                    {% endif %}
+                    
                     {% for row in barang %}
                     <tr>
                         <td class="hidden-xs">
@@ -169,8 +177,9 @@
                                         
                                         <div class="form-group">
                                             {% csrf_token %}
-                                            <input type="hidden" name="barang" value="{{row.barang.id}}">
-                                            <input type="hidden" name="kode" value="{{row.id}}">
+                                            <input type="hidden"  name="stok" value="{{row.barang.stok}}">
+                                            <input type="hidden"  name="barang" value="{{row.barang.id}}">
+                                            <input type="hidden"  name="kode" value="{{row.id}}">
                                             <label for="">Jumlah</label>
                                             <input type="number" name="jumlah" value="{{row.jumlah}}" class="form-control">
 
