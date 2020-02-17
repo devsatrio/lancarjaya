@@ -6,7 +6,7 @@ from .models import keranjang
 from produk.models import barang
 from django.db.models import Sum
 from django.contrib.auth.models import User
-from .forms import Editform
+
 
 
 @login_required
@@ -39,7 +39,20 @@ def hapuskeranjang(request,kodeuser):
 @login_required
 def edit(request,kodeuser):
     if request.method == 'POST':
-        data = keranjang.objects.get(jumlah=request.POST['jumlah2'])
-        data.update()
+        hargabarangnya = 0
+        data = request.get(id=request.POST['kode'])
+        dbarang = models.barang.objects.get(id=request.POST['barang'])
+
+        if dbarang.diskon > 0:
+            jumlahdiskon = int(dbarang.harga)*int(dbarang.diskon)/100
+            hargabarangnya = (int(dbarang.harga)-int(jumlahdiskon))*int(request.POST['jumlah'])
+        else:
+            hargabarangnya = int(dbarang.harga)*int(request.POST['jumlah'])
+
+        if data > 0 :
+            hargabarangnya = int(dbarang.harga)*int(request.POST['jumlah'])
+            t.jumlah = int(request.POST['jumlah']) 
+            t.total = int(t.total)+int(hargabarangnya)
+            t.save()
         messages.success(request,'Berhasil edit data')
         return redirect('transaksi:edit',kodeuser=kodeuser)
