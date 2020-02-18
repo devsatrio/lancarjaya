@@ -25,6 +25,7 @@
     <div class="container">
 
         <div class="row">
+            {% if jumlah_keranjang > 0 %}
             <div class="col-md-10 col-md-offset-1">
 
                 <table class="table table-striped shopping-cart-table">
@@ -113,7 +114,8 @@
                                 <div class="custom-control custom-radio">
                                     {% for halo in row.cost %}
                                     <input type="radio" class="custom-control-input ongkir"
-                                        id="defaultChecked{{row.service}}" value="{{hallo.code}}-{{row.service}}-{{halo.value}}" name="defaultExample2">
+                                        id="defaultChecked{{row.service}}"
+                                        value="{{hallo.code}}-{{row.service}}-{{halo.value}}" name="defaultExample2">
                                     <label class="custom-control-label"
                                         for="defaultChecked{{row.service}}">{{row.service}} -
                                         {{row.description}}</label>
@@ -136,7 +138,8 @@
                                 <div class="custom-control custom-radio">
                                     {% for halo in row.cost %}
                                     <input type="radio" class="custom-control-input ongkir"
-                                        id="defaultChecked{{row.service}}" value="{{hallo.code}}-{{row.service}}-{{halo.value}}" name="defaultExample2">
+                                        id="defaultChecked{{row.service}}"
+                                        value="{{hallo.code}}-{{row.service}}-{{halo.value}}" name="defaultExample2">
                                     <label class="custom-control-label"
                                         for="defaultChecked{{row.service}}">{{row.service}} -
                                         {{row.description}}</label>
@@ -154,10 +157,9 @@
                             </dt>
                             <dd style="display: none;">
                                 <div class="custom-control custom-radio">
-                                    <input type="radio" class="custom-control-input ongkir"
-                                        id="defaultCheckedCOD" value="COD-kediri-10000" name="defaultExample2">
-                                    <label class="custom-control-label"
-                                        for="defaultCheckedCOD">COD -
+                                    <input type="radio" class="custom-control-input ongkir" id="defaultCheckedCOD"
+                                        value="COD-kediri-10000" name="defaultExample2">
+                                    <label class="custom-control-label" for="defaultCheckedCOD">COD -
                                         Dalam Kota Kediri</label>
                                     <br>
                                     <span class="text-muted">Rp. {{10000|intcomma}}</span>
@@ -189,7 +191,8 @@
                             </div>
                             {% if cekalamat > 0 %}
                             <div class="text-center">
-                                <form action="{% url 'transaksi:buat-tansaksi' %}" method="POST" onsubmit="return validasiform()">
+                                <form action="{% url 'transaksi:buat-tansaksi' %}" method="POST"
+                                    onsubmit="return validasiform()">
                                     {% csrf_token %}
                                     <input type="text" value="{{berat_total__sum}}" id="input-berat" name="input-berat">
                                     <input type="text" value="{{total__sum}}" id="input-subtotal" name="input-subtotal">
@@ -201,7 +204,8 @@
                                     </div>
                                     <br><br>
                                     <button type="submit" class="btn btn-mod btn-round btn-large">Beli Sekarang</button>
-                                    <button type="reset" onclick="history.go(-1)" class="btn btn-mod btn-round btn-large">Kembali</button>
+                                    <button type="reset" onclick="history.go(-1)"
+                                        class="btn btn-mod btn-round btn-large">Kembali</button>
                                 </form>
                             </div>
                             {% else %}
@@ -217,7 +221,14 @@
                         </div>
 
                     </div>
-
+                </div>
+            </div>
+            {% else %}
+            <div class="col-md-10 col-md-offset-1 text-center">
+                <h1>Oops, Anda belum punya barang di keranjang.</h1>
+            </div>
+            {% endif %}
+        </div>
 </section>
 
 {% for row in barang %}
@@ -241,8 +252,8 @@
                         <input type="hidden" name="barang" value="{{row.barang.id}}">
                         <input type="hidden" name="kode" value="{{row.id}}">
                         <label for="">Jumlah</label>
-                        <input type="number" name="jumlah" value="{{row.jumlah}}" min="0" max="{{row.barang.stok}}" class="form-control"
-                            style="width:120px;">
+                        <input type="number" name="jumlah" value="{{row.jumlah}}" min="0" max="{{row.barang.stok}}"
+                            class="form-control" style="width:120px;">
 
                     </div>
                     <div class="text-right">
@@ -277,39 +288,39 @@
     $(".ongkir").change(function () {
         if (this.checked) {
             var result = $(this).val().split('-');
-            var pengiriman = result[0]+'-'+result[1];
+            var pengiriman = result[0] + '-' + result[1];
             var harga = parseInt(result[2]);
             var subtotal = $('#input-subtotal').val();
 
-            var total = parseInt(harga)+parseInt(subtotal);
+            var total = parseInt(harga) + parseInt(subtotal);
             $('#input-ongkir').val(harga);
             $('#input-total').val(total);
             $('#input-kargo').val(pengiriman);
-            $('#hargaongkir').html('Rp. '+rupiah(harga));
-            $('#hargatotal').html('Rp.'+rupiah(total));
-            
+            $('#hargaongkir').html('Rp. ' + rupiah(harga));
+            $('#hargatotal').html('Rp.' + rupiah(total));
+
         }
     });
     //==================================================
-		function rupiah(bilangan){
-			var	number_string = bilangan.toString(),
-			sisa 	= number_string.length % 3,
-			rupiah 	= number_string.substr(0, sisa),
-			ribuan 	= number_string.substr(sisa).match(/\d{3}/gi);
-			
-		if (ribuan) {
-			separator = sisa ? '.' : '';
-			rupiah += separator + ribuan.join('.');
-		}
+    function rupiah(bilangan) {
+        var number_string = bilangan.toString(),
+            sisa = number_string.length % 3,
+            rupiah = number_string.substr(0, sisa),
+            ribuan = number_string.substr(sisa).match(/\d{3}/gi);
 
-			return rupiah;
+        if (ribuan) {
+            separator = sisa ? '.' : '';
+            rupiah += separator + ribuan.join('.');
         }
+
+        return rupiah;
+    }
     function validasiform() {
-         if($('#input-ongkir').val()==0){
+        if ($('#input-ongkir').val() == 0) {
             $('#errorisi').html('Oops, Pilih Opsi Pengiriman Terlebih Dahulu');
             $("#errormsg").removeClass("hide");
             return false;
         }
-  }
+    }
 </script>
 {% endblock customjs %}

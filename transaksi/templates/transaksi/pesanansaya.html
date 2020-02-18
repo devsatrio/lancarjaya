@@ -5,103 +5,111 @@
 <!-- Head Section -->
 <section class="small-section bg-dark">
     <div class="relative container align-left">
-        
+
         <div class="row">
-            
+
             <div class="col-md-8">
                 <h1 class="hs-line-11 font-alt mb-20 mb-xs-0">Pesanan Saya</h1>
             </div>
-            
+
         </div>
-        
+
     </div>
 </section>
 <!-- End Head Section -->
 
-            <!-- Section -->
-            <section class="page-section">
-                <div class="container">
-                    
-                    <div class="row">
-                        <div class="col-md-8 col-md-offset-2">
-                            
-                            <table class="table table-striped shopping-cart-table">
-                                <tr>
-                                    <th>
-                                        Kode Transaksi
-                                    </th>
-                                    
-                                    <th>
-                                        Tanggal Beli
-                                    </th>
-                                    
-                                    <th>
-                                        Status
-                                    </th>
+<!-- Section -->
+<section class="page-section">
+    <div class="container">
 
-                                    <th>
-                                        Opsi Pengiriman
-                                    </th>
+        <div class="row">
+            {% if jumlah > 0 %}
+            <div class="col-md-8 col-md-offset-2">
 
-                                    <th>
-                                        No Resi Pengiriman
-                                    </th>
-                                    
-                                </tr>
-                                {% for row in data_transaksi %}
-                                <tr>
-                                    <td>
-                                        <a href="#">{{row.kode_transaksi}}</a>
-                                    </td>
+                <table class="table table-striped shopping-cart-table">
+                    <tr>
+                        <th>
+                            Kode Transaksi
+                        </th>
 
-                                    <td>
-                                        {{row.tanggal_beli}}
-                                    </td>
+                        <th>
+                            Tanggal Beli
+                        </th>
 
-                                    <td>
-                                        {% if row.status_verifikasi != False %}
-                                            Verifikasi
-                                        {% else %}
-                                            Belum Verifikasi
-                                        {% endif %}
-                                    </td>
+                        <th>
+                            Status
+                        </th>
 
-                                    <td>
-                                        {{row.opsi_pengiriman}}
-                                    </td>
+                        <th>
+                            Opsi Pengiriman
+                        </th>
 
-                                    <td>
-                                        {{row.resi_pengiriman}}
-                                    </td>
+                        <th>
+                            No Resi Pengiriman
+                        </th>
 
-                                </tr>
-                                {% endfor %}
-                            </table>
-                            
-                            <hr />
+                    </tr>
+                    {% for row in data_transaksi %}
+                    <tr>
+                        <td>
+                            <a href="#">{{row.kode_transaksi}}</a>
+                        </td>
 
-                            <div class="row">
-                                <div class="col-sm-8">
-                                        <button type="submit" class="btn btn-mod btn-round btn-gray btn-small mb-xs-10" onclick="history.go(-1)">Kembali</button>
-                                </div>
-                                <div class="col-sm-4 text align-right">
-                                    
-                                    <div>
-                                        <a href="{%url 'cara_verifikasi' %}" class="btn btn-mod btn-gray btn-round btn-small">Cara Verifikasi</a>
-                                    </div>
-                                    
-                                </div>
-                            </div>
-                            
-                            <!-- <hr class="mb-60" /> -->
-                            
-                            
-                            
-                        </div>
+                        <td>
+                            {{row.tanggal_beli}}
+                        </td>
+
+                        <td>
+                            {% if row.status_verifikasi != False %}
+                            Verifikasi
+                            {% else %}
+                            Belum Verifikasi
+                            {% endif %}
+                        </td>
+
+                        <td>
+                            {{row.opsi_pengiriman}}
+                        </td>
+
+                        <td>
+                            {{row.resi_pengiriman}}
+                        </td>
+
+                    </tr>
+                    {% endfor %}
+                </table>
+
+                <hr />
+
+                <div class="row">
+                    <div class="col-sm-8">
+                        <button type="submit" class="btn btn-mod btn-round btn-gray btn-small mb-xs-10"
+                            onclick="history.go(-1)">Kembali</button>
                     </div>
-                
+                    <div class="col-sm-4 text align-right">
+
+                        <div>
+                            <a href="{%url 'cara_verifikasi' %}" class="btn btn-mod btn-gray btn-round btn-small">Cara
+                                Verifikasi</a>
+                        </div>
+
+                    </div>
                 </div>
-            </section>
-            <!-- End Section -->
+
+                <!-- <hr class="mb-60" /> -->
+
+
+
+            </div>
+            {% else %}
+            <div class="col-md-8 col-md-offset-2 text-center">
+                <h1>Oops, Anda belum pernah melakukan pemesanan/transaksi</h1>
+            </div>
+            {% endif %}
+        </div>
+
+    </div>
+</section>
+<!-- End Section -->
 
 {% endblock content %}
