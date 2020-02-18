@@ -51,7 +51,7 @@
                                 {% for row in data_transaksi %}
                                 <tr>
                                     <td>
-                                        <a href="#">{{row.kode_transaksi}}</a>
+                                        <a href="{% url 'transaksi:detailpesanan' row.kode_transaksi %}">{{row.kode_transaksi}}</a>
                                     </td>
 
                                     <td>

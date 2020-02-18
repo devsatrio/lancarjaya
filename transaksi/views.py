@@ -138,11 +138,11 @@ def pesanansaya(request):
     }
     return render(request,'transaksi/pesanansaya.html',context)
 
-# @login_required
-# def detailbarang(request,kode_transaksi):
-#     detail_barang = keranjang.objects.filter(kode_transaksi=transaksi.objects.get(kode_transaksi=kode_transaksi))
+@login_required
+def detailbarang(request,kode):
+    detail_barang = keranjang.objects.filter(kode_transaksi=keranjang.objects.get(kode_transaksi=kode))
 
-#     context = {
-#         'detailbarang':detail_barang,
-#     }
-#     return render(request,'transaksi/detail_produk.html',context)
+    context = {
+        'detail':detail_barang,
+    }
+    return render(request,'transaksi/detail_produk.html',context)
