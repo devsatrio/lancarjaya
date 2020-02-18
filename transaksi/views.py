@@ -146,7 +146,7 @@ def pesanansaya(request):
 
 @login_required
 def detailbarang(request,kode):
-    detail_barang = keranjang.objects.filter(kode_transaksi=keranjang.objects.get(kode_transaksi=kode))
+    detail_barang = transaksi.objects.filter(kode_transaksi=transaksi.objects.get(kode_transaksi=kode))
 
     context = {
         'detail':detail_barang,
