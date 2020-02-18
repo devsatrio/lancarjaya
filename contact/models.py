@@ -12,6 +12,7 @@ class contact(models.Model):
 	moto = models.CharField(max_length=100)
 	kota = models.CharField(max_length=100)
 	kode_kota = models.CharField(max_length=100)
+	no_rekening = models.CharField(max_length=30,blank=True,null=True)
 	
 	def __str__(self):
 		return self.moto

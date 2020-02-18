@@ -1,0 +1,106 @@
+{% extends 'layout/base.html' %}
+{% load static %}
+{% block content %}
+
+<!-- Head Section -->
+<section class="small-section bg-dark">
+    <div class="relative container align-left">
+        
+        <div class="row">
+            
+            <div class="col-md-8">
+                <h1 class="hs-line-11 font-alt mb-20 mb-xs-0">Detail Produk</h1>
+            </div>
+            
+        </div>
+        
+    </div>
+</section>
+<!-- End Head Section -->
+
+            <!-- Section -->
+            <section class="page-section">
+                <div class="container">
+                    
+                    <div class="row">
+                        <div class="col-md-8 col-md-offset-2">
+                            
+                            <table class="table table-striped shopping-cart-table">
+                                <tr>
+                                    <th>
+                                        Gambar
+                                    </th>
+                                    
+                                    <th>
+                                        Produk
+                                    </th>
+                                    
+                                    <th>
+                                        Jumlah
+                                    </th>
+
+                                    <th>
+                                        Berat
+                                    </th>
+
+                                    <th>
+                                        Total Biaya
+                                    </th>
+                                    
+                                </tr>
+                                
+                                {% for row in data_transaksi %}
+                                <tr>
+                                    <td>
+                                        {% if row.barang.gambar %}
+                                            <img src="#" alt="" / style="max-width: 150px;">
+                                        {% endif %}
+                                    </td>
+
+                                    <td>
+                                        
+                                    </td>
+
+                                    <td>
+                                        
+                                    </td>
+
+                                    <td>
+                                        
+                                    </td>
+
+                                    <td>
+                                        
+                                    </td>
+
+                                </tr>
+                                {% endfor %}
+                            </table>
+                            
+                            <hr />
+
+                            <div class="row">
+                                <div class="col-sm-8">
+                                        <button type="submit" class="btn btn-mod btn-round btn-gray btn-small mb-xs-10" onclick="history.go(-1)">Kembali</button>
+                                </div>
+                                <div class="col-sm-4 text align-right">
+                                    
+                                    <div>
+                                        <a href="" class="btn btn-mod btn-gray btn-round btn-small">Cara Verifikasi</a>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                            
+                            <!-- <hr class="mb-60" /> -->
+                            
+                            
+                            
+                        </div>
+                    </div>
+                
+                </div>
+            </section>
+            <!-- End Section -->
+
+{% endblock content %}

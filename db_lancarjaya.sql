@@ -244,7 +244,7 @@ CREATE TABLE `contact_contact` (
 --
 
 INSERT INTO `contact_contact` (`id`, `nomer_hp_dua`, `nomer_hp_satu`, `alamat`, `email`, `deskripsi`, `facebook`, `instagram`, `moto`) VALUES
-(2, '08198475899', '08560703948', 'Proin fringilla augue at maximus vestibulum', 'satriosuklun@gmail.com', 'Proin fringilla augue at maximus vestibulum. Nam pulvinar vitae neque et porttitor. Praesent sed nisi eleifend, lorem fermentum orci sit amet, iaculis libero', 'lambe_turah', '@lambe_Turah', 'Proin fringilla augue at maximus vestibulum.');
+(1, '08198475899', '08560703948', 'Proin fringilla augue at maximus vestibulum', 'satriosuklun@gmail.com', 'Proin fringilla augue at maximus vestibulum. Nam pulvinar vitae neque et porttitor. Praesent sed nisi eleifend, lorem fermentum orci sit amet, iaculis libero', 'lambe_turah', '@lambe_Turah', 'Proin fringilla augue at maximus vestibulum.');
 
 -- --------------------------------------------------------
 

@@ -21,6 +21,7 @@ def listkeranjang(request,kodeuser):
     subtotal = keranjang.objects.filter(pembeli=User.objects.get(username=kodeuser)).aggregate(Sum('total'))
     totalbarang = keranjang.objects.filter(pembeli=User.objects.get(username=kodeuser)).aggregate(Sum('jumlah'))
     totalberat = keranjang.objects.filter(pembeli=User.objects.get(username=kodeuser)).aggregate(Sum('berat_total'))
+    
     try:
         cekalamat = pengguna.objects.filter(pengguna=User.objects.get(username=kodeuser)).count()
     except cekalamat.DoesNotExist:
@@ -124,6 +125,24 @@ def buattransaksi(request):
             opsi_pengiriman = request.POST['input-kargo'],
             kode_transaksi = finalkode,
         )
-        return redirect('index')
+        return redirect('transaksi:pesanansaya')
     
-    return redirect('transaksi:keranjang',kodeuser=request.user.username)        
+    return redirect('transaksi:keranjang',kodeuser=request.user.username)
+
+@login_required
+def pesanansaya(request):
+    data_transaksi = transaksi.objects.all()
+
+    context = {
+        'data_transaksi':data_transaksi,
+    }
+    return render(request,'transaksi/pesanansaya.html',context)
+
+# @login_required
+# def detailbarang(request,kode_transaksi):
+#     detail_barang = keranjang.objects.filter(kode_transaksi=transaksi.objects.get(kode_transaksi=kode_transaksi))
+
+#     context = {
+#         'detailbarang':detail_barang,
+#     }
+#     return render(request,'transaksi/detail_produk.html',context)
