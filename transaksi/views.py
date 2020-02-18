@@ -20,9 +20,9 @@ def listkeranjang(request,kodeuser):
 
     jumlah_keranjang = keranjang.objects.filter(kode_transaksi__isnull=True,pembeli=User.objects.get(username=kodeuser)).count()
     data_keranjang = keranjang.objects.filter(kode_transaksi__isnull=True,pembeli=User.objects.get(username=kodeuser))
-    subtotal = keranjang.objects.filter(pembeli=User.objects.get(username=kodeuser)).aggregate(Sum('total'))
-    totalbarang = keranjang.objects.filter(pembeli=User.objects.get(username=kodeuser)).aggregate(Sum('jumlah'))
-    totalberat = keranjang.objects.filter(pembeli=User.objects.get(username=kodeuser)).aggregate(Sum('berat_total'))
+    subtotal = keranjang.objects.filter(kode_transaksi__isnull=True,pembeli=User.objects.get(username=kodeuser)).aggregate(Sum('total'))
+    totalbarang = keranjang.objects.filter(kode_transaksi__isnull=True,pembeli=User.objects.get(username=kodeuser)).aggregate(Sum('jumlah'))
+    totalberat = keranjang.objects.filter(kode_transaksi__isnull=True,pembeli=User.objects.get(username=kodeuser)).aggregate(Sum('berat_total'))
     
     try:
         cekalamat = pengguna.objects.filter(pengguna=User.objects.get(username=kodeuser)).count()
