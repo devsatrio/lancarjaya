@@ -65,7 +65,7 @@
                             {% endif %}
                         </td>
                         <td>
-                            <a href="#" title="" style="text-transform: capitalize;">{{row.barang.nama}}</a>
+                            <a href="{% url 'produk:show' row.barang.slug %}" title="" style="text-transform: capitalize;">{{row.barang.nama}}</a>
                         </td>
                         <td>
                             {{row.jumlah}} Pcs
@@ -194,11 +194,11 @@
                                 <form action="{% url 'transaksi:buat-tansaksi' %}" method="POST"
                                     onsubmit="return validasiform()">
                                     {% csrf_token %}
-                                    <input type="text" value="{{berat_total__sum}}" id="input-berat" name="input-berat">
-                                    <input type="text" value="{{total__sum}}" id="input-subtotal" name="input-subtotal">
-                                    <input type="text" id="input-ongkir" name="input-ongkir">
-                                    <input type="text" id="input-kargo" name="input-kargo">
-                                    <input type="text" id="input-total" name="input-total"> <br><br>
+                                    <input type="hidden" value="{{berat_total__sum}}" id="input-berat" name="input-berat">
+                                    <input type="hidden" value="{{total__sum}}" id="input-subtotal" name="input-subtotal">
+                                    <input type="hidden" id="input-ongkir" name="input-ongkir">
+                                    <input type="hidden" id="input-kargo" name="input-kargo">
+                                    <input type="hidden" id="input-total" name="input-total"> <br><br>
                                     <div id="errormsg" class="text-center alert error hide">
                                         <span id="errorisi"></span>
                                     </div>
