@@ -22,7 +22,7 @@ def index(request):
 def show(request,slugbarang):
     hargabarangnya = 0
     if request.method == 'POST':
-        jumlahnya = keranjang.objects.filter(barang=models.barang.objects.get(id=request.POST['barang'])).filter(pembeli=User.objects.get(id=request.POST['user'])).count()
+        jumlahnya = keranjang.objects.filter(barang=models.barang.objects.get(id=request.POST['barang']),kode_transaksi__isnull=True,pembeli=User.objects.get(id=request.POST['user'])).count()
         dbarang = models.barang.objects.get(id=request.POST['barang'])
         if dbarang.diskon > 0:
             jumlahdiskon = int(dbarang.harga)*int(dbarang.diskon)/100
@@ -32,7 +32,7 @@ def show(request,slugbarang):
 
         beratbarang = int(dbarang.berat)*int(request.POST['jumlah'])
         if jumlahnya > 0 :
-            t = keranjang.objects.get(barang=models.barang.objects.get(id=request.POST['barang']), pembeli=User.objects.get(id=request.POST['user']))
+            t = keranjang.objects.get(kode_transaksi__isnull=True,barang=models.barang.objects.get(id=request.POST['barang']), pembeli=User.objects.get(id=request.POST['user']))
             t.jumlah = int(t.jumlah) + int(request.POST['jumlah']) 
             t.total = int(t.total)+int(hargabarangnya)
             t.berat_total = int(t.berat_total) + int(beratbarang)

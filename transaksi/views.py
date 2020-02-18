@@ -14,9 +14,11 @@ from django.db.models import Max
 
 @login_required
 def listkeranjang(request,kodeuser):
+    
     jne = ''
     pos = ''
 
+    jumlah_keranjang = keranjang.objects.filter(kode_transaksi__isnull=True,pembeli=User.objects.get(username=kodeuser)).count()
     data_keranjang = keranjang.objects.filter(kode_transaksi__isnull=True,pembeli=User.objects.get(username=kodeuser))
     subtotal = keranjang.objects.filter(pembeli=User.objects.get(username=kodeuser)).aggregate(Sum('total'))
     totalbarang = keranjang.objects.filter(pembeli=User.objects.get(username=kodeuser)).aggregate(Sum('jumlah'))
@@ -55,6 +57,7 @@ def listkeranjang(request,kodeuser):
         'cekalamat':cekalamat,
         'jne':jne,
         'pos':pos,
+        'jumlah_keranjang':jumlah_keranjang,
     }
     context.update(subtotal)
     context.update(totalbarang)
@@ -104,7 +107,8 @@ def buattransaksi(request):
         jumlahmax = transaksi.objects.all().count()
         if jumlahmax > 0:
             datamax = transaksi.objects.aggregate(Max('id'))
-            finalkode = 'transaksi'+format(datamax['id__max'], "04")
+            newjumlah = datamax['id__max'] + 1
+            finalkode = 'transaksi'+format(newjumlah, "04")
         else:
             finalkode = 'transaksi'+format(1, "04")
             
@@ -132,10 +136,12 @@ def buattransaksi(request):
 @login_required
 def pesanansaya(request):
     data_transaksi = transaksi.objects.filter(pembeli=User.objects.get(username=request.user.username))
-
+    jumlah = transaksi.objects.filter(pembeli=User.objects.get(username=request.user.username)).count()
     context = {
         'data_transaksi':data_transaksi,
+        'jumlah':jumlah,
     }
+    print(jumlah)
     return render(request,'transaksi/pesanansaya.html',context)
 
 @login_required
