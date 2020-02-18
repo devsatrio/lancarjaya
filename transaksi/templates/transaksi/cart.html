@@ -8,7 +8,7 @@
 {% endblock customcss %}
 
 {% block content %}
-<section class="small-section bg-dark">
+<section class="page-section bg-dark parallax-3">
     <div class="relative container align-left">
 
         <div class="row">
@@ -27,76 +27,78 @@
         <div class="row">
             {% if jumlah_keranjang > 0 %}
             <div class="col-md-10 col-md-offset-1">
+                <div class="table-responsive">
+                    <table class="table table-striped shopping-cart-table">
+                        <tr>
+                            <th class="hidden-xs">
+                                Gambar
+                            </th>
+                            <th>
+                                Produk
+                            </th>
+                            <th>
+                                Jumlah
+                            </th>
+                            <th>
+                                Berat
+                            </th>
+                            <th>
+                                Total
+                            </th>
+                            <th>
+                                Aksi
+                            </th>
+                        </tr>
+    
+                        {% if messages %}
+                        {% for message in messages %}
+                        <div class="alert {{ message.tags }}"><i class="fa fa-lg fa-check-circle-o"></i> {{ message }}</div>
+                        {% endfor %}
+                        <br>
+                        {% endif %}
+    
+                        {% for row in barang %}
+                        <tr>
+                            <td class="hidden-xs">
+                                {% if row.barang.gambar %}
+                                <img src="{{row.barang.gambar.url}}" alt="" / style="max-width: 150px;">
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{% url 'produk:show' row.barang.slug %}" title="" style="text-transform: capitalize;">{{row.barang.nama}}</a>
+                            </td>
+                            <td>
+                                {{row.jumlah}} Pcs
+                            </td>
+                            <td>
+                                {{row.berat_total|div:1000}} Kg
+                            </td>
+                            <td>
+                                {% if row.diskon != 0 %}
+                                Rp. {% with numerator=row.barang.harga|mul:row.barang.diskon|div:100%}
+                                {{row.barang.harga|sub:numerator|mul:row.jumlah|floatformat|intcomma}}
+                                {% endwith %}
+                                {%else%}
+                                Rp. {% with numerator=row.barang.harga|mul:row.jumlah %}
+                                {{numerator|intcomma}}
+                                {% endwith %}
+                                {% endif %}
+                            </td>
+                            <td>
+                                <form method="post" action="{% url 'transaksi:hapus-keranjang' user.username %}">
+                                    {% csrf_token %}
+                                    <input type="hidden" value="{{row.id}}" name="kode">
+                                    <button type="button" class="btn btn-mod btn-round tampilmodal"
+                                        data-kode="{{row.id}}"><i class="fa fa-wrench"></i></button>
+                                    <button type="submit" onclick="return confirm('Hapus Data ?')"
+                                        class="btn btn-mod btn-round"><i class="fa fa-trash-o"></i></button>
+                                </form>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </table>
 
-                <table class="table table-striped shopping-cart-table">
-                    <tr>
-                        <th class="hidden-xs">
-                            Gambar
-                        </th>
-                        <th>
-                            Produk
-                        </th>
-                        <th>
-                            Jumlah
-                        </th>
-                        <th>
-                            Berat
-                        </th>
-                        <th>
-                            Total
-                        </th>
-                        <th>
-                            Aksi
-                        </th>
-                    </tr>
-
-                    {% if messages %}
-                    {% for message in messages %}
-                    <div class="alert {{ message.tags }}"><i class="fa fa-lg fa-check-circle-o"></i> {{ message }}</div>
-                    {% endfor %}
-                    <br>
-                    {% endif %}
-
-                    {% for row in barang %}
-                    <tr>
-                        <td class="hidden-xs">
-                            {% if row.barang.gambar %}
-                            <img src="{{row.barang.gambar.url}}" alt="" / style="max-width: 150px;">
-                            {% endif %}
-                        </td>
-                        <td>
-                            <a href="{% url 'produk:show' row.barang.slug %}" title="" style="text-transform: capitalize;">{{row.barang.nama}}</a>
-                        </td>
-                        <td>
-                            {{row.jumlah}} Pcs
-                        </td>
-                        <td>
-                            {{row.berat_total|div:1000}} Kg
-                        </td>
-                        <td>
-                            {% if row.diskon != 0 %}
-                            Rp. {% with numerator=row.barang.harga|mul:row.barang.diskon|div:100%}
-                            {{row.barang.harga|sub:numerator|mul:row.jumlah|floatformat|intcomma}}
-                            {% endwith %}
-                            {%else%}
-                            Rp. {% with numerator=row.barang.harga|mul:row.jumlah %}
-                            {{numerator|intcomma}}
-                            {% endwith %}
-                            {% endif %}
-                        </td>
-                        <td>
-                            <form method="post" action="{% url 'transaksi:hapus-keranjang' user.username %}">
-                                {% csrf_token %}
-                                <input type="hidden" value="{{row.id}}" name="kode">
-                                <button type="button" class="btn btn-mod btn-round tampilmodal"
-                                    data-kode="{{row.id}}"><i class="fa fa-wrench"></i></button>
-                                <button type="submit" onclick="return confirm('Hapus Data ?')"
-                                    class="btn btn-mod btn-round"><i class="fa fa-trash-o"></i></button>
-                            </form>
-                        </td>
-                    </tr>
-                    {% endfor %}
-                </table>
+                </div>
                 <hr class="mb-60" />
 
                 <div class="row">

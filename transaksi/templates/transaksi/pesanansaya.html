@@ -3,9 +3,7 @@
 {% load humanize %}
 {% load mathfilters %}
 {% block content %}
-
-<!-- Head Section -->
-<section class="small-section bg-dark">
+<section class="page-section bg-dark parallax-3">
     <div class="relative container align-left">
 
         <div class="row">
@@ -27,95 +25,96 @@
         <div class="row">
             {% if jumlah > 0 %}
             <div class="col-md-10 col-md-offset-1">
+                <div class="table-responsive">
+                    <table class="table table-striped shopping-cart-table">
+                        <tr>
+                            <th>
+                                Kode Transaksi
+                            </th>
+    
+                            <th>
+                                Tanggal Pembelian
+                            </th>
+    
+                            <th>
+                                Opsi Pengiriman
+                            </th>
+    
+                            <th>
+                                Ongkir
+                            </th>
+    
+                            <th>
+                                Total Biaya
+                            </th>
+    
+                            <th>
+                                No Resi Pengiriman
+                            </th>
+    
+                            <th>
+                                Status
+                            </th>
+    
+                            <th>
+                                Aksi
+                            </th>
+    
+                        </tr>
+                        {% for row in data_transaksi %}
+                        <tr>
+                            <td>
+                                <a href="{% url 'transaksi:detailpesanan' row.kode_transaksi %}">{{row.kode_transaksi}}</a>
+                            </td>
+    
+                            <td>
+                                {{row.tanggal_beli}}
+                            </td>
+    
+                            <td>
+                                {{row.opsi_pengiriman}}
+                            </td>
+    
+                            <td>
+                                Rp. {{row.ongkir|intcomma}}
+                            </td>
+    
+                            <td>
+                                Rp. {{row.total_biaya|intcomma}}
+                            </td>
+    
+                            <td>
+                                {{row.resi_pengiriman}}
+                            </td>
+    
+                            <td>
+                                {% if row.status_verifikasi != False %}
+                                Verifikasi
+                                {% else %}
+                                Belum Verifikasi
+                                {% endif %}
+                            </td>
+    
+                            <td>
+                                <a href="{% url 'transaksi:detailpesanan' row.kode_transaksi %}" class="btn btn-warning btn-round btn-small mb-xs-10">Detail</a>
+                            </td>
+    
+    
+                        </tr>
+                        {% endfor %}
+                    </table>
 
-                <table class="table table-striped shopping-cart-table">
-                    <tr>
-                        <th>
-                            Kode Transaksi
-                        </th>
-
-                        <th>
-                            Tanggal Pembelian
-                        </th>
-
-                        <th>
-                            Opsi Pengiriman
-                        </th>
-
-                        <th>
-                            Ongkir
-                        </th>
-
-                        <th>
-                            Total Biaya
-                        </th>
-
-                        <th>
-                            No Resi Pengiriman
-                        </th>
-
-                        <th>
-                            Status
-                        </th>
-
-                        <th>
-                            Aksi
-                        </th>
-
-                    </tr>
-                    {% for row in data_transaksi %}
-                    <tr>
-                        <td>
-                            <a href="{% url 'transaksi:detailpesanan' row.kode_transaksi %}">{{row.kode_transaksi}}</a>
-                        </td>
-
-                        <td>
-                            {{row.tanggal_beli}}
-                        </td>
-
-                        <td>
-                            {{row.opsi_pengiriman}}
-                        </td>
-
-                        <td>
-                            Rp. {{row.ongkir|intcomma}}
-                        </td>
-
-                        <td>
-                            Rp. {{row.total_biaya|intcomma}}
-                        </td>
-
-                        <td>
-                            {{row.resi_pengiriman}}
-                        </td>
-
-                        <td>
-                            {% if row.status_verifikasi != False %}
-                            Verifikasi
-                            {% else %}
-                            Belum Verifikasi
-                            {% endif %}
-                        </td>
-
-                        <td>
-                            <button class="btn btn-warning btn-round btn-small mb-xs-10"><a href="{% url 'transaksi:detailpesanan' row.kode_transaksi %}">Detail</a></button>
-                        </td>
-
-
-                    </tr>
-                    {% endfor %}
-                </table>
+                </div>
 
                 <hr />
 
                 <div class="row">
-                    <div class="col-sm-8">
-                        <button type="submit" class="btn btn-danger btn-round btn-gray btn-small mb-xs-10"
-                            onclick="history.go(-1)">Kembali</button>
-                    </div>
-                    <div class="col-sm-4 text align-right">
+                    <div class="col-sm-12 text align-right">
 
                         <div>
+                            <button type="button" class="btn btn-mod btn-green btn-round btn-small" onclick="history.go(-1)">
+                                Kembali
+                            </button>   
                             <a href="{%url 'cara_verifikasi' %}" class="btn btn-mod btn-green btn-round btn-small">Cara
                                 Verifikasi</a>
 

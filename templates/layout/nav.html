@@ -12,22 +12,22 @@
         <div class="inner-nav desktop-nav">
             <ul class="clearlist">
                 <li>
-                    <a href="{%url 'index' %}" class="mn-has-sub active">Home</a>
+                    <a href="{%url 'index' %}" class="active">Home</a>
                 </li>
                 <li>
-                    <a href="{%url 'produk:index' %}" class="mn-has-sub active">Produk</a>
+                    <a href="{%url 'produk:index' %}" class="active">Produk</a>
                 </li>
                 <li>
-                    <a href="{%url 'galeri:index' %}" class="mn-has-sub active">Galeri</a>
+                    <a href="{%url 'galeri:index' %}" class="active">Galeri</a>
                 </li>
                 <li>
-                    <a href="{%url 'blog:index' %}" class="mn-has-sub active">Blog</a>
+                    <a href="{%url 'blog:index' %}" class="active">Blog</a>
                 </li>
                 <li>
-                    <a href="{%url 'testimoni:index' %}" class="mn-has-sub active">Testimoni</a>
+                    <a href="{%url 'testimoni:index' %}" class="active">Testimoni</a>
                 </li>
                 <li>
-                    <a href="{%url 'contact:index' %}" class="mn-has-sub active">Kontak</a>
+                    <a href="{%url 'contact:index' %}" class="active">Kontak</a>
                 </li>
                 <li><a>&nbsp;</a></li>
                 {% if user.is_authenticated %}
@@ -46,10 +46,10 @@
                 </li>
                 {% else %}
                 <li>
-                    <a href="{%url 'users:login' %}" class="mn-has-sub active">Login</a>
+                    <a href="{%url 'users:login' %}" class="active">Login</a>
                 </li>
                 <li>
-                    <a href="{%url 'users:register' %}" class="mn-has-sub active">Register</a>
+                    <a href="{%url 'users:register' %}" class="active">Register</a>
                 </li>
                 {% endif %}
                 <li>

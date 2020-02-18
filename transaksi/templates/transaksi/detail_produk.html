@@ -3,9 +3,7 @@
 {% load humanize %}
 {% load mathfilters %}
 {% block content %}
-
-<!-- Head Section -->
-<section class="small-section bg-dark">
+<section class="page-section bg-dark parallax-3">
     <div class="relative container align-left">
         
         <div class="row">
@@ -26,66 +24,68 @@
                     
                     <div class="row">
                         <div class="col-md-8 col-md-offset-2">
-                            
-                            <table class="table table-striped shopping-cart-table">
-                                <tr>
-                                    <th>
-                                        No
-                                    </th>
+                            <div class="table-responsive">
+                                <table class="table table-striped shopping-cart-table">
+                                    <tr>
+                                        <th>
+                                            No
+                                        </th>
+    
+                                        <th>
+                                            Gambar
+                                        </th>
+                                        
+                                        <th>
+                                            Nama Produk
+                                        </th>
+                                        
+                                        <th>
+                                            Jumlah
+                                        </th>
+    
+                                        <th>
+                                            Berat
+                                        </th>
+    
+                                        <th>
+                                            Harga Sub-Total
+                                        </th>
+                                        
+                                    </tr>
+                                   
+                                    {% for row in detail %}
+                                    <tr >
+                                        <td>   
+                                            {{forloop.counter}}
+                                        </td>
+    
+                                        <td>
+                                            {% if row.barang.gambar %}
+                                                <img src="{{row.barang.gambar.url}}" alt="" / style="max-width: 150px;">
+                                            {% endif %}
+                                        </td>
+    
+                                        <td>
+                                           {{row.barang.nama}}
+                                        </td>
+    
+                                        <td>
+                                            {{row.jumlah}}
+                                        </td>
+    
+                                        <td>
+                                            {{row.berat_total|div:1000}} Kg
+                                        </td>
+    
+                                        <td>
+                                            Rp. {{row.total|intcomma}}
+                                        </td>
+    
+                                    </tr>
+                                    {% endfor %}
+                                </table>
 
-                                    <th>
-                                        Gambar
-                                    </th>
-                                    
-                                    <th>
-                                        Nama Produk
-                                    </th>
-                                    
-                                    <th>
-                                        Jumlah
-                                    </th>
-
-                                    <th>
-                                        Berat
-                                    </th>
-
-                                    <th>
-                                        Harga Sub-Total
-                                    </th>
-                                    
-                                </tr>
-                               
-                                {% for row in detail %}
-                                <tr >
-                                    <td>   
-                                        {{forloop.counter}}
-                                    </td>
-
-                                    <td>
-                                        {% if row.barang.gambar %}
-                                            <img src="{{row.barang.gambar.url}}" alt="" / style="max-width: 150px;">
-                                        {% endif %}
-                                    </td>
-
-                                    <td>
-                                       {{row.barang.nama}}
-                                    </td>
-
-                                    <td>
-                                        {{row.jumlah}}
-                                    </td>
-
-                                    <td>
-                                        {{row.berat_total|div:1000}} Kg
-                                    </td>
-
-                                    <td>
-                                        Rp. {{row.total|intcomma}}
-                                    </td>
-
-                                </tr>
-                                {% endfor %}
-                            </table>
+                            </div>
                             <hr />
                             <br>
                             <div class="row">
