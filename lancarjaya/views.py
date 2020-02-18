@@ -35,3 +35,6 @@ def pencarian(request):
 
 def cara_belanja(request):
     return render(request,'cara_belanja.html')
+
+def cara_verifikasi(request):
+    return render(request,'cara_verifikasi.html')
