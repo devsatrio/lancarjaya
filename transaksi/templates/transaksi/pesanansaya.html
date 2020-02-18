@@ -1,5 +1,7 @@
 {% extends 'layout/base.html' %}
 {% load static %}
+{% load humanize %}
+{% load mathfilters %}
 {% block content %}
 
 <!-- Head Section -->
@@ -24,7 +26,7 @@
 
         <div class="row">
             {% if jumlah > 0 %}
-            <div class="col-md-8 col-md-offset-2">
+            <div class="col-md-10 col-md-offset-1">
 
                 <table class="table table-striped shopping-cart-table">
                     <tr>
@@ -33,11 +35,7 @@
                         </th>
 
                         <th>
-                            Tanggal Beli
-                        </th>
-
-                        <th>
-                            Status
+                            Tanggal Pembelian
                         </th>
 
                         <th>
@@ -45,7 +43,23 @@
                         </th>
 
                         <th>
+                            Ongkir
+                        </th>
+
+                        <th>
+                            Total Biaya
+                        </th>
+
+                        <th>
                             No Resi Pengiriman
+                        </th>
+
+                        <th>
+                            Status
+                        </th>
+
+                        <th>
+                            Aksi
                         </th>
 
                     </tr>
@@ -60,6 +74,22 @@
                         </td>
 
                         <td>
+                            {{row.opsi_pengiriman}}
+                        </td>
+
+                        <td>
+                            Rp. {{row.ongkir|intcomma}}
+                        </td>
+
+                        <td>
+                            Rp. {{row.total_biaya|intcomma}}
+                        </td>
+
+                        <td>
+                            {{row.resi_pengiriman}}
+                        </td>
+
+                        <td>
                             {% if row.status_verifikasi != False %}
                             Verifikasi
                             {% else %}
@@ -68,12 +98,9 @@
                         </td>
 
                         <td>
-                            {{row.opsi_pengiriman}}
+                            <button class="btn btn-warning btn-round btn-small mb-xs-10"><a href="{% url 'transaksi:detailpesanan' row.kode_transaksi %}">Detail</a></button>
                         </td>
 
-                        <td>
-                            {{row.resi_pengiriman}}
-                        </td>
 
                     </tr>
                     {% endfor %}
@@ -83,13 +110,13 @@
 
                 <div class="row">
                     <div class="col-sm-8">
-                        <button type="submit" class="btn btn-mod btn-round btn-gray btn-small mb-xs-10"
+                        <button type="submit" class="btn btn-danger btn-round btn-gray btn-small mb-xs-10"
                             onclick="history.go(-1)">Kembali</button>
                     </div>
                     <div class="col-sm-4 text align-right">
 
                         <div>
-                            <a href="{%url 'cara_verifikasi' %}" class="btn btn-mod btn-gray btn-round btn-small">Cara
+                            <a href="{%url 'cara_verifikasi' %}" class="btn btn-mod btn-green btn-round btn-small">Cara
                                 Verifikasi</a>
 
                         </div>

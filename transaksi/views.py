@@ -145,8 +145,8 @@ def pesanansaya(request):
     return render(request,'transaksi/pesanansaya.html',context)
 
 @login_required
-def detailbarang(request,kode):
-    detail_barang = transaksi.objects.filter(kode_transaksi=transaksi.objects.get(kode_transaksi=kode))
+def detailbarang(request,kodepesan):
+    detail_barang = keranjang.objects.all().filter(kode_transaksi=kodepesan,pembeli=User.objects.get(username=request.user.username))
 
     context = {
         'detail':detail_barang,

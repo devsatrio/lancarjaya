@@ -1,5 +1,7 @@
 {% extends 'layout/base.html' %}
 {% load static %}
+{% load humanize %}
+{% load mathfilters %}
 {% block content %}
 
 <!-- Head Section -->
@@ -7,9 +9,9 @@
     <div class="relative container align-left">
         
         <div class="row">
-            
+            <br>
             <div class="col-md-8">
-                <h1 class="hs-line-11 font-alt mb-20 mb-xs-0">Detail Produk</h1>
+                <h1 class="hs-line-11 font-alt mb-20 mb-xs-0">Detail Pesanan</h1>
             </div>
             
         </div>
@@ -28,11 +30,15 @@
                             <table class="table table-striped shopping-cart-table">
                                 <tr>
                                     <th>
+                                        No
+                                    </th>
+
+                                    <th>
                                         Gambar
                                     </th>
                                     
                                     <th>
-                                        Produk
+                                        Nama Produk
                                     </th>
                                     
                                     <th>
@@ -43,53 +49,57 @@
                                         Berat
                                     </th>
 
-                                    <!-- <th>
-                                        Total Biaya
-                                    </th> -->
+                                    <th>
+                                        Harga Sub-Total
+                                    </th>
                                     
                                 </tr>
-                                
+                               
                                 {% for row in detail %}
-                                <tr>
-                                    <!-- <td>
+                                <tr >
+                                    <td>   
+                                        {{forloop.counter}}
+                                    </td>
+
+                                    <td>
                                         {% if row.barang.gambar %}
-                                            <img src="#" alt="" / style="max-width: 150px;">
+                                            <img src="{{row.barang.gambar.url}}" alt="" / style="max-width: 150px;">
                                         {% endif %}
-                                    </td> -->
-
-                                    <td>
-                                       {{row.jumlah}}
                                     </td>
 
                                     <td>
-                                        
+                                       {{row.barang.nama}}
                                     </td>
 
                                     <td>
-                                        <h1>ff</h1>
+                                        {{row.jumlah}}
                                     </td>
 
                                     <td>
-                                        
+                                        {{row.berat_total|div:1000}} Kg
+                                    </td>
+
+                                    <td>
+                                        Rp. {{row.total|intcomma}}
                                     </td>
 
                                 </tr>
                                 {% endfor %}
                             </table>
                             <hr />
-
-                            <!-- <div class="row">
-                                <div class="col-sm-8">
-                                        <button type="submit" class="btn btn-mod btn-round btn-gray btn-small mb-xs-10" onclick="history.go(-1)">Kembali</button>
+                            <br>
+                            <div class="row">
+                                <div align="center">
+                                        <button type="submit" class="btn btn-danger btn-round btn-gray btn-sm mb-xs-100" onclick="history.go(-1)">Kembali</button>
                                 </div>
-                                <div class="col-sm-4 text align-right">
+                                <!-- <div class="col-sm-4 text align-right">
                                     
                                     <div>
                                         <a href="" class="btn btn-mod btn-gray btn-round btn-small">Cara Verifikasi</a>
                                     </div>
                                     
-                                </div>
-                            </div> -->
+                                </div> -->
+                            </div>
                             
                             <!-- <hr class="mb-60" /> -->
                             
