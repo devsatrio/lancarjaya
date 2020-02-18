@@ -40,11 +40,11 @@
                                     </th>
 
                                     <th>
-                                        No Resi Pengiriman
+                                        Opsi Pengiriman
                                     </th>
 
                                     <th>
-                                        Verifikasi
+                                        No Resi Pengiriman
                                     </th>
                                     
                                 </tr>
@@ -67,16 +67,11 @@
                                     </td>
 
                                     <td>
-                                        {{row.resi_pengiriman}}
+                                        {{row.opsi_pengiriman}}
                                     </td>
 
                                     <td>
-                                        <form method="post" action="#">
-                                            {% csrf_token %}
-                                            <input type="hidden" value="{{row.id}}" name="kode">
-                                            
-                                            <button type="button" class="btn btn-mod btn-round tampilmodal" data-kode="{{row.id}}"><i class="fa fa-check-square-o"></i></button>
-                                        </form>
+                                        {{row.resi_pengiriman}}
                                     </td>
 
                                 </tr>

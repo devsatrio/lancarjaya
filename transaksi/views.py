@@ -131,7 +131,7 @@ def buattransaksi(request):
 
 @login_required
 def pesanansaya(request):
-    data_transaksi = transaksi.objects.all()
+    data_transaksi = transaksi.objects.filter(pembeli=User.objects.get(username=request.user.username))
 
     context = {
         'data_transaksi':data_transaksi,
