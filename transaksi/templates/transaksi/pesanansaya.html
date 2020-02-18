@@ -52,7 +52,7 @@
                     {% for row in data_transaksi %}
                     <tr>
                         <td>
-                            <a href="#">{{row.kode_transaksi}}</a>
+                            <a href="{% url 'transaksi:detailpesanan' row.kode_transaksi %}">{{row.kode_transaksi}}</a>
                         </td>
 
                         <td>
@@ -104,7 +104,7 @@
             </div>
             {% else %}
             <div class="col-md-8 col-md-offset-2 text-center">
-                <h1>
+                <h1 class="text-danger">
                     <strong>Oops !</strong>
                 </h1>
                 <img src="{% static 'images/sad_2.png' %}" alt="sad people" style="max-width: 450px;">

@@ -225,7 +225,12 @@
             </div>
             {% else %}
             <div class="col-md-10 col-md-offset-1 text-center">
-                <h1>Oops, Anda belum punya barang di keranjang.</h1>
+                <h1 class="text-danger">
+                    <strong>Oops !</strong>
+                </h1>
+                <img src="{% static 'images/sad_1.png' %}" alt="sad people" style="max-width: 450px;">
+               <br>
+                Anda belum punya barang di keranjang
             </div>
             {% endif %}
         </div>
