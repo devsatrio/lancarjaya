@@ -9,7 +9,7 @@
         <div class="row">
             
             <div class="col-md-8">
-                <h1 class="hs-line-11 font-alt mb-20 mb-xs-0">Pesanan Saya</h1>
+                <h1 class="hs-line-11 font-alt mb-20 mb-xs-0">Detail Produk</h1>
             </div>
             
         </div>
@@ -28,55 +28,49 @@
                             <table class="table table-striped shopping-cart-table">
                                 <tr>
                                     <th>
-                                        Kode Transaksi
+                                        Gambar
                                     </th>
                                     
                                     <th>
-                                        Tanggal Beli
+                                        Produk
                                     </th>
                                     
                                     <th>
-                                        Status
+                                        Jumlah
                                     </th>
 
                                     <th>
-                                        No Resi Pengiriman
+                                        Berat
                                     </th>
 
                                     <th>
-                                        Verifikasi
+                                        Total Biaya
                                     </th>
                                     
                                 </tr>
+                                
                                 {% for row in data_transaksi %}
                                 <tr>
                                     <td>
-                                        <a href="#">{{row.kode_transaksi}}</a>
-                                    </td>
-
-                                    <td>
-                                        {{row.tanggal_beli}}
-                                    </td>
-
-                                    <td>
-                                        {% if row.status_verifikasi != False %}
-                                            Verifikasi
-                                        {% else %}
-                                            Belum Verifikasi
+                                        {% if row.barang.gambar %}
+                                            <img src="#" alt="" / style="max-width: 150px;">
                                         {% endif %}
                                     </td>
 
                                     <td>
-                                        {{row.resi_pengiriman}}
+                                        
                                     </td>
 
                                     <td>
-                                        <form method="post" action="#">
-                                            {% csrf_token %}
-                                            <input type="hidden" value="{{row.id}}" name="kode">
-                                            
-                                            <button type="button" class="btn btn-mod btn-round tampilmodal" data-kode="{{row.id}}"><i class="fa fa-check-square-o"></i></button>
-                                        </form>
+                                        
+                                    </td>
+
+                                    <td>
+                                        
+                                    </td>
+
+                                    <td>
+                                        
                                     </td>
 
                                 </tr>
