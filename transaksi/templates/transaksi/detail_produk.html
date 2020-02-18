@@ -43,18 +43,22 @@
                                         Berat
                                     </th>
 
-                                    <th>
+                                    <!-- <th>
                                         Total Biaya
-                                    </th>
+                                    </th> -->
                                     
                                 </tr>
                                 
-                                {% for row in data_transaksi %}
+                                {% for row in detail %}
                                 <tr>
-                                    <td>
+                                    <!-- <td>
                                         {% if row.barang.gambar %}
                                             <img src="#" alt="" / style="max-width: 150px;">
                                         {% endif %}
+                                    </td> -->
+
+                                    <td>
+                                       {{row.jumlah}}
                                     </td>
 
                                     <td>
@@ -62,11 +66,7 @@
                                     </td>
 
                                     <td>
-                                        
-                                    </td>
-
-                                    <td>
-                                        
+                                        <h1>ff</h1>
                                     </td>
 
                                     <td>
@@ -76,10 +76,9 @@
                                 </tr>
                                 {% endfor %}
                             </table>
-                            
                             <hr />
 
-                            <div class="row">
+                            <!-- <div class="row">
                                 <div class="col-sm-8">
                                         <button type="submit" class="btn btn-mod btn-round btn-gray btn-small mb-xs-10" onclick="history.go(-1)">Kembali</button>
                                 </div>
@@ -90,7 +89,7 @@
                                     </div>
                                     
                                 </div>
-                            </div>
+                            </div> -->
                             
                             <!-- <hr class="mb-60" /> -->
                             
