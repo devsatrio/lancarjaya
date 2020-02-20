@@ -12,7 +12,7 @@ class kategori(models.Model):
 
 	def __str__(self):
 		return self.nama
-
+	
 class foto(models.Model):
 	judul = models.CharField(max_length=50)
 	deskripsi = models.TextField(max_length=300)
