@@ -88,6 +88,8 @@
                     <button type="submit" class="btn btn-mod btn-circle btn-medium">Masukan Keranjang</button> 
                 </form>
                 {% else %}
+                <div class="alert notice">Maaf, Anda harus <a href="{%url 'users:login' %}">Login</a>, untuk melakukan transaksi, atau <a href="{%url 'users:register' %}">Register</a> apabila belum memiliki akun
+                            </div>
                 <button type="button" onclick="history.go(-1)" class="btn btn-mod btn-circle btn-medium">Kembali</button> 
                 {% endif %}
                 </div>

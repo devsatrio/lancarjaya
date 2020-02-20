@@ -42,7 +42,16 @@ class rolesbarang(ImportExportModelAdmin):
 
     def status_aktiv(self, obj):
         return obj.benevolence_factor > 75
-
+        
     status_aktiv.boolean = True
+
+    def fieldname_download(self):
+    return mark_safe('<a href="/media/{0}" download>{1}</a>'.format(
+        self.fieldname, self.fieldname))
+
+    def set_immortal(self, request):
+    self.model.objects.all().update(is_immortal=True)
+    self.message_user(request, "All heroes are now immortal")
+    return HttpResponseRedirect("../")
 
 admin.site.register(models.barang,rolesbarang)
