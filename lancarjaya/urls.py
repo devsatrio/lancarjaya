@@ -3,7 +3,9 @@ from django.conf import settings
 from django.urls import path , include
 from django.conf.urls.static import static
 from . import views
-
+admin.site.site_header = "Lancar Jaya Shop"
+admin.site.site_title = "LJS"
+admin.site.index_title = "Lancar Jaya Shop Admin"
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('blog/',include('blog.urls')),
